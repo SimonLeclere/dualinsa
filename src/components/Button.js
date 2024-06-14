@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Button({ children, onClick, color }) {
   
+  let [count, setCount] = useState(0);
+
   if (color === 'green') {
     return (
       <button
@@ -27,10 +31,10 @@ export default function Button({ children, onClick, color }) {
 
   return (
     <button
-      onClick={onClick}
+      onClick={() => setCount(count + 1)}
       className="w-full rounded-2xl border-b-4 text-white border-gray-700 bg-gray-600 px-10 py-3 text-center font-bold uppercase transition hover:border-gray-600 hover:bg-gray-500 md:min-w-[320px]"
     >
-      {children}
+      {count}
     </button>
   );
 };
