@@ -11,7 +11,7 @@ datasource db {
 
 
 model Users {
-  id                      BigInt   @id @default(autoincrement())
+  id                      Int   @id @default(autoincrement())
 
   username                String   @unique
   hash                    String // Hashed password
@@ -30,23 +30,26 @@ model Users {
 }
 
 model Preferences {
-  id       BigInt @id @default(autoincrement())
+  id       Int @id @default(autoincrement())
   
   language String @default("fr") // fr | en
   
-  userId   BigInt
+  userId   Int
   user     Users  @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 model UserCourse {
-  id       BigInt @id @default(autoincrement())
+  id       Int @id @default(autoincrement())
   
-  userId   BigInt
+  currentUnitIndex Int @default(0)
+  currentUnitCheckpointIndex Int @default(0)
+
+  userId   Int
   user     Users   @relation(fields: [userId], references: [id])
   
-  courseId BigInt
+  courseId Int
   course   Courses @relation(fields: [courseId], references: [id])
 
   @@index([courseId])
@@ -54,7 +57,7 @@ model UserCourse {
 }
 
 model Courses {
-  id           BigInt     @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   
   name         String
   celeneLink   String
@@ -66,12 +69,12 @@ model Courses {
 }
 
 model Units {
-  id       BigInt   @id @default(autoincrement())
+  id       Int   @id @default(autoincrement())
   
   name     String
-  index    BigInt
+  index    Int
   
-  courseId BigInt
+  courseId Int
   course   Courses  @relation(fields: [courseId], references: [id])
   
   checkpoints       Checkpoints[]
@@ -82,28 +85,27 @@ model Units {
 
 
 model Checkpoints {
-  id              BigInt    @id @default(autoincrement())
+  id              Int    @id @default(autoincrement())
   
-  advancement     Int @default(0) // 0-triesRequired
   completed       Boolean @default(false)
   
   questionsPerTry Int // Nombre de questions à poser à chaque essai
-  triesRequired   BigInt // Nombre d'essais nécessaires pour valider le checkpoint
+  triesRequired   Int // Nombre d'essais nécessaires pour valider le checkpoint
   
   FillInTheBlanksQuestion FillInTheBlanksQuestion[]
   TimedQuestion   TimedQuestion[]
   QCMQuestion     QCMQuestion[]
 
-  unitId          BigInt
+  unitId          Int
   unit            Units     @relation(fields: [unitId], references: [id])
   
   @@index([unitId])
 }
 
 model FillInTheBlanksQuestion {
-  id               BigInt  @id @default(autoincrement())
+  id               Int  @id @default(autoincrement())
   
-  checkpointId     BigInt
+  checkpointId     Int
   checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
   
   question         String
@@ -118,9 +120,9 @@ model FillInTheBlanksQuestion {
 }
 
 model TimedQuestion {
-  id               BigInt  @id @default(autoincrement())
+  id               Int  @id @default(autoincrement())
   
-  checkpointId     BigInt
+  checkpointId     Int
   checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
   
   question         String
@@ -133,9 +135,9 @@ model TimedQuestion {
 
 
 model QCMQuestion {
-  id               BigInt  @id @default(autoincrement())
+  id               Int  @id @default(autoincrement())
   
-  checkpointId     BigInt
+  checkpointId     Int
   checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
   
   question         String

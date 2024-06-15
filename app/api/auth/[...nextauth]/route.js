@@ -5,6 +5,9 @@ import { pbkdf2Sync } from 'crypto';
 
 import prisma from "@/lib/supabase";
 
+
+// Fichier spécifique pour gérer l'authentification avec NextAuth
+
 const handler = NextAuth({
   pages: {
     signIn: '/auth/signin',
@@ -18,6 +21,7 @@ const handler = NextAuth({
         password: { label: "Mot de passe", type: "password" }
       },
 
+      // Fait une requête à la base de données pour vérifier si les identifiants sont corrects
       async authorize(credentials, req) {
 
         if (!credentials?.username || !credentials?.password) return null;
@@ -35,16 +39,28 @@ const handler = NextAuth({
           return {
             id: user.id,
             username: user.username,
-            hash: user.hash,
-            salt: user.salt,
+            // hash: user.hash,
+            // salt: user.salt,
             createdAt: user.createdAt,
           }
         }
 
         return null;
-      }
+      },
     })
-  ]
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if(user) token.user = user;
+
+      return token;
+    },
+
+    async session({ session, token }) {      
+      if(token.user) session.user = token.user;
+      return session;
+    }
+  },
 })
 
 export { handler as GET, handler as POST }

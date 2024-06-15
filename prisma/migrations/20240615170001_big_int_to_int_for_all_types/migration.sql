@@ -1,38 +1,41 @@
 -- CreateTable
 CREATE TABLE "Users" (
-    "id" BIGSERIAL NOT NULL,
-    "firstname" TEXT NOT NULL,
-    "lastname" TEXT NOT NULL,
-    "xp" INTEGER NOT NULL,
-    "dailyGoal" INTEGER NOT NULL,
-    "streak" TEXT[],
-    "creationDate" TIMESTAMP(3) NOT NULL,
-    "avatar" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
+    "username" TEXT NOT NULL,
+    "hash" TEXT NOT NULL,
+    "salt" TEXT NOT NULL,
+    "xp" INTEGER NOT NULL DEFAULT 0,
+    "dailyGoal" INTEGER NOT NULL DEFAULT 0,
+    "streak" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "creationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "avatar" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Preferences" (
-    "id" BIGSERIAL NOT NULL,
-    "language" TEXT NOT NULL,
-    "userId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "language" TEXT NOT NULL DEFAULT 'fr',
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Preferences_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "UserCourse" (
-    "id" BIGSERIAL NOT NULL,
-    "userId" BIGINT NOT NULL,
-    "courseId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "currentUnitIndex" INTEGER NOT NULL DEFAULT 0,
+    "currentUnitCheckpointIndex" INTEGER NOT NULL DEFAULT 0,
+    "userId" INTEGER NOT NULL,
+    "courseId" INTEGER NOT NULL,
 
     CONSTRAINT "UserCourse_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Courses" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "celeneLink" TEXT NOT NULL,
     "department" TEXT NOT NULL,
@@ -43,30 +46,29 @@ CREATE TABLE "Courses" (
 
 -- CreateTable
 CREATE TABLE "Units" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "index" BIGINT NOT NULL,
-    "courseId" BIGINT NOT NULL,
+    "index" INTEGER NOT NULL,
+    "courseId" INTEGER NOT NULL,
 
     CONSTRAINT "Units_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Checkpoints" (
-    "id" BIGSERIAL NOT NULL,
-    "advancement" INTEGER NOT NULL,
-    "completed" BOOLEAN NOT NULL,
+    "id" SERIAL NOT NULL,
+    "completed" BOOLEAN NOT NULL DEFAULT false,
     "questionsPerTry" INTEGER NOT NULL,
-    "triesRequired" BIGINT NOT NULL,
-    "unitId" BIGINT NOT NULL,
+    "triesRequired" INTEGER NOT NULL,
+    "unitId" INTEGER NOT NULL,
 
     CONSTRAINT "Checkpoints_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "FillInTheBlanksQuestion" (
-    "id" BIGSERIAL NOT NULL,
-    "checkpointId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "checkpointId" INTEGER NOT NULL,
     "question" TEXT NOT NULL,
     "textWithHoles" TEXT NOT NULL,
     "propositions" TEXT[],
@@ -78,8 +80,8 @@ CREATE TABLE "FillInTheBlanksQuestion" (
 
 -- CreateTable
 CREATE TABLE "TimedQuestion" (
-    "id" BIGSERIAL NOT NULL,
-    "checkpointId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "checkpointId" INTEGER NOT NULL,
     "question" TEXT NOT NULL,
     "aiPromptSolution" TEXT NOT NULL,
     "duration" INTEGER NOT NULL,
@@ -89,8 +91,8 @@ CREATE TABLE "TimedQuestion" (
 
 -- CreateTable
 CREATE TABLE "QCMQuestion" (
-    "id" BIGSERIAL NOT NULL,
-    "checkpointId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "checkpointId" INTEGER NOT NULL,
     "question" TEXT NOT NULL,
     "answers" TEXT[],
     "correctAnswer" TEXT NOT NULL,
@@ -98,6 +100,9 @@ CREATE TABLE "QCMQuestion" (
 
     CONSTRAINT "QCMQuestion_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Users_username_key" ON "Users"("username");
 
 -- CreateIndex
 CREATE INDEX "Preferences_userId_idx" ON "Preferences"("userId");
