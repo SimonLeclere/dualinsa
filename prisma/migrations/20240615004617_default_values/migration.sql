@@ -1,0 +1,13 @@
+-- AlterTable
+ALTER TABLE "Checkpoints" ALTER COLUMN "advancement" SET DEFAULT 0,
+ALTER COLUMN "completed" SET DEFAULT false;
+
+-- AlterTable
+ALTER TABLE "Preferences" ALTER COLUMN "language" SET DEFAULT 'fr';
+
+-- AlterTable
+ALTER TABLE "Users" ALTER COLUMN "xp" SET DEFAULT 0,
+ALTER COLUMN "dailyGoal" SET DEFAULT 0,
+ALTER COLUMN "streak" SET DEFAULT ARRAY[]::TEXT[],
+ALTER COLUMN "creationDate" SET DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "avatar" SET DEFAULT 0;

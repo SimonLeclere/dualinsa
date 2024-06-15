@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("POSTGRES_URL")
+  directUrl    = env("POSTGRES_PRISMA_URL")
+  relationMode = "prisma"
+}
+
+
+model Users {
+  id                      BigInt   @id @default(autoincrement())
+
+  username                String   @unique
+  hash                    String // Hashed password
+  salt                    String // Salt for password hashing
+  
+  xp                      Int @default(0)
+  dailyGoal               Int @default(0) // (0-10)
+  
+  streak                  String[] @default([]) // (dateString | '') array with 7 elements
+  
+  creationDate            DateTime @default(now())
+  avatar                  Int @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
+  
+  preferences             Preferences[]
+  courses                 UserCourse[]
+}
+
+model Preferences {
+  id       BigInt @id @default(autoincrement())
+  
+  language String @default("fr") // fr | en
+  
+  userId   BigInt
+  user     Users  @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model UserCourse {
+  id       BigInt @id @default(autoincrement())
+  
+  userId   BigInt
+  user     Users   @relation(fields: [userId], references: [id])
+  
+  courseId BigInt
+  course   Courses @relation(fields: [courseId], references: [id])
+
+  @@index([courseId])
+  @@index([userId])
+}
+
+model Courses {
+  id           BigInt     @id @default(autoincrement())
+  
+  name         String
+  celeneLink   String
+  department   String // sti, mri, gsi, stpi
+  semester     Int
+  
+  units        Units[]
+  userCourse   UserCourse[]
+}
+
+model Units {
+  id       BigInt   @id @default(autoincrement())
+  
+  name     String
+  index    BigInt
+  
+  courseId BigInt
+  course   Courses  @relation(fields: [courseId], references: [id])
+  
+  checkpoints       Checkpoints[]
+
+  @@index([courseId])
+}
+
+
+
+model Checkpoints {
+  id              BigInt    @id @default(autoincrement())
+  
+  advancement     Int @default(0) // 0-triesRequired
+  completed       Boolean @default(false)
+  
+  questionsPerTry Int // Nombre de questions à poser à chaque essai
+  triesRequired   BigInt // Nombre d'essais nécessaires pour valider le checkpoint
+  
+  FillInTheBlanksQuestion FillInTheBlanksQuestion[]
+  TimedQuestion   TimedQuestion[]
+  QCMQuestion     QCMQuestion[]
+
+  unitId          BigInt
+  unit            Units     @relation(fields: [unitId], references: [id])
+  
+  @@index([unitId])
+}
+
+model FillInTheBlanksQuestion {
+  id               BigInt  @id @default(autoincrement())
+  
+  checkpointId     BigInt
+  checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
+  
+  question         String
+  textWithHoles    String // "Le {} est un animal très {}." 
+  
+  propositions     String[] // ["chien", "mignon", "fourchette"]
+  correctAnswer    String[] // ["chien", "mignon"]
+  
+  duration         Int // Durée en secondes
+  
+  @@index([checkpointId])
+}
+
+model TimedQuestion {
+  id               BigInt  @id @default(autoincrement())
+  
+  checkpointId     BigInt
+  checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
+  
+  question         String
+  aiPromptSolution String // Solution pour l'évaluation automatique par IA
+  
+  duration         Int // Durée en secondes
+  
+  @@index([checkpointId])
+}
+
+
+model QCMQuestion {
+  id               BigInt  @id @default(autoincrement())
+  
+  checkpointId     BigInt
+  checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
+  
+  question         String
+  
+  answers          String[]
+  correctAnswer    String
+  
+  duration         Int // Durée en secondes
+
+  @@index([checkpointId])
+}

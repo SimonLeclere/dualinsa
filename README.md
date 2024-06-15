@@ -41,3 +41,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 <https://tailwindcss.com/docs/text-color>
 
 <https://github.com/bryanjenningz/react-duolingo>
+
+
+schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
