@@ -20,7 +20,7 @@ export async function POST(req) {
 
     // check if the course exists
     try {
-            const existing = await prisma.Courses.findUnique({
+            const existing = await prisma.courses.findUnique({
                 where: {
                     id: course_id
                 },
@@ -38,7 +38,7 @@ export async function POST(req) {
 
     // check if the user is enrolled in the course
     try {
-        const existing = await prisma.UserCourse.findUnique({
+        const existing = await prisma.userCourse.findUnique({
             where: {
                 userId_courseId : {
                     userId: user_id,
@@ -58,7 +58,7 @@ export async function POST(req) {
 
     // disenroll the user in the course
     try {
-        await prisma.UserCourse.delete({
+        await prisma.userCourse.delete({
             where: {
                 userId_courseId: {
                     userId: user_id,
