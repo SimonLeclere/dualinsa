@@ -1,10 +1,10 @@
-import NavBar from "@/components/NavBar";
+import NavBar from "../components/NavBar";
 
 // import { BottomBar } from "~/components/BottomBar";
 // import { LeftBar } from "~/components/LeftBar";
 // import { TopBar } from "~/components/TopBar";
 
-import LighterSvg from "@/components/icons/LighterSvg";
+import LighterSvg from "../components/icons/LighterSvg";
 
 export default function CoursesList() {
 

@@ -5,10 +5,10 @@ import { useState } from "react";
 import Link from "next/link";
 // import { Calendar } from "./Calendar";
 
-import FireSvg from "@/components/icons/FireSvg";
-import GemSvg from "@/components/icons/GemSvg";
-import MoreOptionsSvg from "@/components/icons/MoreOptionsSvg";
-import LighterSvg from "@/components/icons/LighterSvg";
+import FireSvg from "../components/icons/FireSvg";
+import GemSvg from "../components/icons/GemSvg";
+import MoreOptionsSvg from "../components/icons/MoreOptionsSvg";
+import LighterSvg from "../components/icons/LighterSvg";
 
 // type MenuState = "HIDDEN" | "COURSES" | "STREAK" | "GEMS" | "MORE";
 
