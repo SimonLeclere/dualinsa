@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "../components/NavBar";
 
 // import { BottomBar } from "~/components/BottomBar";
@@ -5,6 +7,7 @@ import Navbar from "../components/NavBar";
 // import { TopBar } from "~/components/TopBar";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import {
   SettingsGearSvg,
@@ -15,6 +18,8 @@ import {
   FireSvg,
   LightningProgressSvg,
   BronzeLeagueSvg,
+  SilverLeagueSvg,
+  GoldLeagueSvg,
   EmptyMedalSvg,
 } from "../components/icons/ProfileSvg";
 
@@ -27,7 +32,7 @@ export default function Profile() {
         <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
           <ProfileTopSection />
           <ProfileStatsSection />
-          <ProfileFriendsSection />
+          {/* <ProfileFriendsSection /> */}
         </div>
       </div>
       <div className="pt-[90px]"></div>
@@ -90,13 +95,11 @@ const ProfileTopSection = () => {
 };
 
 const ProfileStatsSection = () => {
-  {
-    /* TODO : Link to the BDD */
-  }
-  const streak = 14;
+  /* TODO : Link to the BDD */
+  const streak = 1;
   const totalXp = 125;
-  const league = "Bronze";
-  const top3Finishes = 0;
+  const league = "Gold";
+  const top3Finishes = 1;
 
   return (
     <section>
@@ -126,7 +129,13 @@ const ProfileStatsSection = () => {
           </div>
         </div>
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          <BronzeLeagueSvg width={25} height={35} />
+          { // Change the league icon depending on the league
+            {
+              Bronze: <BronzeLeagueSvg width={25} height={35} />,
+              Silver: <SilverLeagueSvg width={25} height={35} />,
+              Gold: <GoldLeagueSvg width={25} height={35} />,
+            }[league]
+          }
           <div className="flex flex-col">
             <span className="text-xl font-bold">{league}</span>
             <span className="text-sm text-gray-400 md:text-base">
@@ -157,8 +166,8 @@ const ProfileStatsSection = () => {
 
 // TODO : fix le state, setState avec le import de "useState" qui bug
 const ProfileFriendsSection = () => {
-  //const [state, setState] = (useState < "FOLLOWING") | ("FOLLOWERS" > "FOLLOWING");
-  const state = "FOLLOWING";
+  const [state, setState] =
+    (useState < "FOLLOWING") | ("FOLLOWERS" > "FOLLOWING");
 
   return (
     <section>
@@ -172,7 +181,7 @@ const ProfileFriendsSection = () => {
                 ? "border-blue-400 text-blue-400"
                 : "border-gray-200 text-gray-400",
             ].join(" ")}
-            /* onClick={() => setState("FOLLOWING")} */
+            onClick={() => setState("FOLLOWING")}
           >
             Following
           </button>
