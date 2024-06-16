@@ -46,7 +46,7 @@ model UserCourse {
 
   userId   Int
   user     Users   @relation(fields: [userId], references: [id])
-
+  
   courseId Int
   course   Courses @relation(fields: [courseId], references: [id])
 
@@ -59,6 +59,8 @@ model Courses {
   id           Int     @id @default(autoincrement())
   
   name         String
+  description  String?
+
   celeneLink   String?
   department   String // sti, mri, gsi, stpi
   semester     Int
