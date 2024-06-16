@@ -26,7 +26,7 @@ export async function POST(req) {
                 },
             }).catch((error) => {
                 console.log(error);
-                throw error;const existing = null;
+                throw error;
             });
     
             if(!existing) return NextResponse.json({ message: 'Course not found' }, { status: 404 });
