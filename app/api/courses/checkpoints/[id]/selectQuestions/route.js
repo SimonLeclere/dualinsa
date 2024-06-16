@@ -2,18 +2,19 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/supabase';
 import { getToken } from "next-auth/jwt"
 
-export async function GET(req) {
+export async function GET(req, { params }) {
     
     // Verify if the request comes from an authenticated user
     const token = await getToken({ req })
-    
+    console.log(params)
+
     if (!token) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
     }
 
 
     // Get checkpointId from query
-    const checkpointId = 1;
+    const checkpointId = +params.id
 
     // Select {checkpoints.questionPerTry} questions from QCMQuestions, FillInTheBlanksQuestion and TimedQuestion tables
     try {
