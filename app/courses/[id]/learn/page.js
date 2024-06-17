@@ -42,6 +42,7 @@ const userCourses =
 export default function page() {
 
     return (
+            
             units
             .map((unit) => {
                 return (
@@ -57,5 +58,6 @@ export default function page() {
                 );
             }
             )
+
     );
 };
