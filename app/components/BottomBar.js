@@ -36,7 +36,7 @@ const bottomBarItems = [
 export default function BottomBar({ selectedTab }) {
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 md:right-auto top-auto md:top-0 z-20 border-t-2 md:border-r-2 border-neutral-200 bg-white flex-col md:flex-row lg:w-64 p-5">
+        <nav className="fixed bottom-0 left-0 right-0 md:right-auto top-auto md:top-0 z-20 border-t-2 md:border-t-0 md:border-r-2 border-neutral-200 bg-white flex-col md:flex-row lg:w-64 p-5">
 
             <Link
                 href="/learn"

@@ -1,13 +1,7 @@
+import FireSvg from "@/components/icons/FireSvg";
+import LightningSvg from "@/components/icons/LightningSvg";
+import LeagueMedalSvg from "@/components/icons/LeagueSvg";
 
-import {
-  EmptyFireSvg,
-  FireSvg,
-  LightningProgressSvg,
-  BronzeLeagueSvg,
-  SilverLeagueSvg,
-  GoldLeagueSvg,
-  EmptyMedalSvg,
-} from "../components/icons/ProfileSvg";
 
 export default function ProfileStatsSection() {
   /* TODO : Link to the BDD */
@@ -21,7 +15,7 @@ export default function ProfileStatsSection() {
       <h2 className="mb-5 text-2xl font-bold">Statistics</h2>
       <div className="grid grid-cols-2 gap-3">
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          {streak === 0 ? <EmptyFireSvg /> : <FireSvg />}
+          <FireSvg empty={streak === 0} className="w-9 h-9" />
           <div className="flex flex-col">
             <span
               className={[
@@ -37,21 +31,14 @@ export default function ProfileStatsSection() {
           </div>
         </div>
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          <LightningProgressSvg size={35} />
+          <LightningSvg size={35} className="w-9 h-9" />
           <div className="flex flex-col">
             <span className="text-xl font-bold">{totalXp}</span>
             <span className="text-sm text-gray-400 md:text-base">Total XP</span>
           </div>
         </div>
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          {
-            // Change the league icon depending on the league
-            {
-              Bronze: <BronzeLeagueSvg width={25} height={35} />,
-              Silver: <SilverLeagueSvg width={25} height={35} />,
-              Gold: <GoldLeagueSvg width={25} height={35} />,
-            }[league]
-          }
+          <LeagueMedalSvg type={league.toLowerCase()} className="w-9 h-9" />
           <div className="flex flex-col">
             <span className="text-xl font-bold">{league}</span>
             <span className="text-sm text-gray-400 md:text-base">
@@ -60,7 +47,7 @@ export default function ProfileStatsSection() {
           </div>
         </div>
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          {top3Finishes === 0 ? <EmptyMedalSvg /> : <EmptyMedalSvg />}
+          <LeagueMedalSvg type="empty" className="w-9 h-9" />
           <div className="flex flex-col">
             <span
               className={[

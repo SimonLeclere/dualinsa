@@ -1,4 +1,6 @@
 import NextAuth from "next-auth"
+import { getServerSession as getSession } from "next-auth/next"
+
 import CredentialsProvider from "next-auth/providers/credentials"
 
 import { pbkdf2Sync } from 'crypto';
@@ -8,7 +10,7 @@ import prisma from "@/lib/supabase";
 
 // Fichier spécifique pour gérer l'authentification avec NextAuth
 
-const handler = NextAuth({
+export const authOptions = {
   pages: {
     signIn: '/auth/signin',
   },
@@ -61,6 +63,10 @@ const handler = NextAuth({
       return session;
     }
   },
-})
+};
+
+const handler = NextAuth(authOptions);
+
+export const getServerSession = async () => await getSession(authOptions);
 
 export { handler as GET, handler as POST }
