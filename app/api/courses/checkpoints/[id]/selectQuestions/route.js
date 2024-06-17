@@ -6,7 +6,6 @@ export async function GET(req, { params }) {
     
     // Verify if the request comes from an authenticated user
     const token = await getToken({ req })
-    console.log(params)
 
     if (!token) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
