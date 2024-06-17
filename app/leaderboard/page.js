@@ -8,23 +8,7 @@ import LeaderboardProfile  from "/app/leaderboard/leaderboardProfile";
 import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard"; 
 import BottomBar from "../components/BottomBar";
 
-import {
-  BronzeLeagueWithSvg,
-  BronzeLeagueWithoutSvg,
-  SilverLeagueWithSvg,
-  SilverLeagueWithoutSvg,
-  GoldLeagueWithSvg,
-  GoldLeagueWithoutSvg,
-  DiamondLeagueWithSvg,
-  DiamondLeagueWithoutSvg,
-  FirstPlaceSvg,
-  LeaderboardBannerSvg,
-  LeaderboardExplanationSvg,
-  LockedLeaderboardSvg,
-  LockedLeagueSvg,
-  SecondPlaceSvg,
-  ThirdPlaceSvg,
-} from "../components/icons/LeaderboardSvg";
+import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
 
 const LeaderboardPlayer = () => {
@@ -61,49 +45,50 @@ const LeaderboardPlayer = () => {
 }
 
 
-function leaderboardLeague(league) {
-    switch(league) {
-        case "Bronze": 
-            return (
-              <>
-                <BronzeLeagueWithSvg className="h-fit w-20" />
-                <LockedLeagueSvg />
-                <LockedLeagueSvg />
-                <LockedLeagueSvg />
-              </>
-            );
-        case "Silver":
-            return (
-              <>
-                <BronzeLeagueWithoutSvg />
-                <SilverLeagueWithSvg className="h-fit w-20" />
-                <LockedLeagueSvg />
-                <LockedLeagueSvg />
-              </>
-            );
-        case "Gold":
-            return (
-              <>
-                <BronzeLeagueWithoutSvg />
-                <SilverLeagueWithoutSvg />
-                <GoldLeagueWithSvg className="h-fit w-20" />
-                <LockedLeagueSvg />
-              </>
-            );
-        case "Diamond":
-            return (
-              <>
-                <BronzeLeagueWithoutSvg />
-                <SilverLeagueWithoutSvg />
-                <GoldLeagueWithoutSvg />
-                <DiamondLeagueWithSvg className="h-fit w-20" />
-              </>
-            );
-    }
+function leaderboardLeague(leagueName) {
+  switch (leagueName) {
+    case "Bronze":
+      return (
+        <>
+          <IconLeagueSvg leagueName="Bronze" plume={true} lock={false} className="h-fit w-20" />
+          <IconLeagueSvg leagueName="" plume={false} lock={true} />
+          <IconLeagueSvg leagueName="" plume={false} lock={true} />
+          <IconLeagueSvg leagueName="" plume={false} lock={true} />
+        </>
+      );
+    case "Silver":
+      return (
+        <>
+          <IconLeagueSvg leagueName="Bronze" plume={false} lock={false} />
+          <IconLeagueSvg leagueName="Silver" plume={true} lock={false} className="h-fit w-20" />
+          <IconLeagueSvg leagueName="" plume={false} lock={true} />
+          <IconLeagueSvg leagueName="" plume={false} lock={true} />
+        </>
+      );
+    case "Gold":
+      return (
+        <>
+          <IconLeagueSvg leagueName="Bronze" plume={false} lock={false} />
+          <IconLeagueSvg leagueName="Silver" plume={false} lock={false} />
+          <IconLeagueSvg leagueName="Gold" plume={true} lock={false} className="h-fit w-20" />
+          <IconLeagueSvg leagueName="" plume={false} lock={true} />
+        </>
+      );
+    case "Diamond":
+      return (
+        <>
+          <IconLeagueSvg leagueName="Bronze" plume={false} lock={false} />
+          <IconLeagueSvg leagueName="Silver" plume={false} lock={false} />
+          <IconLeagueSvg leagueName="Gold" plume={false} lock={false} />
+          <IconLeagueSvg leagueName="Diamond" plume={true} lock={false} className="h-fit w-20" />
+        </>
+      );
+  }
 }
 
+
 export default function LeaderBoard() {
-  const league = "Bronze"; // TODO : get from API
+  const league = "Gold"; // TODO : get from API
   const leaderLeague = `${league} League`;
 
   return (
