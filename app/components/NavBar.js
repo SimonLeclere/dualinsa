@@ -23,8 +23,6 @@ const streaks = [
     { date: new Date(2024, 5, 16), userId: 2 },
 ];
 
-
-
 export default function NavBar({ backgroundColor = "bg-purple-400", borderColor = "border-purple-500" }) {
 
     const [menu, setMenu] = useState("HIDDEN");
