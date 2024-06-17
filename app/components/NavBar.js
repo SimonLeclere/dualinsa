@@ -6,16 +6,30 @@ import Link from "next/link";
 import Calendar from "@/components/Calendar"
 
 import FireSvg from "@/components/icons/FireSvg";
-import GemSvg from "@/components/icons/GemSvg";
-import LingotsTreasureChestSvg from "@/components/icons/LingotsTreasureChestSvg";
+import CoinSvg from "@/components/icons/CoinSvg";
+import CoinStackSvg from "@/components/icons/CoinStackSvg";
 
 // type MenuState = "HIDDEN" | "STREAK" | "GEMS";
+
+const streaks = [
+    { date: new Date(2024, 4, 15), userId: 2 },
+    { date: new Date(2024, 4, 16), userId: 2 },
+    { date: new Date(2024, 4, 17), userId: 2 },
+
+    { date: new Date(2024, 5, 12), userId: 2 },
+    { date: new Date(2024, 5, 13), userId: 2 },
+    { date: new Date(2024, 5, 14), userId: 2 },
+    { date: new Date(2024, 5, 15), userId: 2 },
+    { date: new Date(2024, 5, 16), userId: 2 },
+];
+
+
 
 export default function NavBar({ backgroundColor = "bg-purple-400", borderColor = "border-purple-500" }) {
 
     const [menu, setMenu] = useState("HIDDEN");
     const [streak, setStreak] = useState(0);
-    const [lingots, setLingots] = useState(0);
+    const [score, setLingots] = useState(0);
 
     return (
         <header className="fixed z-20 h-[58px] w-full">
@@ -33,8 +47,9 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                     className="flex items-center gap-2 font-bold"
                     onClick={() => setMenu((x) => (x === "GEMS" ? "HIDDEN" : "GEMS"))}
                 >
-                    <GemSvg empty={lingots === 0}/>
-                    <span className={lingots > 0 ? "text-white" : "text-black opacity-20"}>{lingots}</span>
+                    <CoinSvg empty={score === 0} />
+                    {/* <GemSvg empty={score === 0}/> */}
+                    <span className={score > 0 ? "text-white" : "text-black opacity-20"}>{score}</span>
                 </button>
 
                 {/* DROPDOWN MENU */}
@@ -49,7 +64,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                                             {`Practice each day so your streak won't reset!`}
                                         </p>
                                         <div className="self-stretch">
-                                            <Calendar />
+                                            <Calendar streaks={streaks} />
                                         </div>
                                     </div>
                                 );
@@ -57,18 +72,17 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                             case "GEMS":
                                 return (
                                     <div className="flex grow items-center gap-3 p-5">
-                                        <LingotsTreasureChestSvg className="h-24 w-24" />
+                                        <CoinStackSvg className="h-24 w-24" />
                                         <div className="flex flex-col gap-3">
-                                            <h2 className="text-xl font-bold text-black">Lingots</h2>
+                                            <h2 className="text-xl font-bold text-black">Experience</h2>
                                             <p className="text-sm font-normal text-gray-400">
-                                                You have {lingots}{" "}
-                                                {lingots === 1 ? "lingot" : "lingots"}.
+                                                Vous avez {score}{" "} xp
                                             </p>
                                             <Link
                                                 className="font-bold uppercase text-blue-400 transition hover:brightness-110"
-                                                href="/shop"
+                                                href="/leaderboard"
                                             >
-                                                Go to shop
+                                                Leaderboard
                                             </Link>
                                         </div>
                                     </div>

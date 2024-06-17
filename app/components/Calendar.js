@@ -16,6 +16,10 @@ const getFirstDayOfWeek = (y, m) => {
     return firstDay.getDay();
 };
 
+const dateEquals = (a, b) => {
+    return a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
+};
+
 const getDaysInMonth = (y, m) => {
     return new Date(y, m + 1, 0).getDate();
 };
@@ -40,7 +44,7 @@ const getCalendarDays = (now) => {
     return calendarDays;
 };
 
-export default function Calendar() {
+export default function Calendar({ streaks }) {
 
     const [now, setNow] = useState(new Date());
 
@@ -92,7 +96,7 @@ export default function Calendar() {
                     return (
                         <div key={i} className="flex justify-between">
                             {week.map((date, i) => {
-                                const isActiveDate = date !== null && date === staticNow.getDate();
+                                const isActiveDate = date !== null && streaks.some((streak) => dateEquals(streak.date, new Date(now.getFullYear(), now.getMonth(), date)));
                                 const isCurrentDate = date === staticNow.getDate() && now.getMonth() === staticNow.getMonth() && now.getFullYear() === staticNow.getFullYear();
                                 
                                 return (
