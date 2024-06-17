@@ -36,6 +36,12 @@ export default function LoginScreen() {
         });
     }
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit(e);
+        }
+    }
+
     return (
         <main className="fixed inset-0 z-30 flex flex-col bg-white p-7 transition duration-300">
             <header className="flex flex-row-reverse justify-between sm:flex-row">
@@ -68,6 +74,8 @@ export default function LoginScreen() {
                             placeholder="Nom d'utilisateur"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            onKeyDown={handleKeyPress}
+
                         />
                         <input
                             className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
@@ -75,6 +83,8 @@ export default function LoginScreen() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            onKeyDown={handleKeyPress}
+
                         />
                     </div>
 
