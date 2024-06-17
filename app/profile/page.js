@@ -1,8 +1,8 @@
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "/app/components/BottomBar";
 
-import ProfileStatsSection from "@/app/profile/ProfileStatsSection.js";
-import ProfileTopBar from "@/app/profile/ProfileTopBar";
-import ProfileTopSection from "@/app/profile/ProfileTopSection";
+import ProfileStatsSection from "/app/profile/ProfileStatsSection.js";
+import ProfileTopBar from "/app/profile/ProfileTopBar";
+import ProfileTopSection from "/app/profile/ProfileTopSection";
 
 import { getServerSession } from "../api/auth/[...nextauth]/route";
 

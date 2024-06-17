@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SettingsGearSvg from '@/components/icons/SettingsGearSvg';
+import SettingsGearSvg from '/app/components/icons/SettingsGearSvg';
 
 export default function ProfileTopBar() {
   return (

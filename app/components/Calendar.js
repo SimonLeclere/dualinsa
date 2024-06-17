@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import ChevronSvg from "@/components/icons/ChevronSvg";
+import ChevronSvg from "/app/components/icons/ChevronSvg";
 
 const range = (lo, hi) => {
     const result = Array(hi - lo);

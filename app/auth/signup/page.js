@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { randomBytes, pbkdf2Sync } from "crypto";
 
 import Link from "next/link";
-import CloseSvg from "@/components/icons/CloseSvg";
-import Button from "@/components/Button";
+import CloseSvg from "/app/components/icons/CloseSvg";
+import Button from "/app/components/Button";
 
 export default function Signup() {
 

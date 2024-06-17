@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 
-import GlobeSvg from "@/components/icons/GlobeSvg";
+import GlobeSvg from "/app/components/icons/GlobeSvg";
 import bgSnow from "../../public/bg-snow.svg";
 
 import LoginOrStartButtonsGroup from "./loginOrStartButtonsGroup";

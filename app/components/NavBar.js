@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 
-import Calendar from "@/components/Calendar"
+import Calendar from "/app/components/Calendar"
 
-import FireSvg from "@/components/icons/FireSvg";
-import CoinSvg from "@/components/icons/CoinSvg";
-import CoinStackSvg from "@/components/icons/CoinStackSvg";
+import FireSvg from "/app/components/icons/FireSvg";
+import CoinSvg from "/app/components/icons/CoinSvg";
+import CoinStackSvg from "/app/components/icons/CoinStackSvg";
 
 // type MenuState = "HIDDEN" | "STREAK" | "GEMS";
 

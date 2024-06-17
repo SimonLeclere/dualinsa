@@ -6,8 +6,8 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useState } from "react";
 
 import Link from "next/link";
-import CloseSvg from "@/components/icons/CloseSvg";
-import Button from "@/components/Button";
+import CloseSvg from "/app/components/icons/CloseSvg";
+import Button from "/app/components/Button";
 
 export default function LoginScreen() {
 

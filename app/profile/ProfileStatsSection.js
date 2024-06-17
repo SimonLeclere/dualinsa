@@ -1,6 +1,6 @@
-import FireSvg from "@/components/icons/FireSvg";
-import LightningSvg from "@/components/icons/LightningSvg";
-import LeagueMedalSvg from "@/components/icons/LeagueSvg";
+import FireSvg from "/app/components/icons/FireSvg";
+import LightningSvg from "/app/components/icons/LightningSvg";
+import LeagueMedalSvg from "/app/components/icons/LeagueSvg";
 
 
 export default function ProfileStatsSection() {

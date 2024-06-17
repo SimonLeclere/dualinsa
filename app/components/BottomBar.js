@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import HomeSvg from "@/components/icons/HomeSvg";
-import BooksSvg from "@/components/icons/BooksSvg";
-import LeaderboardSvg from "@/components/icons/LeaderboardSvg";
-import ProfileSvg from "@/components/icons/ProfileSvg";
+import HomeSvg from "/app/components/icons/HomeSvg";
+import BooksSvg from "/app/components/icons/BooksSvg";
+import LeaderboardSvg from "/app/components/icons/LeaderboardSvg";
+import ProfileSvg from "/app/components/icons/ProfileSvg";
 
 const bottomBarItems = [
     {

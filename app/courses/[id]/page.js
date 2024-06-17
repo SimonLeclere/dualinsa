@@ -1,5 +1,5 @@
-import NavBar from "@/components/NavBar";
-import BottomBar from "@/components/BottomBar";
+import NavBar from "/app/components/NavBar";
+import BottomBar from "/app/components/BottomBar";
 
 export default function CoursePage() {
     return (

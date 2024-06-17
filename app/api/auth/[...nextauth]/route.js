@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 
 import { pbkdf2Sync } from 'crypto';
 
-import prisma from "@/lib/supabase";
+import prisma from "/lib/supabase";
 
 
 // Fichier spécifique pour gérer l'authentification avec NextAuth

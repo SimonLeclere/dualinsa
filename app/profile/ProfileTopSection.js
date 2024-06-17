@@ -1,7 +1,7 @@
 'use client';
 
-import EditPencilSvg from "@/components/icons/EditPencilSvg";
-import ProfileTimeSvg from "@/components/icons/ProfileTimeSvg";
+import EditPencilSvg from "/app/components/icons/EditPencilSvg";
+import ProfileTimeSvg from "/app/components/icons/ProfileTimeSvg";
 
 import Link from "next/link";
 

@@ -3,15 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import NavBar from "@/components/NavBar";
-import BottomBar from "@/components/BottomBar";
+import NavBar from "/app/components/NavBar";
+import BottomBar from "/app/components/BottomBar";
 
 // import { LeftBar } from "~/components/LeftBar";
 // import { TopBar } from "~/components/TopBar";
 
-import lighterImg from "@/public/lighter.png";
-import beakerImg from "@/public/beaker.png";
-import pistonImg from "@/public/piston.png";
+import lighterImg from "/public/lighter.png";
+import beakerImg from "/public/beaker.png";
+import pistonImg from "/public/piston.png";
 
 const icons = {
     lighter: <Image src={lighterImg.src} alt="lighter" width="80" height="80" className="flex-shrink-0 mx-4 w-20 h-20 sm:mx-16 sm:w-24 sm:h-24" />,
