@@ -6,7 +6,7 @@ import {
   
   const LeaderboardProfile = ({ place, username, xp }) => {
     return (
-      <div className="flex items-center gap-5 rounded-2xl px-5 py-2 hover:bg-gray-100 md:mx-0">
+      <div className="flex w-full items-center gap-5 rounded-2xl px-5 py-2 hover:bg-gray-100 md:mx-0">
         <div className="flex items-center gap-4">
           {place === 1 ? (
             <FirstPlaceSvg />
@@ -20,10 +20,11 @@ import {
             </div>
           )}
         </div>
-        <div className="grow overflow-hidden overflow-ellipsis font-bold">
-          {username}
+
+        <div className="grow overflow-hidden overflow-ellipsis font-bold text-center">
+            {username}
         </div>
-        <div className="shrink-0 text-indigo-500 md:mr-24 lg:mr-64">
+        <div className="shrink-0 text-right text-indigo-500">
             {`${xp} XP`}
         </div>
       </div>

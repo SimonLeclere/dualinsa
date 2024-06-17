@@ -32,7 +32,7 @@ const LeaderboardPlayer = () => {
 
   return (
     <div>
-      <div className="w-full md:ml-1 lg:ml-1">
+      <div className="w-full md:ml-1 lg:ml-1 ">
         {leaderboardUsers.map((user, i) => (
           <LeaderboardProfile
             key={user.username} 
