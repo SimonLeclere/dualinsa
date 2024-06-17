@@ -1,10 +1,11 @@
-import { DailyQuestsSection, XpProgressSection } from "../components/RightSection";
+import {
+  ProgressSection,
+} from "../components/ProgressSection";
 
 export default function test() {
   return (
     <div className="flex flex-col gap-5">
-      <DailyQuestsSection />
-        <XpProgressSection />
+      <ProgressSection />
     </div>
   );
 }
