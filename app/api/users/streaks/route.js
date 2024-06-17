@@ -11,26 +11,24 @@ export async function GET(req) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
     }
 
-    // Get the authenticated user
+
+    // Get streak of user from query streakrecord table
     try {
-        const user = await prisma.users.findUnique({
+        const streak = await prisma.streaksRecords.findMany({
             where: {
-                username: token.user.username,
-            },
+                userId: token.user.id
+            }
         }).catch((error) => {
             console.log(error);
             throw error;
         });
         
-        if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
+        if(!streak) return NextResponse.json({ message: 'no streak found' }, { status: 404 });
 
-        // Return user.streak
-        return NextResponse.json(user.streak);
+        return NextResponse.json(streak, { status: 200 });
 
     } catch (error) {
-        console.error(error);
-        return NextResponse.json({ message : 'Error looking for user' }, { status: 500 });
+        return NextResponse.json({ message: 'Error looking for streak' }, { status: 500 });
     }
-
 
 }
