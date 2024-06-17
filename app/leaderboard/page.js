@@ -1,6 +1,9 @@
+"use client";
+
 
 import React from "react";
 
+import { useEffect, useRef } from "react";
 import LeaderboardProfile  from "/app/leaderboard/leaderboardProfile";
 import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard"; 
 import BottomBar from "../components/BottomBar";
@@ -23,12 +26,20 @@ import {
   ThirdPlaceSvg,
 } from "../components/icons/LeaderboardSvg";
 
-import Link from "next/link";
-import Image from "next/image";
 
 const LeaderboardPlayer = () => {
   const leaderboardLeague = "Bronze League";
   const leaderboardUsers = useLeaderboardUsers();
+
+  const userRefs = useRef([]);
+  const currentUser = "Alice"; // Remplacez ceci par la requête API pour obtenir l'utilisateur connecté
+
+  useEffect(() => {
+    const currentUserIndex = leaderboardUsers.findIndex(user => user.username === currentUser);
+    if (currentUserIndex !== -1 && userRefs.current[currentUserIndex]) {
+      userRefs.current[currentUserIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [leaderboardUsers, currentUser]);
 
   return (
     <div>
@@ -36,10 +47,11 @@ const LeaderboardPlayer = () => {
         {leaderboardUsers.map((user, i) => (
           <LeaderboardProfile
             key={user.username} 
+            ref={el => (userRefs.current[i] = el)}
             place={i + 1}
             username={user.username} 
             xp={user.score} 
-            condition={user.username == "Alice"} //Remplacer Alice par la reqûete API de l'utilisateur connecté 
+            condition={user.username === currentUser} //Remplacer Alice par la reqûete API de l'utilisateur connecté 
           />
         ))}
       </div>
@@ -92,7 +104,7 @@ function leaderboardLeague(league) {
 
 export default function LeaderBoard() {
   const league = "Bronze"; // TODO : get from API
-  const leaderLeague = `${league} League`; // text for the league
+  const leaderLeague = `${league} League`;
 
   return (
     <div>
