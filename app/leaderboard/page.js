@@ -39,6 +39,7 @@ const LeaderboardPlayer = () => {
             place={i + 1}
             username={user.username} 
             xp={user.score} 
+            condition={user.username == "Alice"} //Remplacer Alice par la reqûete API de l'utilisateur connecté 
           />
         ))}
       </div>
