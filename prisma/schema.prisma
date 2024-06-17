@@ -9,143 +9,150 @@ datasource db {
   relationMode = "prisma"
 }
 
-
 model Users {
-  id                      Int   @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  username                String   @unique
-  hash                    String // Hashed password
-  salt                    String // Salt for password hashing
-  
-  xp                      Int @default(0)
-  dailyGoal               Int @default(0) // (0-10)
-  
-  streak                  String[] @default([]) // (dateString | '') array with 7 elements
-  
-  creationDate            DateTime @default(now())
-  avatar                  Int @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
-  
-  preferences             Preferences[]
-  courses                 UserCourse[]
+  username String @unique
+  hash     String // Hashed password
+  salt     String // Salt for password hashing
+
+  score        Int @default(0)
+  dailyGoal    Int @default(0) // (0-10)
+
+  creationDate DateTime @default(now())
+  avatar       Int      @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
+
+  preferences          Preferences[]
+  courses              UserCourse[]
+  streaksRecords       StreaksRecords[]
+}
+
+model StreaksRecords {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   Users @relation(fields: [userId], references: [id])
+
+  date  DateTime
+
+  @@index([userId])
 }
 
 model Preferences {
-  id       Int @id @default(autoincrement())
-  
+  id Int @id @default(autoincrement())
+
   language String @default("fr") // fr | en
-  
-  userId   Int
-  user     Users  @relation(fields: [userId], references: [id])
+
+  userId Int
+  user   Users @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 model UserCourse {
-  id       Int @id @default(autoincrement())
-  
-  currentUnitIndex Int @default(0)
+  currentUnitIndex           Int @default(0)
   currentUnitCheckpointIndex Int @default(0)
 
-  userId   Int
-  user     Users   @relation(fields: [userId], references: [id])
-  
+  userId Int
+  user   Users @relation(fields: [userId], references: [id])
+
   courseId Int
   course   Courses @relation(fields: [courseId], references: [id])
 
+  @@id([userId, courseId])
   @@index([courseId])
   @@index([userId])
 }
 
 model Courses {
-  id           Int     @id @default(autoincrement())
-  
-  name         String
-  celeneLink   String
-  department   String // sti, mri, gsi, stpi
-  semester     Int
-  
-  units        Units[]
-  userCourse   UserCourse[]
+  id Int @id @default(autoincrement())
+
+  name        String
+  description String?
+
+  celeneLink String?
+  department String // sti, mri, gsi, stpi
+  semester   Int
+
+  units      Units[]
+  userCourse UserCourse[]
 }
 
 model Units {
-  id       Int   @id @default(autoincrement())
-  
-  name     String
-  index    Int
-  
+  id Int @id @default(autoincrement())
+
+  name  String
+  index Int
+
   courseId Int
-  course   Courses  @relation(fields: [courseId], references: [id])
-  
-  checkpoints       Checkpoints[]
+  course   Courses @relation(fields: [courseId], references: [id])
+
+  checkpoints Checkpoints[]
 
   @@index([courseId])
 }
 
-
-
 model Checkpoints {
-  id              Int    @id @default(autoincrement())
-  
-  completed       Boolean @default(false)
-  
+  id Int @id @default(autoincrement())
+
+  completed Boolean @default(false)
+
   questionsPerTry Int // Nombre de questions à poser à chaque essai
   triesRequired   Int // Nombre d'essais nécessaires pour valider le checkpoint
-  
-  FillInTheBlanksQuestion FillInTheBlanksQuestion[]
-  TimedQuestion   TimedQuestion[]
-  QCMQuestion     QCMQuestion[]
 
-  unitId          Int
-  unit            Units     @relation(fields: [unitId], references: [id])
-  
+  FillInTheBlanksQuestion FillInTheBlanksQuestion[]
+  TimedQuestion           TimedQuestion[]
+  QCMQuestion             QCMQuestion[]
+
+  unitId Int
+  unit   Units @relation(fields: [unitId], references: [id])
+
   @@index([unitId])
 }
 
 model FillInTheBlanksQuestion {
-  id               Int  @id @default(autoincrement())
-  
-  checkpointId     Int
-  checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
-  
-  question         String
-  textWithHoles    String // "Le {} est un animal très {}." 
-  
-  propositions     String[] // ["chien", "mignon", "fourchette"]
-  correctAnswer    String[] // ["chien", "mignon"]
-  
-  duration         Int // Durée en secondes
-  
+  id Int @id @default(autoincrement())
+
+  checkpointId Int
+  checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
+
+  question      String
+  textWithHoles String // "Le {} est un animal très {}." 
+
+  propositions  String[] // ["chien", "mignon", "fourchette"]
+  correctAnswer String[] // ["chien", "mignon"]
+
+  duration Int // Durée en secondes
+
   @@index([checkpointId])
 }
 
 model TimedQuestion {
-  id               Int  @id @default(autoincrement())
-  
-  checkpointId     Int
-  checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
-  
+  id Int @id @default(autoincrement())
+
+  checkpointId Int
+  checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
+
   question         String
   aiPromptSolution String // Solution pour l'évaluation automatique par IA
-  
-  duration         Int // Durée en secondes
-  
+
+  duration Int // Durée en secondes
+
   @@index([checkpointId])
 }
 
-
 model QCMQuestion {
-  id               Int  @id @default(autoincrement())
-  
-  checkpointId     Int
-  checkpoint       Checkpoints @relation(fields: [checkpointId], references: [id])
-  
-  question         String
-  
-  answers          String[]
-  correctAnswer    String
-  
-  duration         Int // Durée en secondes
+  id Int @id @default(autoincrement())
+
+  checkpointId Int
+  checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
+
+  question String
+
+  answers       String[]
+  correctAnswer String
+
+  duration Int // Durée en secondes
 
   @@index([checkpointId])
 }
