@@ -6,8 +6,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 import haltereImg from "../../../public/haltere.png";
-
-
+import { SettingsRightNav } from "../../components/SettingsRightNav";
 
 const goalXpOptions = [
   { title: "Chill", xp: 10 },
@@ -16,10 +15,11 @@ const goalXpOptions = [
   { title: "Intense", xp: 50 },
   { title: "Partiel en approche", xp: 500 },
   { title: "Rattrapage", xp: 5000 },
-]
+];
 
-const Coach = () => { // TODO : get from API & save the modification of the goal
-  const goalXp = 100;
+const Coach = () => {
+  // TODO : get from API & save the modification of the goal
+  const goalXp = 10;
   const setGoalXp = 1000;
 
   const [localGoalXp, setLocalGoalXp] = useState(goalXp);
@@ -45,7 +45,13 @@ const Coach = () => { // TODO : get from API & save the modification of the goal
               révisions. Vous pouvez changer d&apos;objectif à tout moment.
             </p>
             <div className="flex gap-5">
-              <Image src={haltereImg.src} alt="Haltère" className="hidden h-52 w-208 sm:block" width={208} height={208} />
+              <Image
+                src={haltereImg.src}
+                alt="Haltère"
+                className="hidden h-52 w-208 sm:block"
+                width={208}
+                height={208}
+              />
               <div className="grow">
                 {goalXpOptions.map(({ title, xp }, i) => {
                   return (
@@ -70,6 +76,7 @@ const Coach = () => { // TODO : get from API & save the modification of the goal
               </div>
             </div>
           </div>
+          <SettingsRightNav selectedTab="Edit Daily Goal" />
         </div>
       </div>
     </div>
