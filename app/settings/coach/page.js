@@ -1,7 +1,5 @@
 "use client";
 
-import { NextPage } from "next";
-import { ComponentProps } from "react";
 import React, { useState } from "react";
 import Image from "next/image";
 
