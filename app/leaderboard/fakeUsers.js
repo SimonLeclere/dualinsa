@@ -1,0 +1,22 @@
+export const fakeUsers = [
+    { id: 1, username: "Alice", score: 100, dailyGoal: 5, avatar: 0, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 2, username: "Bob", score: 200, dailyGoal: 6, avatar: 1, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 3, username: "Charlie", score: 300, dailyGoal: 7, avatar: 2, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 4, username: "David", score: 400, dailyGoal: 8, avatar: 3, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 5, username: "Eve", score: 500, dailyGoal: 9, avatar: 4, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 6, username: "Frank", score: 600, dailyGoal: 10, avatar: 5, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 7, username: "Grace", score: 700, dailyGoal: 0, avatar: 6, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 8, username: "Hank", score: 800, dailyGoal: 1, avatar: 7, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 9, username: "Ivy", score: 250, dailyGoal: 2, avatar: 8, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 10, username: "Jill", score: 350, dailyGoal: 3, avatar: 9, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 11, username: "Karl", score: 450, dailyGoal: 4, avatar: 10, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 12, username: "Liam", score: 550, dailyGoal: 5, avatar: 11, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 13, username: "Mia", score: 650, dailyGoal: 6, avatar: 12, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 14, username: "Nina", score: 750, dailyGoal: 7, avatar: 13, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 15, username: "Omar", score: 33, dailyGoal: 8, avatar: 14, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 16, username: "Pam", score: 66, dailyGoal: 9, avatar: 15, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 17, username: "Quinn", score: 99, dailyGoal: 10, avatar: 16, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 18, username: "Rex", score: 111, dailyGoal: 0, avatar: 17, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+    { id: 19, username: "Sue", score: 222, dailyGoal: 1, avatar: 18, preferences: [], courses: [], streaksRecords: [], creationDate: new Date()},
+
+]
