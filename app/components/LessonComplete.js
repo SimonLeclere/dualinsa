@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ReviewLesson from "./ReviewLesson";
+import PerformanceDisplay from "./PerformanceDisplay";
 
 // Fonction qui permet de formater le temps en heures, minutes et secondes (hh:mm:ss)
 const formatTime = (timeMs) => {
@@ -54,17 +55,10 @@ export default function LessonComplete({
               {formatTime(endTime.current - startTime.current)}
             </div>
           </div>
-          <div className="min-w-[110px] rounded-xl border-2 border-green-400 bg-green-400">
-            <h2 className="py-1 text-center text-white">Incroyable</h2>
-            <div className="flex justify-center rounded-xl bg-white py-4 text-green-400">
-              {Math.round(
-                (correctAnswerCount /
-                  (correctAnswerCount + incorrectAnswerCount)) *
-                  100
-              )}
-              %
-            </div>
-          </div>
+          <PerformanceDisplay
+            correctAnswerCount={correctAnswerCount}
+            incorrectAnswerCount={incorrectAnswerCount}
+          />
           <div className="min-w-[110px] rounded-xl border-2 border-red-400 bg-red-400">
             <h2 className="py-1 text-center text-white">Mauvaise réponse</h2>
             <div className="flex justify-center rounded-xl bg-white py-4 text-red-400">
