@@ -35,7 +35,6 @@ export default function TimeLeft({ startTime, endTime }) {
     <div className="flex justify-center gap-2">
       <span className="text-lg font-bold">
         {formatTime(timeLeft)}
-        {console.log("timeLeft", timeLeft)}
       </span>
     </div>
   );
