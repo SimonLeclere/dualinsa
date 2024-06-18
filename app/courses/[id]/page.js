@@ -11,13 +11,13 @@ export default function App() {
   };
 
   const icons = [
-    { type: "star", href: "/page1", offset: 0, unlocked: false, state: "active"},
-    { type: "book", href: "/page2", offset: 40, unlocked: false, state: "active"},
-    { type: "check", href: "/page3", offset: 40, unlocked: true, state: "complete"},
-    { type: "strong", href: "/page4", offset: 0, unlocked: false, state: "active"},
-    { type: "book", href: "/page5", offset: -40, unlocked: false, state: "active"},
-    { type: "check", href: "/page3", offset: -40, unlocked: false, state: "active"},
-    { type: "trophy", href: "/page6", offset: 0, unlocked: true, state: "complete"}  
+    { type: "star", href: "/page1", offset: 0, unlocked: false, state: "active", progress: 0},
+    { type: "book", href: "/page2", offset: 40, unlocked: false, state: "active", progress: 0},
+    { type: "check", href: "/page3", offset: 40, unlocked: true, state: "active", progress: 5},
+    { type: "strong", href: "/page4", offset: 0, unlocked: false, state: "active", progress: 0},
+    { type: "book", href: "/page5", offset: -40, unlocked: false, state: "active", progress: 0},
+    { type: "check", href: "/page3", offset: -40, unlocked: false, state: "active", progress: 0},
+    { type: "trophy", href: "/page6", offset: 0, unlocked: false, state: "complete", progress: 0},  
 
   ];
 
@@ -35,6 +35,7 @@ export default function App() {
             unlocked = {icon.unlocked}
             state = {icon.state}
             onClick={handleClick}
+            progress = {icon.progress}
           />
         ))}
       </div>

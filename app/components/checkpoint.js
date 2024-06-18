@@ -8,6 +8,7 @@ import BookSvg from "./icons/BookSvg";
 import TrophySvg from "./icons/TrophySvg";
 import StrongSvg from "./icons/StrongSvg";
 import ToolTip from "./icons/ToolTip";
+import CompletionCircle from "./icons/CompletionCircle";
 
 const icons = {
   star: StarSvg,
@@ -23,9 +24,10 @@ export default function CheckButton({
   href,
   className,
   onClick,
-  offset = 0,
+  offset = 0 ,
   unlocked = false,
   state = "active",
+  progress = 0,
 }) {
   const IconComponent = icons[type.toLowerCase()];
 
@@ -38,6 +40,7 @@ export default function CheckButton({
     "flex justify-center items-center w-20 h-20 rounded-full border-b-8 shadow-md cursor-pointer";
     const baseTrophyClasses =
     "flex justify-center items-center w-50 h-50 rounded-full cursor-pointer";
+
   const unlockedClasses =
     unlocked == true
       ? "bg-purple-500 border-purple-800" 
@@ -46,6 +49,11 @@ export default function CheckButton({
     unlocked == true
       ? "bg-transparent border-gray-400"
       : "border-[#b7b7b7] bg-[#e5e5e5]";
+
+  const unlockedClassesComplete =
+    state == "complete"
+      ? "bg-[#FFD600] border-[#FFB800]"
+      : "";
 
   // Spécifique pour le type "trophy"
   if (type.toLowerCase() === "trophy") {
@@ -69,10 +77,11 @@ export default function CheckButton({
     <Link href={href} passHref>
       <div
         style={{ transform: `translateX(${offset}px)` }}
-        className={`${baseClasses} ${unlockedClasses} `}
+        className={`${baseClasses} ${unlockedClasses} ${unlockedClassesComplete} `}
         onClick={onClick}
       >
         <IconComponent unlocked={unlocked} className="w-12 h-12" />
+        {unlocked && state == "active" && <CompletionCircle progress={progress} classname ="flex justify-center items-center"/>}
         {unlocked && state == "active" && <ToolTip offset = {offset} />}
       </div>
     </Link>
