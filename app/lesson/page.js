@@ -49,11 +49,18 @@ const lessonProblem3 = {
   correctAnswer: 0, // la bonne réponse est à l'index 0
 };
 
+
+let userAnswer = false; // réponse de l'utilisateur
+
+//const lessonProblems = [{lessonProblem1 : userAnswer}, {lessonProblem2 : userAnswer}, {lessonProblem3 : userAnswer}];
+
+const lessonProblems = [lessonProblem1, lessonProblem2, lessonProblem3];
+
+
+
 const numbersEqual = (a, b) => {
   return a.length === b.length && a.every((_, i) => a[i] === b[i]);
 };
-
-const lessonProblems = [lessonProblem1, lessonProblem2, lessonProblem3];
 
 export default function Test() {
   const [lessonProblem, setLessonProblem] = useState(0);
@@ -79,10 +86,15 @@ export default function Test() {
     ? numbersEqual(selectedAnswers, correctAnswer)
     : selectedAnswer === correctAnswer;
 
+
+  const goodAnswer 
+
   const onCheckAnswer = () => {
     setCorrectAnswerShown(true);
     if (isAnswerCorrect) {
       setCorrectAnswerCount((x) => x + 1); // bonne réponse +1
+      
+
     } else {
       setIncorrectAnswerCount((x) => x + 1); // mauvaise réponse +1
     }
