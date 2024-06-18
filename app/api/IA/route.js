@@ -12,15 +12,16 @@ export async function POST(req) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
     }
 
-    if
-
     const { question, solution, reponse } = await req.json();
 
     if (!question || !solution || !reponse) {
       return NextResponse.json({ message: 'Invalid input: question, solution, and reponse are required' }, { status: 400 });
   }
+
+  let response;
+
   try{
-    const response = await getAnswer(question, solution, reponse);
+    response = await getAnswer(question, solution, reponse);
   } catch (error) {
     return NextResponse.json({ message: 'Error while processing the request' }, { status: 500 });
   }
@@ -35,7 +36,7 @@ async function getAnswer(question, solution, reponse) {
     "messages": [
       {
         "role": "system",
-        "content": "You are an AI system that evaluates student's answers to open questions. \n\nPrompt will contain the following elements : the question, the solution and the student's proposition.\n\nYou should always  answer with JSON format.  You should always provide a correction using the same language as the student.\n\n{ \"correction\" : string, \"correct\" : boolean }"
+        "content": "You are an AI system that evaluates student's answers to open questions. \n\nPrompt will contain the following elements : the question, the solution and the student's proposition.\n\nYou should always  answer with JSON format. If the student's answer is not exactly letter-for-letter the same as the solution, but the meaning is the same or if the student makes only one spelling mistake, the answer should be considered correct (example : bleue instead of bleu must be correct or vleu instead of bleu is also correct). You should always provide a correction in the same language of the question (example : if the question is in French, you should answer in French too).\n\n{ \"correction\" : string, \"correct\" : boolean }"
       },
       {
         "role": "user",
