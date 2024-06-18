@@ -5,8 +5,6 @@ import Image from "next/image";
 
 import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
-import CustomAvatar from "./CustomAvatar";
-
 
 import pp1 from "@/public/pp/pp-1.png"
 import pp2 from "@/public/pp/pp-2.png"
@@ -19,33 +17,24 @@ import pp8 from "@/public/pp/pp-8.png"
 import pp9 from "@/public/pp/pp-9.png"
 import pp10 from "@/public/pp/pp-10.png"
 import pp11 from "@/public/pp/pp-11.png"
+import pp12 from "@/public/pp/pp-12.png"
 
-const avatarSources = [
-  { src: pp1.src },
-  { src: pp2.src },
-  { src: pp3.src },
-  { src: pp4.src },
-  { src: pp5.src },
-  { src: pp6.src },
-  { src: pp7.src },
-  { src: pp8.src },
-  { src: pp9.src },
-  { src: pp10.src },
-  { src: pp11.src },
-];
+const avatarSources = [ pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12 ];
+
 
 export default function Account() {
 
   const currentUsername = "John Doe";
   const currentLanguage = "Français";
   const currentAvatar = pp1.src;
+  const userId = 1; 
 
   const [username, setUsername] = useState(currentUsername);
   const [language, setLanguage] = useState(currentLanguage);
   const [avatar, setAvatar] = useState(currentAvatar);
 
-  const saveChanges = () => {
-    console.log("Changes saved");
+  const saveChanges = async (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -66,6 +55,7 @@ export default function Account() {
             Enregistrer
           </button>
         </div>
+
         <div className="flex justify-center gap-12">
           <div className="flex w-full max-w-xl flex-col gap-8">
 
@@ -94,9 +84,6 @@ export default function Account() {
             <div className="flex flex-col gap-2">
               <label className="font-bold text-gray-800">Photo de profil</label>
               <div className="flex flex-wrap gap-2 justify-center">
-
-                <CustomAvatar avatar={avatar} setAvatar={setAvatar} />
-
                 {avatarSources.map((avatarSource, index) => (
                   <div
                     key={index}
