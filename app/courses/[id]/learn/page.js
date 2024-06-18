@@ -28,7 +28,19 @@ const units = [
     {
         index: 2,
         name: "Les grandeurs thermodynamiques",
+    },
+
+    {
+        index: 3,
+        name: "Les réactions chimiques",
+    },
+
+    {
+        index: 4,
+        name: "Les équilibres chimiques",
     }
+
+
 ]
 
 const userCourses =

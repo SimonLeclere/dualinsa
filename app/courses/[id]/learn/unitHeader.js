@@ -32,9 +32,9 @@ export default function unitHeader({color, unitNumber, unitName }) {
           <h2 className="text-2xl font-bold">Unit {unitNumber}</h2>
           <p className="text-lg">{unitName}</p>
         </div>
-        <button className="m-2 px-5 py-2 border border-zinc-800 rounded-lg hover:bg-purple-600">
+        <button className="m-2 px-5 py-2 flex gap-x-3 border border-zinc-800 rounded-lg hover:bg-purple-600">
           <GuidePDFSvg />
-          <Link href="/pdfs/thermochimie.pdf">COURS</Link>
+          <Link href="/pdfs/thermochimie.pdf" className = "fond-bold">COURS</Link>
         </button>
       </header>
 
