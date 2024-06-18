@@ -34,11 +34,9 @@ export default function unitHeader({color, unitNumber, unitName }) {
         </div>
         <button className="m-2 px-5 py-2 flex gap-x-3 border border-zinc-800 rounded-lg hover:bg-purple-600">
           <GuidePDFSvg />
-          <Link href="/pdfs/thermochimie.pdf" className = "fond-bold">COURS</Link>
+          <Link href="/pdfs/thermochimie.pdf" >COURS</Link>
         </button>
       </header>
-
-
-    </div>
-  );
+      </div>
+    );
 }
