@@ -95,7 +95,7 @@ model Units {
 model Checkpoints {
   id Int @id @default(autoincrement())
 
-  completed Boolean @default(false)
+  index Int
 
   questionsPerTry Int // Nombre de questions à poser à chaque essai
   triesRequired   Int // Nombre d'essais nécessaires pour valider le checkpoint
