@@ -1,14 +1,14 @@
-export default function StrongSvg() {
+export default function StrongSvg({unlocked =false}) {
   return (
     <svg width="42" height="34" viewBox="0 0 42 34" fill="none">
-      <g clip-path="url(#clip0_334_225119)">
+      <g clipPath="url(#clip0_334_225119)">
         <line
           x1="16"
           y1="20.3246"
           x2="24.7589"
           y2="15.2676"
-          stroke="#E6A000"
-          stroke-width="4"
+          stroke="white"
+          strokeWidth="4"
         ></line>
         <rect
           x="17.7635"
@@ -17,7 +17,7 @@ export default function StrongSvg() {
           height="26.2961"
           rx="4.55125"
           transform="rotate(-30 17.7635 3.66309)"
-          fill="black"
+          fill = {unlocked == true ? "black" : "#b7b7b7"}
         ></rect>
         <rect
           x="2.87354"
@@ -26,7 +26,7 @@ export default function StrongSvg() {
           height="26.2961"
           rx="4.55125"
           transform="rotate(-30 2.87354 12.2598)"
-          fill="black"
+          fill = {unlocked == true ? "black" : "#b7b7b7"}
         ></rect>
         <rect
           x="25.9184"
@@ -35,7 +35,7 @@ export default function StrongSvg() {
           height="18.205"
           rx="4.55125"
           transform="rotate(-30 25.9184 3.62891)"
-          fill="black"
+          fill = {unlocked == true ? "black" : "#b7b7b7"}
         ></rect>
         <rect
           x="-1.23499"
@@ -44,7 +44,7 @@ export default function StrongSvg() {
           height="18.205"
           rx="4.55125"
           transform="rotate(-30 -1.23499 19.3027)"
-          fill="black"
+          fill = {unlocked == true ? "black" : "#b7b7b7"}
         ></rect>
         <rect
           opacity="0.2"

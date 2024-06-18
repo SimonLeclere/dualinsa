@@ -7,6 +7,7 @@ import LockSvg from "./icons/LockSvg";
 import BookSvg from "./icons/BookSvg";
 import TrophySvg from "./icons/TrophySvg";
 import StrongSvg from "./icons/StrongSvg";
+import ToolTip from "./icons/ToolTip";
 
 const icons = {
   star: StarSvg,
@@ -17,7 +18,15 @@ const icons = {
   strong: StrongSvg,
 };
 
-export default function CheckButton({ type, href, className, onClick, offset }) {
+export default function CheckButton({
+  type,
+  href,
+  className,
+  onClick,
+  offset = 0,
+  unlocked = false,
+  state = "active",
+}) {
   const IconComponent = icons[type.toLowerCase()];
 
   if (!IconComponent) {
@@ -25,34 +34,49 @@ export default function CheckButton({ type, href, className, onClick, offset }) 
     return null;
   }
 
+  const baseClasses =
+    "flex justify-center items-center w-20 h-20 rounded-full border-b-8 shadow-md cursor-pointer";
+    const baseTrophyClasses =
+    "flex justify-center items-center w-50 h-50 rounded-full cursor-pointer";
+  const unlockedClasses =
+    unlocked == true
+      ? "bg-purple-500 border-purple-800" 
+      : "border-[#b7b7b7] bg-[#e5e5e5]";
+  const unlockedTrophyClasses =
+    unlocked == true
+      ? "bg-transparent border-gray-400"
+      : "border-[#b7b7b7] bg-[#e5e5e5]";
+
+  // Spécifique pour le type "trophy"
   if (type.toLowerCase() === "trophy") {
+
+
     return (
-      <Link href={href} passHref
-      style={{transform:`translateX(${offset}px)`}}>
+      <Link href={href} passHref>
         <div
-          className={`flex justify-center items-center w-20 h-20 bg-white border-b-4  rounded-full shadow-md cursor-pointer `}
+          style={{ transform: `translateX(${offset}px)` }}
+          className={`${baseTrophyClasses} ${unlockedTrophyClasses}  `}
           onClick={onClick}
         >
-          <IconComponent className="w-12 h-12" />
+          <IconComponent unlocked={unlocked} className={unlocked && state == "active" ? "animate-bounce" : ""} />
         </div>
       </Link>
     );
   }
 
-  
+  // Générique pour les autres types
   return (
-    <Link href={href} passHref
-    style={{transform:`translateX(${offset}px)`}} >
+    <Link href={href} passHref>
       <div
-        className={`flex justify-center items-center w-20 h-20 rounded-full bg-purple-500 border-purple-800 border-b-4 shadow-md cursor-pointer ${className}`}
+        style={{ transform: `translateX(${offset}px)` }}
+        className={`${baseClasses} ${unlockedClasses} `}
         onClick={onClick}
       >
-        <IconComponent className="w-12 h-12" />
-        </div>
-      
+        <IconComponent unlocked={unlocked} className="w-12 h-12" />
+        {unlocked && state == "active" && <ToolTip offset = {offset} />}
+      </div>
     </Link>
   );
-  
 }
 
 
