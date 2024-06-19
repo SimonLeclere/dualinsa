@@ -48,6 +48,14 @@ export default function Account() {
   
   const saveChanges = async (event) => {
     event.preventDefault();
+    // Request to update user
+    const res = await fetch('/api/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, language, avatar }),
+    });
   };
 
   return (
