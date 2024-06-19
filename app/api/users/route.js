@@ -36,3 +36,50 @@ export async function GET(req) {
 
 
 }
+
+export async function POST(req) {
+    const token = await getToken({ req })
+    
+    if (!token) {
+        return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
+    }
+
+    // Get the authenticated user
+    try {
+        const user = await prisma.users.findUnique({
+            where: {
+                id: token.user.id,
+            },
+        }).catch((error) => {
+            console.log(error);
+            throw error;
+        });
+        
+        if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
+
+        // Update user
+        const { username, language, avatar } = req.body;
+        const updatedUser = await prisma.users.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                username,
+                language,
+                avatar,
+            },
+        }).catch((error) => {
+            console.log(error);
+            throw error;
+        });
+
+        // Return user
+        delete updatedUser.hash;
+        delete updatedUser.salt;
+        return NextResponse.json(updatedUser);
+
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message : 'Error updating user' }, { status: 500 });
+    }
+}
