@@ -25,7 +25,7 @@ export default function unitHeader({color, unitNumber, unitName }) {
     
   // }
   return (
-    <div className={["w-5/6 max-w-2xl text-white sm:rounded-xl bg-purple-400 m-1"]}>
+    <div className={"w-5/6 max-w-2xl text-white rounded-xl bg-purple-400 m-1"}>
       <BottomBar selectedTab="courses" />
       <header className="flex items-center justify-between gap-4 p-4">
         <div className="flex flex-col gap-1">
@@ -34,10 +34,10 @@ export default function unitHeader({color, unitNumber, unitName }) {
         </div>
         <button className="m-2 px-5 py-2 flex gap-x-3 border-2 border-zinc-600 rounded-lg hover:bg-purple-600 shadow-md">
           <GuidePDFSvg />
-          <Link href="/pdfs/thermochimie.pdf" >COURS</Link>
+          <Link href="/pdfs/thermochimie.pdf">COURS</Link>
         </button>
       </header>
-      </div>
-    );
+    </div>
+  );
 }
 

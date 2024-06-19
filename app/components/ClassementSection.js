@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import IconLeagueSvg from "../components/icons/LeaderboardSvg";
+import {IconLeagueSvg} from "../components/icons/LeaderboardSvg";
 
 export const ClassementSection = () => {
   // TODO : lick to the BDD

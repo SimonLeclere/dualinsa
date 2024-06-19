@@ -51,6 +51,7 @@ const checkpoints = [
 
 export default function Unit() {
   return (
+    <>
     <div className="flex flex-col items-center gap-12 w-full">
       {units.map((unit, index) => (
         <UnitSection
@@ -60,6 +61,8 @@ export default function Unit() {
         />
       ))}
     </div>
+    <div className="pb-24"></div> {/* Pour avoir de la place lors de la fin du défillement */}
+    </>
   );
 }
 
