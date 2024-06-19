@@ -32,7 +32,19 @@ export default function Coach() {
       setGoalXp(user.dailyGoal);
     }
   }, [user]);
-
+  
+  const saveChanges = async (event) => {
+    event.preventDefault();
+    setGoalXp(localGoalXp)
+    // Request to update user
+    const res = await fetch('/api/users/dailyGoal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ dailyGoal: goalXp }),
+    });
+  };
 
   return (
     <div>
@@ -44,7 +56,7 @@ export default function Coach() {
           </h1>
           <button
             className="rounded-2xl border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
-            onClick={() => setGoalXp(localGoalXp)}
+            onClick={saveChanges}
             disabled={localGoalXp === goalXp}
           >
             Enregistrer
