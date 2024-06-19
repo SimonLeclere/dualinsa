@@ -12,6 +12,6 @@
     --> soit on fait un récap général (de combien de fois il a du refaire les questions etc etc)
 
 
-2) Faire le chronomète à droite de la barre de progression
+2) Faire le chronomètre à droite de la barre de progression
     --> Soit on fait un temps général, genre 1 minute pour répondre à toutes les questions
     --> Soit on fait un temps poru chaque questions du QCM, genre 1 minute pour réponde à une question
