@@ -7,28 +7,39 @@ import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
 import NavBar from "@/components/NavBar";
 
-import pp1 from "@/public/pp/pp-1.png"
-import pp2 from "@/public/pp/pp-2.png"
-import pp3 from "@/public/pp/pp-3.png"
-import pp4 from "@/public/pp/pp-4.png"
-import pp5 from "@/public/pp/pp-5.png"
-import pp6 from "@/public/pp/pp-6.png"
-import pp7 from "@/public/pp/pp-7.png"
-import pp8 from "@/public/pp/pp-8.png"
-import pp9 from "@/public/pp/pp-9.png"
-import pp10 from "@/public/pp/pp-10.png"
-import pp11 from "@/public/pp/pp-11.png"
-import pp12 from "@/public/pp/pp-12.png"
+import pp1 from "@/public/pp/pp-1.png";
+import pp2 from "@/public/pp/pp-2.png";
+import pp3 from "@/public/pp/pp-3.png";
+import pp4 from "@/public/pp/pp-4.png";
+import pp5 from "@/public/pp/pp-5.png";
+import pp6 from "@/public/pp/pp-6.png";
+import pp7 from "@/public/pp/pp-7.png";
+import pp8 from "@/public/pp/pp-8.png";
+import pp9 from "@/public/pp/pp-9.png";
+import pp10 from "@/public/pp/pp-10.png";
+import pp11 from "@/public/pp/pp-11.png";
+import pp12 from "@/public/pp/pp-12.png";
 
-const avatarSources = [ pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12 ];
-
+const avatarSources = [
+  pp1,
+  pp2,
+  pp3,
+  pp4,
+  pp5,
+  pp6,
+  pp7,
+  pp8,
+  pp9,
+  pp10,
+  pp11,
+  pp12,
+];
 
 export default function Account() {
-
   const currentUsername = "John Doe";
   const currentLanguage = "Français";
   const currentAvatar = pp1.src;
-  const userId = 1; 
+  const userId = 1;
 
   const [username, setUsername] = useState(currentUsername);
   const [language, setLanguage] = useState(currentLanguage);
@@ -41,7 +52,7 @@ export default function Account() {
   return (
     <div className="min-h-screen justify-center">
       <NavBar />
-      <div className="mx-auto flex flex-col gap-5 px-4 pt-20 pb-32 sm:pt-10 md:pl-28 lg:pl-72">
+      <div className="mx-auto flex flex-col gap-5 px-4 pt-20 pb-32 md:pl-28 lg:pl-72">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-4xl">
           <h1 className="text-lg font-bold text-gray-800 sm:text-2xl">
             Compte
@@ -121,4 +132,4 @@ export default function Account() {
       </div>
     </div>
   );
-};
+}
