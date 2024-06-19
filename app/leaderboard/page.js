@@ -11,7 +11,7 @@ import NavBar from "../components/NavBar";
 import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
 const LeaderboardPlayer = () => {
-  const leaderboardLeague = "Bronze League";
+
   const leaderboardUsers = useLeaderboardUsers();
 
   const userRefs = useRef([]);
@@ -80,8 +80,9 @@ function leaderboardLeague(leagueName) {
 }
 
 export default function LeaderBoard() {
-  const league = "Gold"; // TODO : get from API
-  const leaderLeague = `${league} League`;
+
+  const { data: league, error, isLoading } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
+
 
   return (
     <>
@@ -92,10 +93,14 @@ export default function LeaderBoard() {
           {
             <>
               <div className="sticky top-0 -mt-14 flex w-full flex-col items-center gap-2 sm:gap-5 bg-white pt-20 sm:pt-28">
-                <div className="flex items-center gap-5">
+                { isLoading && <div>Chargement...</div>}
+                { error && <div>Erreur: {error.message}</div>}
+                {
+                  league  && <>
+                  <div className="flex items-center gap-5">
                   {leaderboardLeague(league)}
                 </div>
-                <h1 className="text-2xl font-bold">{leaderLeague}</h1>
+                <h1 className="text-2xl font-bold">{league} League</h1>
                 <div className="flex w-full flex-col items-center gap-1">
                   <p className="text-sm sm:text-lg text-gray-500">
                     Vous êtes dans le top 20% des joueurs
@@ -105,6 +110,8 @@ export default function LeaderBoard() {
                   </time>
                 </div>
                 <div className="w-full border-b-2 border-gray-200"></div>
+                </>
+                }
               </div>
               <LeaderboardPlayer />
             </>
