@@ -8,11 +8,12 @@ export const ProgressSection = () => {
   return (
     <article className="flex flex-col gap-5 rounded-2xl border-2 border-gray-200 p-6 font-bold text-gray-700">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl">Progession</h2>
+        <h2 className="text-xl">Daily Progression</h2>
         <Link href="/settings/coach" className="uppercase text-blue-400">
           Modifier
         </Link>
       </div>
+      
       <div className="flex gap-5">
         <LightningProgressSvg />
         <div className="flex grow flex-col justify-around">

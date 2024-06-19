@@ -1,6 +1,7 @@
 import { ClassementSection } from "./ClassementSection";
 import { ProgressSection } from "./ProgessSection"; 
 import StreakCoinSection from "./StreakCoinSection";
+import PatagerSection from "./PartagerSection";
 
 
 export default function RightBar() {
@@ -11,6 +12,7 @@ export default function RightBar() {
         </article>
           <ProgressSection />
           <ClassementSection />
+          <PatagerSection />
       </aside>
     );
 }
