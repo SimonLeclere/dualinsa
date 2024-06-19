@@ -11,7 +11,7 @@ export default function ProfileStatsSection() {
   /* TODO : Link to the BDD */
   const streak = 0;
   const totalXp = 125;
-  const league = "Gold";
+  const league = "Diamond";
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
   const topClassement = 3;
 
