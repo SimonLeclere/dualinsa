@@ -41,6 +41,7 @@ model StreaksRecords {
 model UserCourse {
   currentUnitIndex           Int @default(0)
   currentUnitCheckpointIndex Int @default(0)
+  currentCheckpointProgress  Int @default(0)
 
   userId Int
   user   Users @relation(fields: [userId], references: [id])
