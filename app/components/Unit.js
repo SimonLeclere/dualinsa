@@ -40,7 +40,7 @@ const checkpoints = [
     ],
     [
       { type: "star", href: "/page13", progress: 1},
-      { type: "book", href: "/page14", progress: 0.4},
+      { type: "book", href: "/page14", progress: 0.6},
       { type: "strong", href: "/page11", progress: 0},
       { type: "check", href: "/page3", progress: 0},
       { type: "book", href: "/page14", progress: 0},

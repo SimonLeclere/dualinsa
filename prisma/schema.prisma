@@ -22,7 +22,7 @@ model Users {
   creationDate DateTime @default(now())
   avatar       Int      @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
 
-  preferences          Preferences[]
+  language String @default("fr") // fr | en
   courses              UserCourse[]
   streaksRecords       StreaksRecords[]
 }
@@ -34,17 +34,6 @@ model StreaksRecords {
   user   Users @relation(fields: [userId], references: [id])
 
   date  DateTime
-
-  @@index([userId])
-}
-
-model Preferences {
-  id Int @id @default(autoincrement())
-
-  language String @default("fr") // fr | en
-
-  userId Int
-  user   Users @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -95,7 +84,7 @@ model Units {
 model Checkpoints {
   id Int @id @default(autoincrement())
 
-  completed Boolean @default(false)
+  index Int
 
   questionsPerTry Int // Nombre de questions à poser à chaque essai
   triesRequired   Int // Nombre d'essais nécessaires pour valider le checkpoint
