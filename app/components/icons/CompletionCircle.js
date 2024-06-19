@@ -24,7 +24,7 @@ export default function CompletionCircle({progress}) {
         cx="55"
         cy="59"
         r="46"
-        stroke="black" // Couleur de progression
+        stroke="#FFD600" // Couleur de progression
         strokeWidth="8"
         fill="none"
         strokeDasharray={circumference}
