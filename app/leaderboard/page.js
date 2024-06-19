@@ -3,7 +3,7 @@
 import React from "react";
 
 import { useEffect, useRef } from "react";
-import LeaderboardProfile from "../leaderboard/LeaderboardProfile";
+import LeaderboardProfile from "../leaderboard/leaderboardProfile";
 import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard";
 import BottomBar from "../components/BottomBar";
 import NavBar from "../components/NavBar";
