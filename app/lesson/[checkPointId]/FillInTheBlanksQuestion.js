@@ -15,6 +15,9 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
                 correction: currentQuestion.textWithHoles.split("{}").map((text, i) => {
                     return text + (i < currentQuestion.textWithHoles.split("{}").length - 1 ? currentQuestion.correctAnswer[i] : "");
                 }).join(""),
+                userAnswer: currentQuestion.textWithHoles.split("{}").map((text, i) => {
+                    return text + (i < currentQuestion.textWithHoles.split("{}").length - 1 ? selectedAnswers[i] : "");
+                }).join(""),
             };
         },
 

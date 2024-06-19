@@ -1,9 +1,17 @@
 import React from "react";
 
 const getMessageAndStyle = (percentage) => {
-  if (percentage >= 75) {
+  if (percentage === 100) {
     return {
-      message: "Incroyable",
+      message: "Parfait !",
+      bgColor: "bg-green-400",
+      textColor: "text-green-400",
+      borderColor: "border-green-400",
+      textColorWhite: "text-white",
+    };
+  } else if (percentage >= 75) {
+    return {
+      message: "Incroyable !",
       bgColor: "bg-green-400",
       textColor: "text-green-400",
       borderColor: "border-green-400",
@@ -27,7 +35,7 @@ const getMessageAndStyle = (percentage) => {
     };
   } else {
     return {
-      message: "Boff",
+      message: "A retravailler",
       bgColor: "bg-red-400",
       textColor: "text-red-400",
       borderColor: "border-red-400",

@@ -2,22 +2,51 @@ import { useState, useImperativeHandle, forwardRef } from 'react';
 
 const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setShowConfirmButton }, ref) {
 
-    const [userAnswer, setUserAnswer] = useState(null);
+    const [userAnswer, setUserAnswer] = useState("");
     const [locked, setLocked] = useState(false);
 
     useImperativeHandle(ref, () => ({
 
         async checkAnswer() {
             setLocked(true);
-            return {
-                isCorrect: true,
-                correction: ""
+
+            try {
+                const data = await fetch("/api/correctTimedQuestion", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        question: currentQuestion.question,
+                        solution: currentQuestion.aiPromptSolution,
+                        reponse: userAnswer
+                    })
+                });
+
+                if (!data.ok) {
+                    throw new Error("Error while processing the request");
+                }
+
+                // { correct: boolean, correction: string }
+                const response = await data.json();
+
+                return {
+                    isCorrect: response.correct,
+                    correction: response.correction || currentQuestion.aiPromptSolution,
+                    userAnswer: userAnswer
+                }
+            } catch (error) {
+                return {
+                    isCorrect: false,
+                    correction: currentQuestion.aiPromptSolution,
+                    userAnswer: userAnswer
+                }
             }
         },
 
         reset() {
             setLocked(false);
-            setUserAnswer(null);
+            setUserAnswer("");
         }
     }));
 

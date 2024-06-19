@@ -9,9 +9,11 @@ const QCMQuestion = forwardRef(function QCMQuestion({ currentQuestion, setShowCo
 
         async checkAnswer() {
             setLocked(true);
+            
             return {
                 isCorrect: selectedAnswer === currentQuestion.correctAnswer,
-                correction: currentQuestion.correctAnswer
+                correction: currentQuestion.correctAnswer,
+                userAnswer: selectedAnswer,
             }
         },
 
@@ -39,8 +41,8 @@ const QCMQuestion = forwardRef(function QCMQuestion({ currentQuestion, setShowCo
                             key={i}
                             className={
                                 answer === selectedAnswer
-                                    ? "cursor-pointer rounded-xl text-xl border-2 border-b-4 border-blue-300 p-6 sm:py-14 sm:px-32 bg-blue-100 text-blue-400"
-                                    : "cursor-pointer rounded-xl text-xl border-2 border-b-4 border-gray-200 p-6 sm:py-14 sm:px-32 hover:bg-gray-100"
+                                    ? "cursor-pointer rounded-xl text-xl border-2 border-b-4 border-blue-300 content-center py-10 w-full sm:w-80 bg-blue-100 text-blue-400"
+                                    : "cursor-pointer rounded-xl text-xl border-2 border-b-4 border-gray-200 content-center py-10 w-full sm:w-80 hover:bg-gray-100"
                             }
                             role="radio"
                             aria-checked={answer === selectedAnswer}
