@@ -22,29 +22,29 @@ const checkpoints = [
     ],
     [
       { type: "star", href: "/page1", progress: 1},
-      { type: "book", href: "/page6", progress: 1},
-      { type: "strong", href: "/page7", progress: 1},
-      { type: "check", href: "/page3", progress: 1},
-      { type: "book", href: "/page2", progress: 1},
-      { type: "strong", href: "/page3", progress: 1},
-      { type: "trophy", href: "/page8", progress: 1}
-    ],
-    [
-      { type: "star", href: "/page9", progress: 1},
-      { type: "book", href: "/page10", progress: 1},
-      { type: "strong", href: "/page11", progress: 1},
-      { type: "check", href: "/page3", progress: 1},
-      { type: "book", href: "/page2", progress: 1},
-      { type: "strong", href: "/page3", progress: 1},
-      { type: "trophy", href: "/page12", progress: 1}
-    ],
-    [
-      { type: "star", href: "/page13", progress: 1},
-      { type: "book", href: "/page14", progress: 0.6},
-      { type: "strong", href: "/page11", progress: 0},
+      { type: "book", href: "/page6", progress: 0.7},
+      { type: "strong", href: "/page7", progress: 0},
       { type: "check", href: "/page3", progress: 0},
-      { type: "book", href: "/page14", progress: 0},
-      { type: "strong", href: "/page11", progress: 0},
+      { type: "book", href: "/page2", progress: 0},
+      { type: "strong", href: "/page3", progress: 0},
+      { type: "trophy", href: "/page8", progress: 0}
+    ],
+    [
+      { type: "star", href: "/page9", progress: 0},
+      { type: "book", href: "/page00", progress: 0},
+      { type: "strong", href: "/page00", progress: 0},
+      { type: "check", href: "/page3", progress: 0},
+      { type: "book", href: "/page2", progress: 0},
+      { type: "strong", href: "/page3", progress: 0},
+      { type: "trophy", href: "/page02", progress: 0}
+    ],
+    [
+      { type: "star", href: "/page03", progress: 0},
+      { type: "book", href: "/page04", progress: 0},
+      { type: "strong", href: "/page00", progress: 0},
+      { type: "check", href: "/page3", progress: 0},
+      { type: "book", href: "/page04", progress: 0},
+      { type: "strong", href: "/page00", progress: 0},
       { type: "trophy", href: "/page16", progress: 0}
     ],
   ];
