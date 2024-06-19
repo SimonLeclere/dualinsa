@@ -18,6 +18,7 @@ export default function StrongSvg({unlocked =false}) {
           rx="4.55125"
           transform="rotate(-30 17.7635 3.66309)"
           fill = {unlocked == true ? "black" : "#b7b7b7"}
+          fillOpacity={unlocked == true ? "0.2" : "1"}
         ></rect>
         <rect
           x="2.87354"
@@ -27,6 +28,7 @@ export default function StrongSvg({unlocked =false}) {
           rx="4.55125"
           transform="rotate(-30 2.87354 12.2598)"
           fill = {unlocked == true ? "black" : "#b7b7b7"}
+          fillOpacity={unlocked == true ? "0.2" : "1"}
         ></rect>
         <rect
           x="25.9184"
@@ -36,6 +38,7 @@ export default function StrongSvg({unlocked =false}) {
           rx="4.55125"
           transform="rotate(-30 25.9184 3.62891)"
           fill = {unlocked == true ? "black" : "#b7b7b7"}
+          fillOpacity={unlocked == true ? "0.2" : "1"}
         ></rect>
         <rect
           x="-1.23499"
@@ -45,6 +48,7 @@ export default function StrongSvg({unlocked =false}) {
           rx="4.55125"
           transform="rotate(-30 -1.23499 19.3027)"
           fill = {unlocked == true ? "black" : "#b7b7b7"}
+          fillOpacity={unlocked == true ? "0.2" : "1"}
         ></rect>
         <rect
           opacity="0.2"

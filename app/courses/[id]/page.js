@@ -1,47 +1,40 @@
 "use client";
 
+
 import NavBar from "@/components/NavBar";
 import BottomBar from "@/components/BottomBar";
 import React, { act } from "react";
 import CheckButton from "@/components/checkpoint";
+import Unit from "@/components/Unit";
+
+
 
 export default function App() {
   const handleClick = () => {
     console.log("CheckButton clicked!");
   };
 
-  const icons = [
-    { type: "star", href: "/page1", offset: 0, unlocked: false, state: "active", progress: 0},
-    { type: "book", href: "/page2", offset: 40, unlocked: false, state: "active", progress: 0},
-    { type: "check", href: "/page3", offset: 40, unlocked: true, state: "active", progress: 5},
-    { type: "strong", href: "/page4", offset: 0, unlocked: false, state: "active", progress: 0},
-    { type: "book", href: "/page5", offset: -40, unlocked: false, state: "active", progress: 0},
-    { type: "check", href: "/page3", offset: -40, unlocked: false, state: "active", progress: 0},
-    { type: "trophy", href: "/page6", offset: 0, unlocked: false, state: "complete", progress: 0},  
-
-  ];
-
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center pb-8">
       <NavBar />
-      <div className="flex flex-col items-center gap-4">
-        {icons.map((icon, index) => (
-          <CheckButton
-            key={index}
-            type={icon.type}
-            href={icon.href}
-            offset={icon.offset}
-            className="bg-purple-500 border-purple-800"
-            unlocked = {icon.unlocked}
-            state = {icon.state}
-            onClick={handleClick}
-            progress = {icon.progress}
-          />
-        ))}
-      </div>
+        <Unit />  
       <BottomBar />
     </div>
   );
 }
 
 
+
+
+
+// export default function App() {
+//   return (
+//     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+//       <NavBar />
+//       <div className="flex flex-col items-center w-full gap-8 py-8">
+//         <Unit />
+//       </div>
+//       <BottomBar />
+//     </div>
+//   );
+// }

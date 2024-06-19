@@ -9,6 +9,7 @@ import TrophySvg from "./icons/TrophySvg";
 import StrongSvg from "./icons/StrongSvg";
 import ToolTip from "./icons/ToolTip";
 import CompletionCircle from "./icons/CompletionCircle";
+import checkpoints from "./Unit";
 
 const icons = {
   star: StarSvg,
@@ -24,7 +25,7 @@ export default function CheckButton({
   href,
   className,
   onClick,
-  offset = 0 ,
+  offset = 0,
   unlocked = false,
   state = "active",
   progress = 0,
@@ -38,27 +39,25 @@ export default function CheckButton({
 
   const baseClasses =
     "flex justify-center items-center w-20 h-20 rounded-full border-b-8 shadow-md cursor-pointer";
-    const baseTrophyClasses =
+  const baseTrophyClasses =
     "flex justify-center items-center w-50 h-50 rounded-full cursor-pointer";
 
   const unlockedClasses =
     unlocked == true
-      ? "bg-purple-500 border-purple-800" 
+      ? 
+      (state == "complete"
+        ? "bg-[#FFD600] border-[#FFB800]"
+        : "bg-purple-500 border-purple-800")
       : "border-[#b7b7b7] bg-[#e5e5e5]";
   const unlockedTrophyClasses =
     unlocked == true
       ? "bg-transparent border-gray-400"
       : "border-[#b7b7b7] bg-[#e5e5e5]";
 
-  const unlockedClassesComplete =
-    state == "complete"
-      ? "bg-[#FFD600] border-[#FFB800]"
-      : "";
+  
 
   // Spécifique pour le type "trophy"
   if (type.toLowerCase() === "trophy") {
-
-
     return (
       <Link href={href} passHref>
         <div
@@ -66,7 +65,10 @@ export default function CheckButton({
           className={`${baseTrophyClasses} ${unlockedTrophyClasses}  `}
           onClick={onClick}
         >
-          <IconComponent unlocked={unlocked} className={unlocked && state == "active" ? "animate-bounce" : ""} />
+          <IconComponent
+            unlocked={unlocked}
+            className={unlocked && state == "active" ? "animate-bounce" : ""}
+          />
         </div>
       </Link>
     );
@@ -77,15 +79,18 @@ export default function CheckButton({
     <Link href={href} passHref>
       <div
         style={{ transform: `translateX(${offset}px)` }}
-        className={`${baseClasses} ${unlockedClasses} ${unlockedClassesComplete} `}
+        className={`${baseClasses} ${unlockedClasses} `}
         onClick={onClick}
       >
         <IconComponent unlocked={unlocked} className="w-12 h-12" />
-        {unlocked && state == "active" && <CompletionCircle progress={progress} classname ="flex justify-center items-center"/>}
-        {unlocked && state == "active" && <ToolTip offset = {offset} />}
+        {unlocked && state == "active" && (
+          <CompletionCircle
+            progress={progress}
+            classname="flex justify-center items-center"
+          />
+        )}
+        {unlocked && state == "active" && <ToolTip offset={offset} />}
       </div>
     </Link>
   );
 }
-
-

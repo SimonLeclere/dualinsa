@@ -1,9 +1,9 @@
 // CompletionCircle.js
 import React from "react";
 
-export default function CompletionCircle({ progress }) {
+export default function CompletionCircle({progress}) {
   const circumference = 2 * Math.PI * 46;
-  const offset = circumference - (progress / 5) * circumference;
+  const offset = circumference - (progress) * circumference;
 
   return (
     <svg
@@ -30,6 +30,7 @@ export default function CompletionCircle({ progress }) {
         strokeDasharray={circumference}
         strokeDashoffset={offset}
         className="transition-all duration-500"
+        transform="rotate(-90 55 59)" // Rotate the circle by -90 degrees around the center point (55, 59)
       />
     </svg>
   );
