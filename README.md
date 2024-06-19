@@ -45,3 +45,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
 
 <https://docs.google.com/document/d/1jww7iEQxZfz7plSWy20kQJrUcMD3mzIMfUO8stizBuI/edit?usp=sharing>
+
+TODO:
+
+- [ ] Ajouter un bouton pour se déconnecter
+- [ ] Pouvoir accéder à la session depuis chaque page
+- [ ] Vue avec les checkpoints
+- [ ] Composant "exercice"
+- [ ] Relier toutes les routes à l'api
+- [ ] Remettre le bon logo gold sur /profile

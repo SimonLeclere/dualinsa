@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import haltereImg from "../../../public/haltere.png";
-import { SettingsRightNav } from "../../components/SettingsRightNav";
+import haltereImg from "@/public/haltere.png";
+import { SettingsRightNav } from "@/components/SettingsRightNav";
+
+import BottomBar from "@/components/BottomBar";
 
 const goalXpOptions = [
   { title: "Chill", xp: 10 },
@@ -15,14 +17,16 @@ const goalXpOptions = [
   { title: "Rattrapage", xp: 5000 },
 ];
 
-const Coach = () => {
+export default function Coach() {
   // TODO : get from API & save the modification of the goal
   const goalXp = 10;
   const setGoalXp = 1000;
 
   const [localGoalXp, setLocalGoalXp] = useState(goalXp);
+
   return (
     <div>
+      <BottomBar selectedTab="profile" />
       <div className="mx-auto flex flex-col gap-5 px-4 py-20 sm:py-10 md:pl-28 lg:pl-72">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-4xl">
           <h1 className="text-lg font-bold text-gray-800 sm:text-2xl">
@@ -80,5 +84,3 @@ const Coach = () => {
     </div>
   );
 };
-
-export default Coach;

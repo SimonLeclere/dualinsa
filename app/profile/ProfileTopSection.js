@@ -29,7 +29,7 @@ export default function ProfileTopSection({ user }) {
         </div>
       </div>
       <Link
-        href="/profile/settings"
+        href="/settings/account"
         className="hidden items-center gap-2 self-start rounded-2xl border-b-4 border-blue-500 bg-blue-400 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 md:flex"
       >
         <EditPencilSvg />

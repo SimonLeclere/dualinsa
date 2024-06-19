@@ -61,6 +61,7 @@ const userCourses = [
 
 export default function CoursesList() {
 
+
     return (
         <div>
             <NavBar />
@@ -81,9 +82,9 @@ export default function CoursesList() {
                                     >
                                         {icons[course.icon]}
                                         <section className="flex flex-col w-full gap-3">
-                                            <div className="flex items-center justify-between">
+                                            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                                                 <h3 className="text-lg font-bold">{course.name}</h3>
-                                                <div className="inline-flex h-7 rounded-full bg-gray-200 px-3 py-1 text-sm font-bold uppercase text-gray-400 whitespace-nowrap">
+                                                <div className="w-fit inline-flex h-7 rounded-full bg-gray-200 px-3 py-1 text-sm font-bold uppercase text-gray-400 whitespace-nowrap">
                                                     Semestre {course.semester}
                                                 </div>
                                             </div>

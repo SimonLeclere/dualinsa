@@ -10,7 +10,7 @@ import {
 
 
   
-  const LeaderboardProfile = React.forwardRef(({ place, username, xp, condition }, ref) => {
+const LeaderboardProfile = React.forwardRef(function LeaderboardProfile({ place, username, xp, condition }, ref) {
     return (
         <div ref={ref} className={`flex w-full items-center gap-5 rounded-2xl px-5 py-2 md:mx-0 ${condition ? 'bg-purple-200' : 'hover:bg-gray-100'}`}>
             <div className="flex items-center gap-4">

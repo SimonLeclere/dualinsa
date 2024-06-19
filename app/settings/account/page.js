@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
+import NavBar from "@/components/NavBar";
 
 import pp1 from "@/public/pp/pp-1.png"
 import pp2 from "@/public/pp/pp-2.png"
@@ -38,11 +39,10 @@ export default function Account() {
   };
 
   return (
-    <div>
+      <div className="min-h-screen justify-center">
 
-      <BottomBar selectedTab="profile" />
-
-      <div className="mx-auto flex flex-col gap-5 px-4 py-20 sm:py-10 md:pl-28 lg:pl-72">
+      <NavBar />
+      <div className="mx-auto flex flex-col gap-5 px-4 pt-20 pb-32 sm:pt-10 md:pl-28 lg:pl-72">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-4xl">
           <h1 className="text-lg font-bold text-gray-800 sm:text-2xl pt-5">
             Compte
@@ -104,6 +104,8 @@ export default function Account() {
             </div>
           </div>
           <SettingsRightNav selectedTab="Account" />
+          
+          <BottomBar selectedTab="profile" />
         </div>
       </div>
     </div>
