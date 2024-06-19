@@ -44,6 +44,7 @@ export const authOptions = {
             // hash: user.hash,
             // salt: user.salt,
             createdAt: user.createdAt,
+            language: user.language,
           }
         }
 
