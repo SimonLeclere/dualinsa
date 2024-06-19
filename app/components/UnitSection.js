@@ -41,7 +41,7 @@ export default function UnitSection({ unit, checkpoints }) {
         {checkpoints && checkpoints.length > 0 ? (
           checkpoints.map((checkpoint, index) => (
             <CheckButton
-              key={index}
+              key={`${index}${unit.index}`}
               type={checkpoint.type}
               href={checkpoint.href}
               offset={getOffset(index)}

@@ -4,8 +4,8 @@
 import NavBar from "@/components/NavBar";
 import BottomBar from "@/components/BottomBar";
 import React, { act } from "react";
-import CheckButton from "@/components/checkpoint";
-import Unit from "@/components/Unit";
+import UnitSection from "@/components/UnitSection";
+
 
 
 
@@ -17,7 +17,15 @@ export default function App() {
   return (
     <div className="flex flex-col items-center justify-center pb-8">
       <NavBar />
-        <Unit />  
+        <div className="flex flex-col items-center gap-12 w-full">
+        {units.map((unit, index) => (
+          <UnitSection
+            key={unit.index}
+            unit={unit}
+            checkpoints={checkpoints[index]}
+          />
+        ))}
+      </div> 
       <BottomBar />
     </div>
   );

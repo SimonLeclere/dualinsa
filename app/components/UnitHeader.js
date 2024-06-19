@@ -5,25 +5,8 @@ import GuidePDFSvg from "@/components/icons/GuidePDF";
 
 
 //Header of the unit containing the unit name, number, and a button linked to the unit's pdf file 
-export default function unitHeader({color, unitNumber, unitName }) {
+export default function unitHeader({unitNumber, unitName, courseId }) {
 
-  // if (color === 'green') {
-    // return (
-    //   <div 
-    //     className={`${className} flex flex-col items-center justify-center`}
-    //   >
-    //     <h1 className="text-3xl font-bold">{unitName}</h1>
-    //     <h2 className="text-xl font-bold">Unité {unitNumber}</h2>
-    //     <button
-    //       onClick={onClick}
-    //       className="flex items-center gap-1 rounded-2xl border-2 bg-white px-4 py-2 text-sm font-bold uppercase border-gray-500 text-gray-500"
-    //     >
-    //       Voir le PDF
-    //     </button>
-    //   </div>
-    // );
-    
-  // }
   return (
     <div className={["w-5/6 max-w-2xl text-white sm:rounded-xl bg-purple-400 m-1"]}>
       <BottomBar selectedTab="courses" />
@@ -34,7 +17,7 @@ export default function unitHeader({color, unitNumber, unitName }) {
         </div>
         <button className="m-2 px-5 py-2 flex gap-x-3 border-2 border-zinc-600 rounded-lg hover:bg-purple-600 shadow-md">
           <GuidePDFSvg />
-          <Link href="/pdfs/thermochimie.pdf" >COURS</Link>
+          <Link href={`/RepPDFcours/${courseId}/${unitNumber}`} >COURS</Link>
         </button>
       </header>
       </div>
