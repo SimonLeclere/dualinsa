@@ -12,7 +12,7 @@ export default function ProfileStatsSection({totalXp}) {
 
   
   const { data: streak, error, isLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
-  const league = "Gold"; // Remplacer par calcul de league
+  const { data: league, error1, isLoading1 } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
   const topClassement = 3; // Remplacer par calcul de classement
 
@@ -24,8 +24,8 @@ export default function ProfileStatsSection({totalXp}) {
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
           <FireSvg empty={streak === 0} className="w-9 h-9" />
           <div className="flex flex-col">
-            {isLoading && <p>...</p>}
-            {error && <p>Erreur</p>}
+            {(isLoading || isLoading1) && <p>...</p>}
+            {(error || error1) && <p>Erreur</p>}
             {
               streak &&
                 <span
