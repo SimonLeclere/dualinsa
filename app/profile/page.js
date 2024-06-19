@@ -6,7 +6,6 @@ import ProfileStatsSection from "/app/profile/ProfileStatsSection.js";
 import ProfileTopBar from "/app/profile/ProfileTopBar";
 import ProfileTopSection from "/app/profile/ProfileTopSection";
 
-import { getServerSession } from "../api/auth/[...nextauth]/route";
 
 import useSwr from "swr";
 

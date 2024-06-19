@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import useSwr from "swr";
 
 import haltereImg from "@/public/haltere.png";
 import { SettingsRightNav } from "@/components/SettingsRightNav";
@@ -19,10 +20,19 @@ const goalXpOptions = [
 
 export default function Coach() {
   // TODO : get from API & save the modification of the goal
-  const goalXp = 10;
-  const setGoalXp = 1000;
-
+  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
+ 
+  const [goalXp, setGoalXp] = useState('');
   const [localGoalXp, setLocalGoalXp] = useState(goalXp);
+
+
+  useEffect(() => {
+    if (user) {
+      const goalXp = user.dailyGoal;
+      setGoalXp(user.dailyGoal);
+    }
+  }, [user]);
+
 
   return (
     <div>

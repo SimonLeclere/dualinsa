@@ -1,9 +1,10 @@
 "use client";
 
-import { getToken } from "next-auth/jwt"
+import useSwr from "swr";
 
 import { useState } from "react";
 import Image from "next/image";
+import { useEffect } from 'react';
 
 import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
@@ -25,19 +26,26 @@ import pp12 from "@/public/pp/pp-12.png"
 const avatarSources = [ pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12 ];
 
 
-export default async function Account() {
+export default function Account() {
 
-  const token = await getToken({ req })
+  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
-  const currentUsername = token.user.username;
-  const currentLanguage = "Français";
-  const currentAvatar = pp1.src;
-  const userId = 1; 
-
-  const [username, setUsername] = useState(currentUsername);
-  const [language, setLanguage] = useState(currentLanguage);
-  const [avatar, setAvatar] = useState(currentAvatar);
-
+  const [username, setUsername] = useState('');
+  const [language, setLanguage] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [currentUsername, setCurrentUsername] = useState('');
+  const [currentLanguage, setCurrentLanguage] = useState('');
+  const [currentAvatar, setCurrentAvatar] = useState('')
+  
+  useEffect(() => {
+    if (user) {
+      const { username, language, avatar } = user;
+      setUsername(username);
+      setLanguage(language);
+      setAvatar(avatar);
+    }
+  }, [user]);
+  
   const saveChanges = async (event) => {
     event.preventDefault();
   };
