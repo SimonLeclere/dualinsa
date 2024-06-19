@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-
+import useSwr from "swr";
 import { useEffect, useRef } from "react";
-import LeaderboardProfile from "../leaderboard/LeaderboardProfile";
+import LeaderboardProfile from "./leaderboardProfile";
 import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard";
 import BottomBar from "../components/BottomBar";
 import NavBar from "../components/NavBar";
@@ -15,7 +15,15 @@ const LeaderboardPlayer = () => {
   const leaderboardUsers = useLeaderboardUsers();
 
   const userRefs = useRef([]);
-  const currentUser = "Alice"; // Remplacez ceci par la requête API pour obtenir l'utilisateur connecté
+
+  const { data: currentUser, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
+
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+  if (error) {
+    return <div>Erreur: {error.message}</div>;
+  }
 
   useEffect(() => {
     const currentUserIndex = leaderboardUsers.findIndex(
@@ -39,7 +47,7 @@ const LeaderboardPlayer = () => {
             place={i + 1}
             username={user.username}
             xp={user.score}
-            condition={user.username === currentUser} //Remplacer Alice par la reqûete API de l'utilisateur connecté
+            condition={user.username === currentUser}
           />
         ))}
       </div>
