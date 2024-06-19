@@ -1,5 +1,7 @@
 "use client";
 
+import { getToken } from "next-auth/jwt"
+
 import { useState } from "react";
 import Image from "next/image";
 
@@ -23,9 +25,11 @@ import pp12 from "@/public/pp/pp-12.png"
 const avatarSources = [ pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12 ];
 
 
-export default function Account() {
+export default async function Account() {
 
-  const currentUsername = "John Doe";
+  const token = await getToken({ req })
+
+  const currentUsername = token.user.username;
   const currentLanguage = "Français";
   const currentAvatar = pp1.src;
   const userId = 1; 

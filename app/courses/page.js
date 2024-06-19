@@ -1,5 +1,7 @@
 'use client'
 
+import useSwr from "swr";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,37 +21,6 @@ const icons = {
     piston: <Image src={pistonImg.src} alt="piston" width="80" height="80" className="flex-shrink-0 mx-4 w-20 h-20 sm:mx-16 sm:w-24 sm:h-24" />
 }
 
-const courses = [
-    {
-        id: 1,
-        name: "Thermochimie",
-        description: "Apprends à étudier les échanges d'énergie lors de réactions chimiques !",
-        department: "stpi",
-        icon: 'lighter',
-        semester: 2,
-        celeneLink: "https://celene.insa-cvl.fr"
-    },
-    {
-        id: 2,
-        name: "Mécanique des fluides",
-        description: "Apprends à décrire les fluides et leurs propriétés !",
-        department: "mri",
-        icon: 'beaker',
-        semester: 3,
-        celeneLink: "https://celene.insa-cvl.fr"
-    },
-    {
-        id: 3,
-        name: "Mécanismes et assemblages",
-        description: "Apprends à décrire des systèmes mécaniques complexes !",
-        department: "mri",
-        icon: 'piston',
-        semester: 3,
-        celeneLink: "https://celene.insa-cvl.fr"
-    
-    }
-]
-
 const userCourses = [
     {
         userId: 2,
@@ -61,6 +32,8 @@ const userCourses = [
 
 export default function CoursesList() {
 
+    const { data: courses, error, isLoading } = useSwr('/api/courses/listAll', (url) => fetch(url).then((res) => res.json()));
+    const { data1: enrolledCourses, error1, isLoading1 } = useSwr('/api/courses/listEnrolled', (url) => fetch(url).then((res) => res.json()));
 
     return (
         <div>
@@ -70,8 +43,11 @@ export default function CoursesList() {
                     <div className="py-7">
                         <h2 className="mb-5 text-2xl font-bold">Matières</h2>
 
-                        {
-                            courses
+                        { (isLoading || isLoading1) && <p>Chargement...</p> }
+                        { (error || error1) && <p>Erreur de chargement</p> }
+                        {   
+                            courses &&
+                            courses //Modifier avec enrolledCourses
                             .sort((a, b) => userCourses.some(uc => uc.courseId === b.id) - userCourses.some(uc => uc.courseId === a.id))
                             .map((course) => {
                                 return (
