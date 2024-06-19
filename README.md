@@ -48,10 +48,9 @@ schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
 
 TODO:
 
-- [ ] Ajouter un bouton pour se déconnecter
+- [ ] Ajouter un bouton pour se déconnecter (maxime)
 - [ ] Pouvoir accéder à la session depuis chaque page
 - [ ] Vue avec les checkpoints
 - [ ] Composant "exercice"
 - [ ] Relier toutes les routes à l'api
-- [ ] Remettre le bon logo gold sur /profile
 - [ ] Mettre les boutons Edit Account et Change Avatar sur mobile dans /profile

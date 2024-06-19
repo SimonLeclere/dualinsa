@@ -13,7 +13,7 @@ export default function ProfileStatsSection() {
   const totalXp = 125;
   const league = "Gold";
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
-  const topClassement = 4;
+  const topClassement = 3;
 
   return (
     <section>
