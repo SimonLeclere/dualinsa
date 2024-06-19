@@ -5,15 +5,17 @@ import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 import LeagueMedalSvg from "/app/components/icons/LeagueSvg";
 import LeaderboardPlaceSvg from "../components/icons/LeaderboardPlaceSvg";
 
+import useSwr from "swr";
 
 
-export default function ProfileStatsSection() {
-  /* TODO : Link to the BDD */
-  const streak = 0;
-  const totalXp = 125;
-  const league = "Gold";
+export default function ProfileStatsSection({totalXp}) {
+
+  
+  const { data: streak, error, isLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
+  const league = "Gold"; // Remplacer par calcul de league
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
-  const topClassement = 3;
+  const topClassement = 3; // Remplacer par calcul de classement
+
 
   return (
     <section>
@@ -22,14 +24,19 @@ export default function ProfileStatsSection() {
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
           <FireSvg empty={streak === 0} className="w-9 h-9" />
           <div className="flex flex-col">
-            <span
-              className={[
-                "text-xl font-bold",
-                streak === 0 ? "text-gray-400" : "",
-              ].join(" ")}
-            >
-              {streak}
-            </span>
+            {isLoading && <p>...</p>}
+            {error && <p>Erreur</p>}
+            {
+              streak &&
+                <span
+                className={[
+                  "text-xl font-bold",
+                  streak === 0 ? "text-gray-400" : "",
+                ].join(" ")}
+              >
+                {streak}
+              </span>
+            }
             <span className="text-sm text-gray-400 md:text-base">
               Day streak
             </span>

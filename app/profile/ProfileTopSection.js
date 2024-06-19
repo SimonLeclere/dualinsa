@@ -26,7 +26,7 @@ export default function ProfileTopSection({ user }) {
             <ProfileTimeSvg />
             <span className="text-gray-500">
               Membre depuis{" "}
-              {user.creationDate.toLocaleDateString("fr-FR", {
+              {new Date(user.creationDate).toLocaleDateString("fr-FR", {
                 month: "long",
                 year: "numeric",
               })}
