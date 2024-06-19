@@ -104,7 +104,6 @@ const SilverLeagueSvg = (props) => {
   );
 };
 
-
 const GoldLeagueSvg = (props) => {
   return (
     <svg width="53" height="59" viewBox="0 0 53 59" {...props}>
