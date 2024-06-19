@@ -54,3 +54,4 @@ TODO:
 - [ ] Composant "exercice"
 - [ ] Relier toutes les routes à l'api
 - [ ] Remettre le bon logo gold sur /profile
+- [ ] Mettre les boutons Edit Account et Change Avatar sur mobile dans /profile
