@@ -26,6 +26,7 @@ const Bottombar = forwardRef(function BottomBar(
   }));
 
   const validateAnswer = async (skip) => {
+    if(loading) return;
     setLoading(true);
     const correction = await checkAnswer(skip);
 

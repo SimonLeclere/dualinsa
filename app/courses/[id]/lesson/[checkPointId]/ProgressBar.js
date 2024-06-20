@@ -10,7 +10,7 @@ const formatSeconds = (seconds) => {
   return `${minutes ? minutes + " : " : ""}${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 };
 
-export default function ProgressBar({ params }, { currentQuestionIndex, totalCorrectAnswersNeeded, setQuitMessageShown, timerDuration, onTimerEnd, stopTimer, courseId }) {
+export default function ProgressBar({ currentQuestionIndex, totalCorrectAnswersNeeded, setQuitMessageShown, timerDuration, onTimerEnd, stopTimer, courseId }) {
   const [counter, setCounter] = useState(timerDuration);
   const timerEndedRef = useRef(false);
 
@@ -49,8 +49,7 @@ export default function ProgressBar({ params }, { currentQuestionIndex, totalCor
       <button
         className="text-gray-400"
         onClick={() => {
-          setQuitMessageShown(true);
-          routeur.push(`/courses/${params.id}`);
+          routeur.push(`/courses/${courseId}`);
         }}
       >
         <CloseSvg />

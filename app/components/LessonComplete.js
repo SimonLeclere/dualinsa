@@ -68,9 +68,9 @@ export default function LessonComplete({
         </div>
       </div>
       <section className="border-gray-200 sm:border-t-2 sm:p-10">
-        <div className="mx-auto flex max-w-5xl sm:justify-between">
+        <div className="mx-auto flex flex-col sm:flex-rox max-w-5xl sm:justify-between">
           <button
-            className="hidden rounded-2xl border-2 border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:block sm:min-w-[150px] sm:max-w-fit"
+            className="rounded-2xl border-2 border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:min-w-[150px] sm:max-w-fit"
             onClick={() => setReviewLessonShown(true)}
           >
             Voir le récapitulatif
@@ -101,4 +101,4 @@ export default function LessonComplete({
       />
     </div>
   );
-};
+}

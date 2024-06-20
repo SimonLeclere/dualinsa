@@ -27,8 +27,8 @@ const fetcher = async url => {
 
 export default function LessonPage({ params }) {
 
-    const checkPointId = params.checkPointId;
-
+    const { id, checkPointId } = params;
+    
     const { data: questions, error, isLoading } = useSWR(`/api/courses/checkpoints/${checkPointId}/selectQuestions`,
         fetcher,
         {
@@ -74,6 +74,7 @@ export default function LessonPage({ params }) {
                 />
                 <LessonCompleteBottomBar
                     setDisplayReview={setReviewLessonShown}
+                    id={id}
                 />
                 <ReviewLesson
                     reviewLessonShown={reviewLessonShown}
@@ -98,6 +99,7 @@ export default function LessonPage({ params }) {
                         console.log("Timer ended");
                         await BottomBarRef.current.skipQuestion()
                     }}
+                    courseId={id}
                 />
             </div>
 
