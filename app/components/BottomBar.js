@@ -12,7 +12,7 @@ import ProfileSvg from "/app/components/icons/ProfileSvg";
 const bottomBarItems = [
   {
     name: "Learn",
-    href: "/learn",
+    href: "/courses",
     routeName: "learn",
     icon: <HomeSvg />,
   },
@@ -43,10 +43,8 @@ export default function BottomBar({ selectedTab }) {
   
   if (error) return <div>Error: {error.message}</div>;
 
-  let redirect = "/courses";
-
   if (!lastCourse?.message && !isLoading && lastCourse.lastCourse != "0") {
-      redirect = `/courses/${lastCourse.lastCourse}`;
+      bottomBarItems[0].href = `/courses/${lastCourse.lastCourse}`;
   }
 
 

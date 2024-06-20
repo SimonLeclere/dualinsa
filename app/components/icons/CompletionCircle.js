@@ -4,8 +4,6 @@ import React from "react";
 export default function CompletionCircle({progress}) {
   const circumference = 2 * Math.PI * 46;
   const offset = circumference - (progress * circumference);
-  console.log(progress);
-
   return (
     <svg
       width="110"

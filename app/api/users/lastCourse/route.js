@@ -57,7 +57,7 @@ export async function POST(req) {
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
         // Update user.lastCourse
-        const { lastCourse } = JSON.parse(req.body);
+        const { lastCourse } = await req.json();
         const updatedUser = await prisma.users.update({
             where: { id: token.user.id },
             data: { lastCourse },
@@ -67,7 +67,7 @@ export async function POST(req) {
         });
 
         // Return updated user
-        return NextResponse.json(updatedUser, { status: 200 });
+        return NextResponse.json(updatedUser.lastCourse, { status: 200 });
 
     } catch (error) {
         console.error(error);

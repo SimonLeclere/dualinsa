@@ -7,16 +7,27 @@ import RightBar from "/app/components/RightBar";
 import BottomBar from "/app/components/BottomBar";
 import UnitSection from "/app/components/UnitSection";
 
-export default function CoursePage({ params }) {
+export default function CoursePage({params}) {
 
-  const { data, error, isLoading } = useSwr(`/api/courses/units/${params.id}/listAll`, (url) => fetch(url).then((res) => res.json()));
+    // Fetch Post the params.id to /api/users/lastCourse
+    const { data: lc} = useSwr(`/api/users/lastCourse`, (url) => fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ lastCourse: +params.id })
+    }).then((res) => res.json()));
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (data.message) return <div>Erreur: {data.message}</div>;
 
-  const units = data?.units; // All units from the course with all their checkpoints
-  const advancement = data?.advancement; // User advancement in the course
+    const {data, error, isLoading} = useSwr(`/api/courses/units/${params.id}/listAll`, (url) => fetch(url).then((res) => res.json()));
+    
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+    if (data.message) return <div>Erreur: {data.message}</div>;
+    
+    const units = data?.units; // All units from the course with all their checkpoints
+    const advancement = data?.advancement; // User advancement in the course
+    console.log(advancement);
 
   return (
     <div className="flex justify-center gap-3 pr-0 md:pr-6 md:ml-24 lg:ml-64 lg:gap-12">
