@@ -1,28 +1,39 @@
 "use client";
 
-import React from "react";
+import { useEffect, useRef } from "react";
 import useSwr from "swr";
 import LeaderboardProfile from "./leaderboardProfile";
 import BottomBar from "../components/BottomBar";
 import NavBar from "../components/NavBar";
 
+import { useSession } from "next-auth/react";
+
 import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
-const LeaderboardList = ({ leaderboardUsers }) => {
-
+const LeaderboardList = ({ leaderboardUsers, currentUserId }) => {
+ 
   leaderboardUsers = leaderboardUsers.sort((a, b) => b.score - a.score);
+
+  const userRefs = useRef([]);
+
+  useEffect(() => {
+    const currentUserIndex = leaderboardUsers.findIndex(user => user.id === currentUserId);
+    if (currentUserIndex !== -1 && userRefs.current[currentUserIndex]) {
+      userRefs.current[currentUserIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [leaderboardUsers, currentUserId]);
 
   return (
     <>
-      <div className="w-full md:ml-1 lg:ml-1 ">
+      <div className="w-full px-2">
         {leaderboardUsers.map((user, i) => (
           <LeaderboardProfile
             key={user.username}
+            ref={el => (userRefs.current[i] = el)}
             place={i + 1}
             username={user.username}
             xp={user.score}
-            // condition={user.username === currentUser}
-            condition={false}
+            condition={user.id === currentUserId}
           />
         ))}
       </div>
@@ -58,7 +69,8 @@ export default function LeaderBoard() {
   const { data, error, isLoading } = useSwr('/api/leaderboard', (url) => fetch(url).then((res) => res.json()));
   const { data: league, error: errorLeague, isLoading: isLoadingLeague } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
-  // TODO
+  const { data: session } = useSession();
+  const currentUserId = session?.user?.id;
 
   return (
     <>
@@ -90,7 +102,7 @@ export default function LeaderBoard() {
                 }
               </div>
               {
-                data && <LeaderboardList leaderboardUsers={data} />
+                data && <LeaderboardList leaderboardUsers={data} currentUserId={currentUserId} />
               }
             </>
           }

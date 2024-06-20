@@ -15,7 +15,7 @@ export default function ProfileTopBar() {
       <span className="text-gray-400 flex-1 text-center">Profile</span>
 
       <Link
-        href="/api/auth/signup"
+        href="/api/auth/signout"
         className="flex h-11 w-12 items-center justify-center gap-2 rounded-2xl border-b-4 border-red-500 bg-red-400 font-bold uppercase text-white transition hover:brightness-110"
       >
         <LogoutSvg />

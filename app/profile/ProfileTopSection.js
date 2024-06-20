@@ -66,7 +66,7 @@ export default function ProfileTopSection({ user }) {
         Edit profile
       </Link>
       <Link
-        href="/api/auth/signup"
+        href="/api/auth/signout"
         className="hidden items-center gap-2 self-start rounded-2xl border-b-4 border-red-500 bg-red-400 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 md:flex"
       >
         <LogoutSvg />
