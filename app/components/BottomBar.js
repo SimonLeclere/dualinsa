@@ -20,7 +20,7 @@ const bottomBarItems = [
     name: "Cours",
     href: "/courses",
     routeName: "courses",
-    icon: <BooksSvg />,
+    icon: <BooksSvg />, // TODO
   },
   {
     name: "Leaderboard",
@@ -40,10 +40,10 @@ export default function BottomBar({ selectedTab }) {
 
   const { data: lastCourse, error, isLoading } = useSwr('/api/users/lastCourse', (url) => fetch(url).then((res) => res.json()));
   
-  
   if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div>Loading...</div>;
 
-  if (!lastCourse?.message && !isLoading && lastCourse.lastCourse != "0") {
+  if (!isLoading && !error && lastCourse?.lastCourse != "0") {
       bottomBarItems[0].href = `/courses/${lastCourse.lastCourse}`;
   }
 
@@ -52,7 +52,7 @@ export default function BottomBar({ selectedTab }) {
     <>
       <nav className="fixed bottom-0 left-0 right-0 md:right-auto top-auto md:top-0 z-20 border-t-2 md:border-t-0 md:border-r-2 border-neutral-200 bg-white flex-col md:flex-row lg:w-64 p-5">
         <Link
-          href="/learn"
+          href="/courses"
           className="mb-5 ml-5 mt-5 hidden text-3xl font-feather font-bold text-purple-400 lg:block"
         >
           dualinsa
@@ -62,7 +62,7 @@ export default function BottomBar({ selectedTab }) {
           {bottomBarItems.map((item) => {
             return (
               <li
-                key={item.href}
+                key={`${item.name}-bottom-bar-${item.href}`}
                 className="flex flex-1 items-center md:items-stretch justify-center md:justify-normal"
               >
                 <Link
