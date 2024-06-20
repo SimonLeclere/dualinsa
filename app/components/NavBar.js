@@ -17,9 +17,9 @@ import Strong2Svg from "./icons/Strong2Svg";
 
 export default function NavBar({ backgroundColor = "bg-purple-400", borderColor = "border-purple-500" }) {
 
-    const { data: currentStreak, streakError, streakLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
-    const { data: currentScore, lingotsError, lingotsLoading } = useSwr("/api/users/xp", (url) => fetch(url).then((res) => res.json()));
-    const { data: streaks, streaksError, streaksLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
+    const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
+    const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr("/api/users/xp", (url) => fetch(url).then((res) => res.json()));
+    const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
 
     const [menu, setMenu] = useState("HIDDEN");
 
@@ -82,7 +82,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                       </p>
                       <div className="self-stretch">
                         {
-                          streaksLoading ? <div>Loading...</div> : <Calendar streaks={streaks} />
+                          streaksLoading && !streaksError ? <div>Loading...</div> : <Calendar streaks={streaks} />
                         }
                       </div>
                     </div>
