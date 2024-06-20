@@ -8,6 +8,16 @@ import UnitSection from "/app/components/UnitSection";
 
 export default function CoursePage({params}) {
 
+    // Fetch Post the params.id to /api/users/lastCourse
+    const { data: lc} = useSwr(`/api/users/lastCourse`, (url) => fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ lastCourse: +params.id })
+    }).then((res) => res.json()));
+
+
     const {data, error, isLoading} = useSwr(`/api/courses/units/${params.id}/listAll`, (url) => fetch(url).then((res) => res.json()));
     
     if (isLoading) return <div>Loading...</div>;
@@ -15,7 +25,6 @@ export default function CoursePage({params}) {
     if (data.message) return <div>Erreur: {data.message}</div>;
     
     const units = data?.units; // All units from the course with all their checkpoints
-    console.log(units);
     const advancement = data?.advancement; // User advancement in the course
     console.log(advancement);
 

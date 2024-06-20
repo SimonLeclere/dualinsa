@@ -11,7 +11,6 @@ const formatTime = (timeMs) => {
       .map((x) => x.toString().padStart(2, "0"))
       .join(":");
   return [hours, minutes, seconds]
-    .map((x) => x.toString().padStart(2, "0"))
     .join(":");
 };
 
