@@ -63,6 +63,8 @@ export async function POST(req) {
         // Update user
         let { username, language, avatar } = body;
         
+        username = username.trim();
+        
         if (!username || !language) {
             return NextResponse.json({ message: 'Invalid input: username, language and avatar are required' }, { status: 400 });
         }
@@ -90,6 +92,9 @@ export async function POST(req) {
 
     } catch (error) {
         console.error(error);
+        if (error.code === 'P2002') {
+            return NextResponse.json({ message: 'Username already taken' }, { status: 400 });
+        }
         return NextResponse.json({ message : 'Error updating user' }, { status: 500 });
     }
 }
