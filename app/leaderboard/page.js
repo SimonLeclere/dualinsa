@@ -3,7 +3,7 @@
 import React from "react";
 
 import { useEffect, useRef } from "react";
-import LeaderboardProfile from "../leaderboard/LeaderboardProfile";
+import LeaderboardProfile from "../leaderboard/leaderboardProfile";
 import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard";
 import BottomBar from "../components/BottomBar";
 import NavBar from "../components/NavBar";
@@ -11,7 +11,6 @@ import NavBar from "../components/NavBar";
 import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
 const LeaderboardPlayer = () => {
-  const leaderboardLeague = "Bronze League";
   const leaderboardUsers = useLeaderboardUsers();
 
   const userRefs = useRef([]);
