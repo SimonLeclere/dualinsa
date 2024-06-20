@@ -21,9 +21,10 @@ const goalXpOptions = [
 
 export default function Coach() {
   // TODO : get from API & save the modification of the goal
-  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
+  const { data: user, error, isLoading, mutate } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
  
   const [dailyGoalPreference, setDailyGoalPreference] = useState(user?.dailyGoalPreference || 0);
+  const [loading, setLoading] = useState(false);
 
   // TODO: remove  
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function Coach() {
   
   const saveChanges = async (event) => {
     event.preventDefault();
+    setLoading(true);
     // Request to update user
     await fetch('/api/users/dailyGoal', {
       method: 'POST',
@@ -44,6 +46,9 @@ export default function Coach() {
       },
       body: JSON.stringify({ dailyGoalPreference: dailyGoalPreference }),
     });
+
+    mutate({ ...user, dailyGoalPreference });
+    setLoading(false);
   };
 
   return (
@@ -58,9 +63,17 @@ export default function Coach() {
           <button
             className="rounded-2xl border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
             onClick={saveChanges}
-            disabled={dailyGoalPreference === user?.dailyGoalPreference}
+            disabled={dailyGoalPreference === user?.dailyGoalPreference || loading}
           >
+            <div className="flex">
+            {loading && (
+                <svg className="animate-spin mr-3 ml-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            )}
             Enregistrer
+            </div>
           </button>
         </div>
         <div className="flex justify-center gap-12">
