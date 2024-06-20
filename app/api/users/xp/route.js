@@ -15,7 +15,7 @@ export async function GET(req) {
     try {
         const user = await prisma.users.findUnique({
             where: {
-                username: token.user.username,
+                id: token.user.id,
             },
         }).catch((error) => {
             console.log(error);
