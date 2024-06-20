@@ -26,6 +26,7 @@ export default function ProfileStatsSection({totalXp}) {
           <div className="flex flex-col">
             {(isLoading || isLoading1) && <p>...</p>}
             {(error || error1) && <p>Erreur</p>}
+            {(streak.message || league.message) && <p>Erreur: {streak.message || league.message}</p>}
             {
               streak &&
                 <span

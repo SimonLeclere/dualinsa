@@ -45,6 +45,7 @@ export default function CoursesList() {
 
                         { (isLoading || isLoading1) && <p>Chargement...</p> }
                         { (error || error1) && <p>Erreur de chargement</p> }
+                        { data.message && <div>Erreur: {data.message}</div> }
                         {   
                             courses &&
                             courses //Modifier avec enrolledCourses

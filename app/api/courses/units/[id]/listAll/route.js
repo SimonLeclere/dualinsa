@@ -20,8 +20,10 @@ export async function GET(req, { params }) {
         // Check if the user is enrolled in the course
         const userCourse = await prisma.userCourse.findUnique({
             where: {
-                userId: user.id,
-                courseId: courseId
+                userId_courseId : {
+                    userId: token.user.id,
+                    courseId: courseId
+                }
             }
         }).catch((error) => {
             console.log(error);

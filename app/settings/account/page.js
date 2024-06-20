@@ -30,6 +30,7 @@ export default function Account() {
 
   const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
+  if (user.message) return <div>Erreur: {user.message}</div>;
   const [username, setUsername] = useState('');
   const [language, setLanguage] = useState('');
   const [avatar, setAvatar] = useState('');

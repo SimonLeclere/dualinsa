@@ -25,7 +25,8 @@ export default function Coach() {
   const [goalXp, setGoalXp] = useState('');
   const [localGoalXp, setLocalGoalXp] = useState(goalXp);
 
-
+  if (user.message) return <div>Erreur: {user.message}</div>;
+  
   useEffect(() => {
     if (user) {
       const goalXp = user.dailyGoal;
