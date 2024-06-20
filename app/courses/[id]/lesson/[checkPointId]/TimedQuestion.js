@@ -44,7 +44,7 @@ const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setSh
             }
         },
 
-        reset() {
+        reset(nextQuestion) {
             setLocked(false);
             setUserAnswer("");
         }

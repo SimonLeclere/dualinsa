@@ -69,7 +69,6 @@ export default function UnitSection({ unit, checkpoints, advancement, previousCh
               state={advancement.currentUnitCheckpointIndex == index && advancement.currentUnitIndex + 1 === unit.index ? "active" : advancement.currentUnitCheckpointIndex > index ? "complete" : "complete"}
               unlocked={advancement.currentUnitCheckpointIndex >= index && advancement.currentUnitIndex + 1 === unit.index || advancement.currentUnitIndex + 1 > unit.index}
               className="relative"
-              onClick={checkpoint.onClick}
             />
           ))
         ) : (

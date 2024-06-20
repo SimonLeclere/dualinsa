@@ -25,10 +25,26 @@ export async function GET(req) {
         
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
-        if(user.score < constantes.BRONZE_MAX) return NextResponse.json({ league: 'Bronze' });
-        if(user.score < constantes.SILVER_MAX) return NextResponse.json({ league: 'Silver' });
-        if(user.score < constantes.GOLD_MAX) return NextResponse.json({ league: 'Gold' });
-        return NextResponse.json({ league: 'Diamond' });
+
+        const users = await prisma.users.findMany({
+            orderBy: {
+              score: 'desc',
+            },
+            select: {
+              id: true,
+            },
+          });
+
+        if (!users) return NextResponse.json({ message: 'No users found' }, { status: 404 });
+
+        const totalUsersCount = users.length;
+
+        const userRank = users.findIndex((u) => u.id === user.id) + 1;
+
+        if(user.score < constantes.BRONZE_MAX) return NextResponse.json({ league: 'Bronze', rank: userRank, totalUsers: totalUsersCount });
+        if(user.score < constantes.SILVER_MAX) return NextResponse.json({ league: 'Silver', rank: userRank, totalUsers: totalUsersCount });
+        if(user.score < constantes.GOLD_MAX) return NextResponse.json({ league: 'Gold', rank: userRank, totalUsers: totalUsersCount });
+        return NextResponse.json({ league: 'Diamond', rank: userRank, totalUsers: totalUsersCount });
 
     } catch (error) {
         console.error(error);

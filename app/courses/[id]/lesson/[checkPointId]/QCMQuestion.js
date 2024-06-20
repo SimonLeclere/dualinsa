@@ -17,7 +17,7 @@ const QCMQuestion = forwardRef(function QCMQuestion({ currentQuestion, setShowCo
             }
         },
 
-        reset() {
+        reset(nextQuestion) {
             setLocked(false);
             setSelectedAnswer(null);
         }

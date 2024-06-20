@@ -11,9 +11,10 @@ export async function GET(req, { params }) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
     }
 
-
     // Get courseId from slug
     const courseId = +params.id
+
+    if (!courseId) return NextResponse.json({ message: 'Invalid course id' }, { status: 400 });	
 
     // Select {checkpoints.questionPerTry} questions from QCMQuestions, FillInTheBlanksQuestion and TimedQuestion tables
     try {

@@ -61,9 +61,8 @@ export default function ProblemTexteATrou({
                       {selectedAnswers.length > 0 &&
                         selectedAnswers.map((i) => {
                           return (
-                            <div>
+                            <div key={i}>
                               <button
-                                key={i}
                                 className="rounded-2xl border-2 border-b-4 p-2 text-gray-700"
                                 onClick={() => {
                                   setSelectedAnswers((selectedAnswers) => {

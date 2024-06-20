@@ -5,7 +5,7 @@ export default function ShareSection() {
     const [isClicked, setIsClicked] = useState(false);
 
     const copyToClipboard = () => {
-        const url = "localhost:3000"; // TODO : mettre le vrai l'url de la page
+        const url = window.location.hostname;
         navigator.clipboard.writeText(url);
         setIsClicked(true);
     };

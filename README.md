@@ -48,7 +48,5 @@ schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
 
 TODO:
 
-- [ ] Pouvoir accéder à la session depuis chaque page
-- [ ] Vue avec les checkpoints
-- [ ] Composant "exercice"
 - [ ] Relier toutes les routes à l'api
+- [ ] i18n

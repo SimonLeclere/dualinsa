@@ -14,10 +14,10 @@ export default function LessonFastForwardEndFail ({
       <div className="flex grow flex-col items-center justify-center gap-5">
         <LessonFastForwardEndFailSvg />
         <h1 className="text-2xl font-bold">
-          Vous n'avez pas déverrouillé l'unité {unitNumber}
+          Vous n&apos;avez pas déverrouillé l&apos;unité {unitNumber}
         </h1>
         <p className="text-lg text-gray-500">
-          Ne vous inquiétez pas ! C'est en forgeant qu'on devient forgeron.
+          Ne vous inquiétez pas ! C&apos;est en forgeant qu&apos;on devient forgeron.
         </p>
       </div>
       <section className="border-gray-200 sm:border-t-2 sm:p-10">

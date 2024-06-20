@@ -15,7 +15,7 @@ export default function LessonFastForwardEndPass({
       <div className="flex grow flex-col items-center justify-center gap-5">
         <LessonFastForwardEndPassSvg />
         <h1 className="text-2xl font-bold">
-          Vous avez débloqué l'unité {unitNumber}!
+          Vous avez débloqué l&apos;unité {unitNumber}!
         </h1>
         <p className="text-lg text-gray-500">
           Bravo ! Vous avancez à grands pas !

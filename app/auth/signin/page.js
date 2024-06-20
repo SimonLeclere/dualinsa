@@ -3,13 +3,21 @@
 import { signIn } from "next-auth/react"
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 import Link from "next/link";
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 
 export default function LoginScreen() {
+    return (
+        <Suspense>
+            <LoginScreenComponent/>
+        </Suspense>
+    )
+}
+
+function LoginScreenComponent() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

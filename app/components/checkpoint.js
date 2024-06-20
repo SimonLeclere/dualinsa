@@ -1,6 +1,8 @@
 // checkpoint.js
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import StarSvg from "./icons/StarSvg";
 import CheckmarkSvg from "./icons/CheckMarkSvg";
 import LockSvg from "./icons/LockSvg";
@@ -19,16 +21,10 @@ const icons = {
   strong: StrongSvg,
 };
 
-export default function Checkpoint({
-  type,
-  href,
-  className,
-  onClick,
-  offset = 0,
-  unlocked = false,
-  state = "active",
-  progress = 0,
-}) {
+export default function Checkpoint({ type, href, className, offset = 0, unlocked = false, state = "active", progress = 0 }) {
+  
+  const router = useRouter();
+  
   const IconComponent = icons[type.toLowerCase()];
 
   if (!IconComponent) {
@@ -37,9 +33,9 @@ export default function Checkpoint({
   }
 
   const baseClasses =
-    "flex justify-center items-center w-20 h-20 rounded-full border-b-8 shadow-md cursor-pointer";
+    "flex justify-center items-center w-20 h-20 rounded-full border-b-8 shadow-md";
   const baseTrophyClasses =
-    "flex justify-center items-center w-50 h-50 rounded-full cursor-pointer";
+    "flex justify-center items-center w-50 h-50 rounded-full";
 
   const unlockedClasses =
     unlocked == true
@@ -48,38 +44,40 @@ export default function Checkpoint({
         ? "bg-[#FFD600] border-[#FFB800]"
         : "bg-purple-500 border-purple-800")
       : "border-[#b7b7b7] bg-[#e5e5e5]";
+
   const unlockedTrophyClasses =
     unlocked == true
       ? "bg-transparent border-gray-400"
       : "border-[#b7b7b7] bg-[#e5e5e5]";
-
   
 
   // Spécifique pour le type "trophy"
   if (type.toLowerCase() === "trophy") {
     return (
-      <Link href={href} passHref>
-        <div
-          style={{ transform: `translateX(${offset}px)` }}
-          className={`${baseTrophyClasses} ${unlockedTrophyClasses}  `}
-          onClick={onClick}
-        >
+      <button
+        onClick={() => unlocked && router.push(href)}
+        className={unlocked ? "cursor-pointer" : "cursor-default"}
+        style={{ transform: `translateX(${offset}px)` }}
+      >
+        <div className={`${baseTrophyClasses} ${unlockedTrophyClasses}`}>
           <IconComponent
             unlocked={unlocked}
             className={unlocked && state == "active" ? "animate-bounce" : ""}
           />
         </div>
-      </Link>
+      </button>
     );
   }
 
   // Générique pour les autres types
   return (
-    <Link href={href} passHref>
+    <button
+      onClick={() => unlocked && router.push(href)}
+      className={unlocked ? "cursor-pointer" : "cursor-default"}
+      style={{ transform: `translateX(${offset}px)` }}
+    >
       <div
-        style={{ transform: `translateX(${offset}px)` }}
-        className={`${baseClasses} ${unlockedClasses} `}
-        onClick={onClick}
+        className={`${baseClasses} ${unlockedClasses}`}
       >
         <IconComponent unlocked={unlocked} className="w-12 h-12" />
         {unlocked && state == "active" && (
@@ -90,6 +88,6 @@ export default function Checkpoint({
         )}
         {unlocked && state == "active" && <ToolTip offset={offset} />}
       </div>
-    </Link>
+    </button>
   );
 }

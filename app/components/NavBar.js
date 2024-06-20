@@ -37,7 +37,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
               setMenu((x) => (x === "STREAK" ? "HIDDEN" : "STREAK"))
             }
           >
-            <FireSvg empty={currentStreak && currentStreak === 0} />
+            <FireSvg empty={!currentStreak} />
             <span
               className={currentStreak && currentStreak > 0 ? "text-white" : "text-black opacity-20"}
             >

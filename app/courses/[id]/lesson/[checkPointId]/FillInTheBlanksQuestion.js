@@ -21,9 +21,11 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
             };
         },
 
-        reset() {
+        reset(nextQuestion) {
             setLocked(false);
-            setSelectedAnswers(new Array(currentQuestion.textWithHoles.split("{}").length - 1).fill(null));
+            if (nextQuestion.type === currentQuestion.type) {
+                setSelectedAnswers(new Array(nextQuestion.textWithHoles.split("{}").length - 1).fill(null));
+            }
         }
 
     }));

@@ -68,7 +68,7 @@ export default function StreakCoinSection() {
         tabIndex={0}
       >
         <CoinSvg empty={currentScore === 0} />
-        <span className={currentScore > 0 ? "text-red-500" : "text-gray-300"}>
+        <span className={currentScore > 0 ? "text-orange-500" : "text-gray-300"}>
           {currentScore}
         </span>
         <div
@@ -80,15 +80,15 @@ export default function StreakCoinSection() {
         >
           <CoinStackSvg className="h-24 w-24" />
           <div className="flex flex-col gap-3">
-            <h2 className="text-xl font-bold text-black">Lingots</h2>
+            <h2 className="text-xl font-bold text-black">Expérience</h2>
             <p className="text-sm font-normal text-gray-400">
-              You have {currentScore} {currentScore === 1 ? "lingot" : "lingots"}.
+              Vous avez {currentScore} {currentScore === 1 ? "point" : "points"} d&apos;expérience.
             </p>
             <Link
               className="uppercase text-blue-400 transition hover:brightness-110"
-              href="/shop"
+              href="/leaderboard"
             >
-              Go to shop
+              Voir le classement
             </Link>
           </div>
         </div>

@@ -11,10 +11,10 @@ export default function LessonFastForwardStart({
       <div className="flex grow flex-col items-center justify-center gap-5">
         <LessonFastForwardStartSvg />
         <h1 className="text-lg font-bold">
-          Vous voulez passer à l'unité {unitNumber}?
+          Vous voulez passer à l&apos;unité {unitNumber}?
         </h1>
         <p className="text-sm text-gray-400">
-          Passez le test pour prendre de l'avance. Mais nous ne vous faciliterons pas la tâche.
+          Passez le test pour prendre de l&apos;avance. Mais nous ne vous faciliterons pas la tâche.
         </p>
       </div>
       <div className="flex flex-col gap-5"></div>
@@ -30,7 +30,7 @@ export default function LessonFastForwardStart({
             className="w-full rounded-2xl border-b-4 border-blue-500 bg-blue-400 p-3 font-bold uppercase text-white transition hover:brightness-110 sm:min-w-[150px] sm:max-w-fit"
             onClick={() => setIsStartingLesson(false)}
           >
-            Let's go !
+            Let&apos;s go !
           </button>
         </div>
       </section>

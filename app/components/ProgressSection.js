@@ -1,10 +1,17 @@
 import Link from "next/link";
 
 import { LightningProgressSvg } from "../components/icons/LightningProgressSvg";
+import useSWR from "swr";
 
 export const ProgressSection = () => {
-  const xpToday = 14; // TODO: get from API
-  const goalXp = 100; // TODO: get from API
+
+  const { data, error, isLoading } = useSWR("/api/users", (url) => fetch(url).then((res) => res.json()));
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
+
+  const { dailyGoal: xpToday, dailyGoalPreference: goalXp } = data;
+
   return (
     <article className="flex flex-col gap-5 rounded-2xl border-2 border-gray-200 p-6 font-bold text-gray-700">
       <div className="flex items-center justify-between">

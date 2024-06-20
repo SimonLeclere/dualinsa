@@ -149,12 +149,16 @@ export default function LessonPage({ params }) {
                 }}
                 showNextQuestion={() => {
                     setShowCorrectAnswer(false);
-                    currentQuestionRef.current.reset();
-
+                    
                     if (currentQuestionIndex === questions.length - 1) {
                         setExerciseEnded(true);
+
+                        // TODO: Save the results to the database
+
                         return;
                     }
+
+                    currentQuestionRef.current.reset(questions[currentQuestionIndex + 1]);
                     setCurrentQuestionIndex((prev) => prev + 1);
                 }}
             />
