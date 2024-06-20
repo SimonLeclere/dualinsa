@@ -10,6 +10,7 @@ import StrongSvg from "./icons/StrongSvg";
 import ToolTip from "./icons/ToolTip";
 import CompletionCircle from "./icons/CompletionCircle";
 
+
 const icons = {
   star: StarSvg,
   check: CheckmarkSvg,
@@ -19,7 +20,9 @@ const icons = {
   strong: StrongSvg,
 };
 
+
 export default function Checkpoint({
+
   type,
   href,
   className,
@@ -92,4 +95,5 @@ export default function Checkpoint({
       </div>
     </Link>
   );
+
 }

@@ -1,4 +1,5 @@
 export default function StrongSvg({unlocked =false}) {
+  
     return (
       <svg width="42" height="34" viewBox="0 0 42 34" fill="none">
         <g clipPath="url(#clip0_334_225119)">
@@ -99,3 +100,4 @@ export default function StrongSvg({unlocked =false}) {
       </svg>
     );
   }
+}

@@ -81,3 +81,4 @@ export default function TrophySvg({ unlocked = false, ...props }) {
       </svg>
     );
   }
+}

@@ -8,6 +8,7 @@ import Checkpoint from "./checkpoint";
 
 export default function UnitSection({ unit, checkpoints, advancement}) {
 
+
   function getOffset(numIcon){
     if(numIcon % 6 == 0){
       return 0;
@@ -36,7 +37,9 @@ export default function UnitSection({ unit, checkpoints, advancement}) {
       <UnitHeader
         unitNumber={unit.index}
         unitName={unit.name}
+
         courseId={unit.courseId}
+
       />
       <div className="flex flex-col items-center gap-4 mt-8">
         {checkpoints && checkpoints.length > 0 ? (
@@ -48,6 +51,7 @@ export default function UnitSection({ unit, checkpoints, advancement}) {
               offset={getOffset(index)}
               progress={advancement.currentCheckpointProgress / checkpoint.triesRequired }
               state={getState(advancement.currentCheckpointProgress / checkpoint.triesRequired )}
+
               unlocked={index === 0 || (index > 0 && checkpoints[index - 1] && getState(checkpoints[index - 1].progress) === "complete")}
               className="relative"
               onClick={checkpoint.onClick}
