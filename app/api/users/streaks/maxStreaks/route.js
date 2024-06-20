@@ -5,7 +5,6 @@ import { getToken } from "next-auth/jwt"
 function maxConsecutiveConnections(connections) {
     if (!connections || connections.length === 0) return 0;
 
-
     // Step 1: Sort connections by date
     connections.sort((a, b) => new Date(a.date) - new Date(b.date));
 
@@ -15,13 +14,19 @@ function maxConsecutiveConnections(connections) {
     for (let i = 1; i < connections.length; i++) {
         let prevDate = new Date(connections[i - 1].date);
         let currentDate = new Date(connections[i].date);
-        
-        // Calculate the difference in days between the two dates
-        let diffDays = Math.floor((currentDate - prevDate) / (1000 * 60 * 60 * 24));
 
-        if (diffDays === 1) {
+        // Format the dates to ISO string and extract the day part
+        let prevDay = prevDate.toISOString().split('T')[0];
+        let currentDay = currentDate.toISOString().split('T')[0];
+
+        // Check if the current day is the next day of the previous day
+        let prevDayPlusOne = new Date(prevDate);
+        prevDayPlusOne.setDate(prevDate.getDate() + 1);
+        let prevDayPlusOneStr = prevDayPlusOne.toISOString().split('T')[0];
+
+        if (currentDay === prevDayPlusOneStr) {
             currentConsecutive++;
-        } else if (diffDays > 1) {
+        } else {
             currentConsecutive = 1;
         }
 
@@ -32,6 +37,7 @@ function maxConsecutiveConnections(connections) {
 
     return maxConsecutive;
 }
+
 
 export async function GET(req) {
     

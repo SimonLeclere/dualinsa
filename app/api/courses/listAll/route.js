@@ -15,7 +15,7 @@ export async function GET(req) {
     try {
         const enrolledCourses = await prisma.userCourse.findMany({
             where: {
-                userId: token.id
+                userId: token.user.id
             }
         }).catch((error) => {
             console.log(error);
