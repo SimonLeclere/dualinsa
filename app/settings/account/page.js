@@ -1,7 +1,10 @@
 "use client";
 
+import useSwr from "swr";
+
 import { useState } from "react";
 import Image from "next/image";
+import { useEffect } from 'react';
 
 import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
@@ -36,17 +39,36 @@ const avatarSources = [
 ];
 
 export default function Account() {
-  const currentUsername = "John Doe";
-  const currentLanguage = "Français";
-  const currentAvatar = pp1.src;
-  const userId = 1;
 
-  const [username, setUsername] = useState(currentUsername);
-  const [language, setLanguage] = useState(currentLanguage);
-  const [avatar, setAvatar] = useState(currentAvatar);
+  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
+  if (user.message) return <div>Erreur: {user.message}</div>;
+  const [username, setUsername] = useState('');
+  const [language, setLanguage] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [currentUsername, setCurrentUsername] = useState('');
+  const [currentLanguage, setCurrentLanguage] = useState('');
+  const [currentAvatar, setCurrentAvatar] = useState('')
+  
+  useEffect(() => {
+    if (user) {
+      const { username, language, avatar } = user;
+      setUsername(username);
+      setLanguage(language);
+      setAvatar(avatar);
+    }
+  }, [user]);
+  
   const saveChanges = async (event) => {
     event.preventDefault();
+    // Request to update user
+    const res = await fetch('/api/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, language, avatar }),
+    });
   };
 
   return (

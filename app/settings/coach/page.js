@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import useSwr from "swr";
 
 import haltereImg from "@/public/haltere.png";
 import { SettingsRightNav } from "@/components/SettingsRightNav";
@@ -20,10 +21,32 @@ const goalXpOptions = [
 
 export default function Coach() {
   // TODO : get from API & save the modification of the goal
-  const goalXp = 10;
-  const setGoalXp = 1000;
-
+  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
+ 
+  const [goalXp, setGoalXp] = useState('');
   const [localGoalXp, setLocalGoalXp] = useState(goalXp);
+
+  if (user.message) return <div>Erreur: {user.message}</div>;
+  
+  useEffect(() => {
+    if (user) {
+      const goalXp = user.dailyGoal;
+      setGoalXp(user.dailyGoal);
+    }
+  }, [user]);
+  
+  const saveChanges = async (event) => {
+    event.preventDefault();
+    setGoalXp(localGoalXp)
+    // Request to update user
+    const res = await fetch('/api/users/dailyGoal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ dailyGoal: goalXp }),
+    });
+  };
 
   return (
     <div>
@@ -36,7 +59,7 @@ export default function Coach() {
           </h1>
           <button
             className="rounded-2xl border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
-            onClick={() => setGoalXp(localGoalXp)}
+            onClick={saveChanges}
             disabled={localGoalXp === goalXp}
           >
             Enregistrer

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-
+import useSwr from "swr";
 import { useEffect, useRef } from "react";
-import LeaderboardProfile from "../leaderboard/leaderboardProfile";
+import LeaderboardProfile from "./leaderboardProfile";
 import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard";
 import BottomBar from "../components/BottomBar";
 import NavBar from "../components/NavBar";
@@ -11,10 +11,19 @@ import NavBar from "../components/NavBar";
 import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
 const LeaderboardPlayer = () => {
+
   const leaderboardUsers = useLeaderboardUsers();
 
   const userRefs = useRef([]);
-  const currentUser = "Alice"; // Remplacez ceci par la requête API pour obtenir l'utilisateur connecté
+
+  const { data: currentUser, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
+
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+  if (error) {
+    return <div>Erreur: {error.message}</div>;
+  }
 
   useEffect(() => {
     const currentUserIndex = leaderboardUsers.findIndex(
@@ -38,7 +47,7 @@ const LeaderboardPlayer = () => {
             place={i + 1}
             username={user.username}
             xp={user.score}
-            condition={user.username === currentUser} //Remplacer Alice par la reqûete API de l'utilisateur connecté
+            condition={user.username === currentUser}
           />
         ))}
       </div>
@@ -71,8 +80,9 @@ function leaderboardLeague(leagueName) {
 }
 
 export default function LeaderBoard() {
-  const league = "Gold"; // TODO : get from API
-  const leaderLeague = `${league} League`;
+
+  const { data: league, error, isLoading } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
+
 
   return (
     <>
@@ -83,10 +93,14 @@ export default function LeaderBoard() {
           {
             <>
               <div className="sticky top-0 -mt-14 flex w-full flex-col items-center gap-2 sm:gap-5 bg-white pt-20 sm:pt-28">
-                <div className="flex items-center gap-5">
+                { isLoading && <div>Chargement...</div>}
+                { error && <div>Erreur: {error.message}</div>}
+                {
+                  league  && <>
+                  <div className="flex items-center gap-5">
                   {leaderboardLeague(league)}
                 </div>
-                <h1 className="text-2xl font-bold">{leaderLeague}</h1>
+                <h1 className="text-2xl font-bold">{league} League</h1>
                 <div className="flex w-full flex-col items-center gap-1">
                   <p className="text-sm sm:text-lg text-gray-500">
                     Vous êtes dans le top 20% des joueurs
@@ -96,6 +110,8 @@ export default function LeaderBoard() {
                   </time>
                 </div>
                 <div className="w-full border-b-2 border-gray-200"></div>
+                </>
+                }
               </div>
               <LeaderboardPlayer />
             </>

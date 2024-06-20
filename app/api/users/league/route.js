@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '/lib/supabase';
-import { getToken } from "next-auth/jwt"
+import { getToken } from "next-auth/jwt";
+import constantes from "@/lib/config.js";
 
 export async function GET(req) {
     
@@ -24,8 +25,10 @@ export async function GET(req) {
         
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
-        // Return user.score
-        return NextResponse.json(user.score);
+        if(user.score < constantes.BRONZE_MAX) return NextResponse.json({ league: 'Bronze' });
+        if(user.score < constantes.SILVER_MAX) return NextResponse.json({ league: 'Silver' });
+        if(user.score < constantes.GOLD_MAX) return NextResponse.json({ league: 'Gold' });
+        return NextResponse.json({ league: 'Diamond' });
 
     } catch (error) {
         console.error(error);

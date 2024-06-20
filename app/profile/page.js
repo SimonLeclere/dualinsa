@@ -1,31 +1,33 @@
+'use client'
+
 import BottomBar from "/app/components/BottomBar";
 
 import ProfileStatsSection from "/app/profile/ProfileStatsSection.js";
 import ProfileTopBar from "/app/profile/ProfileTopBar";
 import ProfileTopSection from "/app/profile/ProfileTopSection";
 
-import { getServerSession } from "../api/auth/[...nextauth]/route";
 
-export default async function Profile() {
+import useSwr from "swr";
 
-  const session = await getServerSession();
 
-  const user = {
-    username: "simon",
-    score: 0,
-    dailyGoal: 0,
-    avatar: 0,
-    streaksRecords: [],
-    creationDate: new Date(),
-  }
+export default function Profile() {
+
+  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
   return (
     <div>
       <ProfileTopBar />
       <div className="flex justify-center gap-3 md:pl-2 pt-14 md:ml-24 lg:ml-64">
         <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
-          <ProfileTopSection user={user} />
-          <ProfileStatsSection user={user} />
+          {isLoading && <p>Chargement...</p>}
+          {error && <p>Erreur de chargement</p>}
+          {user.message && <p>Erreur: {user.message}</p>}
+          {
+            user && <>
+            <ProfileTopSection user={user} />
+            <ProfileStatsSection totalXp={user.score}/>
+            </>
+          }
         </div>
       </div>
       <div className="pt-[90px]"></div>

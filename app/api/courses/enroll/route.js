@@ -22,7 +22,7 @@ export async function POST(req) {
     try {
             const existing = await prisma.courses.findUnique({
                 where: {
-                    id: course_id
+                    id: +course_id
                 },
             }).catch((error) => {
                 console.log(error);
@@ -42,7 +42,7 @@ export async function POST(req) {
             where: {
                 userId_courseId : {
                     userId: user_id,
-                    courseId: course_id
+                    courseId: +course_id
                 }
                 },
         }).catch((error) => {
@@ -60,7 +60,7 @@ export async function POST(req) {
     try {
         await prisma.userCourse.create({
             data: {
-                courseId: course_id,
+                courseId: +course_id,
                 userId: user_id
             },
         }).catch((error) => {

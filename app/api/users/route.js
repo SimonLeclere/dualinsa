@@ -11,31 +11,33 @@ export async function GET(req) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
     }
 
-
-    // Get streak of user from query streakrecord table
+    // Get the authenticated user
     try {
-        const streak = await prisma.streaksRecords.findMany({
+        const user = await prisma.users.findUnique({
             where: {
-                userId: token.user.id
-            }
+                id: token.user.id,
+            },
         }).catch((error) => {
             console.log(error);
             throw error;
         });
         
-        if(!streak) return NextResponse.json({ message: 'no streak found' }, { status: 404 });
+        if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
-        return NextResponse.json(streak, { status: 200 });
+        // Return user
+        delete user.hash;
+        delete user.salt;
+        return NextResponse.json(user);
 
     } catch (error) {
-        return NextResponse.json({ message: 'Error looking for streak' }, { status: 500 });
+        console.error(error);
+        return NextResponse.json({ message : 'Error looking for user' }, { status: 500 });
     }
+
 
 }
 
 export async function POST(req) {
-    
-    // Verify if the request comes from an authenticated user
     const token = await getToken({ req })
     
     if (!token) {
@@ -55,17 +57,29 @@ export async function POST(req) {
         
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
-        // Add streak of user to StreakRecords table
-        await prisma.streaksRecords.create({
+        // Update user
+        const { username, language, avatar } = req.body;
+        const updatedUser = await prisma.users.update({
+            where: {
+                id: user.id,
+            },
             data: {
-                userId: user.id,
-                date: req.body.date,
-            }
+                username,
+                language,
+                avatar,
+            },
         }).catch((error) => {
             console.log(error);
             throw error;
         });
-    } catch (error) {     
-        return NextResponse.json({ message: 'Error looking for userCourse' }, { status: 500 });
+
+        // Return user
+        delete updatedUser.hash;
+        delete updatedUser.salt;
+        return NextResponse.json(updatedUser);
+
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message : 'Error updating user' }, { status: 500 });
     }
 }
