@@ -81,7 +81,13 @@ export default function Account() {
       body: JSON.stringify({ username, language, avatar }),
     });
 
-    if(user?.message && user.message == "Username already taken") setErrorMessage('Erreur: Nom d\'utilisateur déjà pris.');
+    const updatedUser = await res.json();
+    if (res.status !== 200 && updatedUser.message) {
+      setErrorMessage("Erreur : Nom d'utilisateur déjà pris");
+      setLoading(false);
+      return;
+    
+    }
 
     mutate({ ...user, username, language, avatar }, false);
     setLoading(false);
@@ -95,8 +101,9 @@ export default function Account() {
           <h1 className="text-lg font-bold text-gray-800 sm:text-2xl">
             Compte
           </h1>
+          <div className="flex flex-col items-right md:items-start w-full md:w-auto">
           <button
-            className="rounded-2xl border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
+            className="rounded-2xl ml-auto w-48 md:w-auto border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
             onClick={saveChanges}
             disabled={
               currentUsername === username &&
@@ -104,22 +111,25 @@ export default function Account() {
               currentAvatar === avatar || loading
             }
           >
-            <div className="flex ">
-            {loading && (
-                <svg className="animate-spin mr-3 ml-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-            )}
-              Enregistrer
-            </div>
-            {errorMessage && (
-              <div className="mt-2 text-red-500 font-bold">
-                {errorMessage}
+            <div className="flex">
+              
+              {loading && (
+                  <svg className="animate-spin mr-3 ml-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+              )}
+                Enregistrer
               </div>
-            )}
-          </button>
-          {/* TODO confirmation */}
+
+            </button>
+            {errorMessage && (
+                <div className="mt-2 text-red-500 font-bold text-center md:text-left">
+                  {errorMessage}
+                </div>
+              )}
+          </div>
+            {/* TODO confirmation */}
         </div>
 
         <div className="flex justify-center gap-12">
