@@ -8,8 +8,8 @@ import LeaderboardPlaceSvg from "../components/icons/LeaderboardPlaceSvg";
 import useSwr from "swr";
 
 
-export default function ProfileStatsSection({totalXp}) {
-  
+export default function ProfileStatsSection({ totalXp }) {
+
   const { data: streak, error, isLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
   const { data: league, error1, isLoading1 } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
@@ -26,20 +26,8 @@ export default function ProfileStatsSection({totalXp}) {
             {(isLoading || isLoading1) && <p>...</p>}
             {(error || error1) && <p>Erreur</p>}
             {(streak?.message || league?.message) && <p>Erreur: {streak.message || league.message}</p>}
-            {
-              streak &&
-                <span
-                className={[
-                  "text-xl font-bold",
-                  streak === 0 ? "text-gray-400" : "",
-                ].join(" ")}
-              >
-                {streak}
-              </span>
-            }
-            <span className="text-sm text-gray-400 md:text-base">
-              Day streak
-            </span>
+            <span className="text-xl font-bold">{streak || 0}</span>
+            <span className="text-sm text-gray-400 md:text-base">Day streak</span>
           </div>
         </div>
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">

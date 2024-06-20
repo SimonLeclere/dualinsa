@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import NavBar from "/app/components/NavBar";
+import RightBar from "/app/components/RightBar";
 import BottomBar from "/app/components/BottomBar";
 
 import lighterImg from "/public/lighter.png";
@@ -52,9 +53,10 @@ export default function CoursesList() {
     }
 
     return (
-        <div>
+        <div className="flex justify-center gap-3 md:ml-24 lg:ml-64 lg:gap-12">
             <NavBar />
-            <div className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
+            <div className="flex max-w-2xl grow flex-col pt-14 sm:pt-10">
+
                 <div className="px-4 pb-20">
                     <div className="py-7">
                         <h2 className="mb-5 text-2xl font-bold">Matières</h2>
@@ -107,6 +109,7 @@ export default function CoursesList() {
                     </div>
                 </div>
             </div>
+            <RightBar />
             <BottomBar selectedTab="courses" />
         </div>
     );

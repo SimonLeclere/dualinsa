@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import useSwr from "swr";
 import Link from "next/link";
 
 import Calendar from "/app/components/Calendar"
@@ -14,25 +15,13 @@ import { usePathname } from "next/navigation";
 import AccountSvg from "./icons/AccountSvg";
 import Strong2Svg from "./icons/Strong2Svg";
 
-// type MenuState = "HIDDEN" | "STREAK" | "GEMS";
-
-const streaks = [
-    { date: new Date(2024, 4, 15), userId: 2 },
-    { date: new Date(2024, 4, 16), userId: 2 },
-    { date: new Date(2024, 4, 17), userId: 2 },
-
-    { date: new Date(2024, 5, 12), userId: 2 },
-    { date: new Date(2024, 5, 13), userId: 2 },
-    { date: new Date(2024, 5, 14), userId: 2 },
-    { date: new Date(2024, 5, 15), userId: 2 },
-    { date: new Date(2024, 5, 16), userId: 2 },
-];
-
 export default function NavBar({ backgroundColor = "bg-purple-400", borderColor = "border-purple-500" }) {
 
+    const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
+    const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr("/api/users/xp", (url) => fetch(url).then((res) => res.json()));
+    const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
+
     const [menu, setMenu] = useState("HIDDEN");
-    const [streak, setStreak] = useState(0);
-    const [score, setLingots] = useState(0);
 
     const pathname = usePathname();
 
@@ -48,11 +37,11 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
               setMenu((x) => (x === "STREAK" ? "HIDDEN" : "STREAK"))
             }
           >
-            <FireSvg empty={streak === 0} />
+            <FireSvg empty={currentStreak && currentStreak === 0} />
             <span
-              className={streak > 0 ? "text-white" : "text-black opacity-20"}
+              className={currentStreak && currentStreak > 0 ? "text-white" : "text-black opacity-20"}
             >
-              {streak}
+              {streakLoading ? 0 : currentStreak}
             </span>
           </button>
 
@@ -60,12 +49,11 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
             className="flex items-center gap-2 font-bold"
             onClick={() => setMenu((x) => (x === "GEMS" ? "HIDDEN" : "GEMS"))}
           >
-            <CoinSvg empty={score === 0} />
-            {/* <GemSvg empty={score === 0}/> */}
+            <CoinSvg empty={currentScore === 0} />
             <span
-              className={score > 0 ? "text-white" : "text-black opacity-20"}
+              className={currentScore > 0 ? "text-white" : "text-black opacity-20"}
             >
-              {score}
+              {currentScore}
             </span>
           </button>
 
@@ -93,7 +81,9 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                         {`Practice each day so your streak won't reset!`}
                       </p>
                       <div className="self-stretch">
-                        <Calendar streaks={streaks} />
+                        {
+                          streaksLoading && !streaksError ? <div>Loading...</div> : <Calendar streaks={streaks} />
+                        }
                       </div>
                     </div>
                   );
@@ -107,7 +97,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                           Experience
                         </h2>
                         <p className="text-sm font-normal text-gray-400">
-                          Vous avez {score} xp
+                          Vous avez {currentScore} xp
                         </p>
                         <Link
                           className="font-bold uppercase text-blue-400 transition hover:brightness-110"
