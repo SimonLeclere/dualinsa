@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function LessonCompleteBottomBar({ setDisplayReview }) {
+export default function LessonCompleteBottomBar({ setDisplayReview, params}) {
 
   return (
     <div className="w-full fixed bottom-0" >
@@ -14,7 +14,7 @@ export default function LessonCompleteBottomBar({ setDisplayReview }) {
           </button>
           <Link
             className="flex w-full items-center justify-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
-            href="/learn"
+            href={`/courses/${params.id}`}
           >
             Continue
           </Link>

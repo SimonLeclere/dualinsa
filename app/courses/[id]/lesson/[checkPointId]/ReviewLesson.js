@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import BigCloseSvg from "../../components/icons/BigCloseSvg";
-import DoneSvg from "../../components/icons/DoneSvg";
+import BigCloseSvg from "@/components/icons/BigCloseSvg";
+import DoneSvg from "@/components/icons/DoneSvg";
 
 // Fonction qui affiche les réponses correctes et incorrectes à la fin d'une leçon
 export default function ReviewLesson({ reviewLessonShown, setReviewLessonShown, questionResults }) {

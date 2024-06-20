@@ -44,7 +44,7 @@ export default function UnitSection({ unit, checkpoints, advancement}) {
             <Checkpoint
               key={`${index}${unit.index}`}
               type={index % 6 == 0 ? "star" : index % 6 == 1 ? "check" : index % 6 == 2 ? "lock" : index % 6 == 3 ? "book" : index % 6 == 4 ? "trophy" : "strong"}
-              href={`/lesson/${checkpoint.id}`}
+              href={`/courses/${unit.courseId}/lesson/${checkpoint.id}`}
               offset={getOffset(index)}
               progress={advancement.currentCheckpointProgress / checkpoint.triesRequired }
               state={getState(advancement.currentCheckpointProgress / checkpoint.triesRequired )}

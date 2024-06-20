@@ -1,8 +1,8 @@
 'use client';
 import { useState, useImperativeHandle, forwardRef } from "react";
 
-import BigCloseSvg from "../../components/icons/BigCloseSvg";
-import DoneSvg from "../../components/icons/DoneSvg";
+import BigCloseSvg from "@/components/icons/BigCloseSvg";
+import DoneSvg from "@/components/icons/DoneSvg";
 
 const Bottombar = forwardRef(function BottomBar({ showConfirmButton, isAnswerCorrect, showCorrectAnswer, checkAnswer, showNextQuestion, disableAllButtons }, ref) {
 
