@@ -1,3 +1,7 @@
+"use client";
+
+import useSwr from "swr";
+
 import Link from "next/link";
 
 import HomeSvg from "/app/components/icons/HomeSvg";
@@ -33,6 +37,19 @@ const bottomBarItems = [
 ];
 
 export default function BottomBar({ selectedTab }) {
+
+  const { data: lastCourse, error, isLoading } = useSwr('/api/users/lastCourse', (url) => fetch(url).then((res) => res.json()));
+  
+  
+  if (error) return <div>Error: {error.message}</div>;
+
+  let redirect = "/courses";
+
+  if (!lastCourse?.message && !isLoading && lastCourse.lastCourse != "0") {
+      redirect = `/courses/${lastCourse.lastCourse}`;
+  }
+
+
   return (
     <>
       <nav className="fixed bottom-0 left-0 right-0 md:right-auto top-auto md:top-0 z-20 border-t-2 md:border-t-0 md:border-r-2 border-neutral-200 bg-white flex-col md:flex-row lg:w-64 p-5">

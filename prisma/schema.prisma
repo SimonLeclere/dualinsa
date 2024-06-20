@@ -20,6 +20,7 @@ model Users {
   dailyGoal    Int @default(0)
   dailyGoalPreference Int @default(20)
 
+  lastCourse  Int @default(0)
   creationDate DateTime @default(now())
   avatar       Int      @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
 
