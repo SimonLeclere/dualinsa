@@ -60,9 +60,10 @@ export default function UnitSection({ unit, checkpoints, advancement, previousCh
         {checkpoints && checkpoints.length > 0 ? (
           checkpoints.map((checkpoint, index) => (
             <Checkpoint
+            
               key={`${index}${unit.index}`}
+              href={`/courses/${unit.courseId}/lesson/${checkpoint.id}`}
               type={getType(index + previousCheckPointsCount)}
-              href={`/lesson/${checkpoint.id}`}
               offset={getOffset(index + previousCheckPointsCount)}
               progress={advancement.currentCheckpointProgress / checkpoint.triesRequired }
               state={advancement.currentUnitCheckpointIndex == index && advancement.currentUnitIndex + 1 === unit.index ? "active" : advancement.currentUnitCheckpointIndex > index ? "complete" : "complete"}
