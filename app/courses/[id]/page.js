@@ -3,26 +3,26 @@
 import useSwr from "swr";
 
 import NavBar from "/app/components/NavBar";
+import RightBar from "/app/components/RightBar";
 import BottomBar from "/app/components/BottomBar";
 import UnitSection from "/app/components/UnitSection";
 
-export default function CoursePage({params}) {
+export default function CoursePage({ params }) {
 
-    const {data, error, isLoading} = useSwr(`/api/courses/units/${params.id}/listAll`, (url) => fetch(url).then((res) => res.json()));
-    
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    if (data.message) return <div>Erreur: {data.message}</div>;
-    
-    const units = data?.units; // All units from the course with all their checkpoints
-    console.log(units);
-    const advancement = data?.advancement; // User advancement in the course
-    console.log(advancement);
+  const { data, error, isLoading } = useSwr(`/api/courses/units/${params.id}/listAll`, (url) => fetch(url).then((res) => res.json()));
 
-    return (
-        <div className="flex flex-col items-center justify-center pb-8">
-        <NavBar />
-          <div className="flex flex-col items-center gap-12 w-full">
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (data.message) return <div>Erreur: {data.message}</div>;
+
+  const units = data?.units; // All units from the course with all their checkpoints
+  const advancement = data?.advancement; // User advancement in the course
+
+  return (
+    <div className="flex justify-center gap-3 pr-0 md:pr-6 md:ml-24 lg:ml-64 lg:gap-12">
+      <NavBar />
+      <div className="flex max-w-2xl grow flex-col">
+        <div className="flex flex-col items-center gap-12 w-full mt-10 md:mt-0 mb-32 md:mb-6">
           {units.map((unit, index) => (
             <UnitSection
               key={unit.index}
@@ -32,8 +32,10 @@ export default function CoursePage({params}) {
               advancement={advancement}
             />
           ))}
-        </div> 
-        <BottomBar />
+        </div>
       </div>
-    );
+      <RightBar />
+      <BottomBar />
+    </div>
+  );
 }

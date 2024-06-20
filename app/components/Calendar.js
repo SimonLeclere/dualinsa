@@ -96,7 +96,7 @@ export default function Calendar({ streaks }) {
                     return (
                         <div key={i} className="flex justify-between">
                             {week.map((date, i) => {
-                                const isActiveDate = date !== null && streaks.some((streak) => dateEquals(streak.date, new Date(now.getFullYear(), now.getMonth(), date)));
+                                const isActiveDate = date !== null && streaks.some((streak) => dateEquals(new Date(streak.date), new Date(now.getFullYear(), now.getMonth(), date)));
                                 const isCurrentDate = date === staticNow.getDate() && now.getMonth() === staticNow.getMonth() && now.getFullYear() === staticNow.getFullYear();
                                 
                                 return (
