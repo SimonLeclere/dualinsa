@@ -1,7 +1,7 @@
 export default function Strong2Svg({ ...props }) {
   return (
     <svg width="40" height="40" viewBox="0 0 26 26" fill="none" {...props}>
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
         strokeLinecap="round"

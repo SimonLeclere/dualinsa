@@ -13,9 +13,23 @@ export async function GET(req) {
 
     // Get a list of all courses
     try {
+        const enrolledCourses = await prisma.userCourse.findMany({
+            where: {
+                userId: token.id
+            }
+        }).catch((error) => {
+            console.log(error);
+            throw error;
+        });
+        
         const list = await prisma.courses.findMany().catch((error) => {
             console.log(error);
             throw error;
+        });
+
+        // for each course, check if the user is enrolled
+        list.forEach(course => {
+            course.isEnrolled = enrolledCourses.some(uc => uc.courseId === course.id);
         });
         
         if(!list) return NextResponse.json({ message: 'no courses found' }, { status: 404 });

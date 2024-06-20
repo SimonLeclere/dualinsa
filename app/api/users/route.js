@@ -27,7 +27,7 @@ export async function GET(req) {
         // Return user
         delete user.hash;
         delete user.salt;
-        return NextResponse.json(user);
+        return NextResponse.json(user, { status: 200 });
 
     } catch (error) {
         console.error(error);
@@ -57,8 +57,18 @@ export async function POST(req) {
         
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
+
+        const body = await req.json();
+
         // Update user
-        const { username, language, avatar } = req.body;
+        let { username, language, avatar } = body;
+        
+        if (!username || !language) {
+            return NextResponse.json({ message: 'Invalid input: username, language and avatar are required' }, { status: 400 });
+        }
+
+        if(!avatar) avatar = -1;
+
         const updatedUser = await prisma.users.update({
             where: {
                 id: user.id,
@@ -76,7 +86,7 @@ export async function POST(req) {
         // Return user
         delete updatedUser.hash;
         delete updatedUser.salt;
-        return NextResponse.json(updatedUser);
+        return NextResponse.json(updatedUser, { status: 200 });
 
     } catch (error) {
         console.error(error);

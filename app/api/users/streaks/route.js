@@ -55,11 +55,17 @@ export async function POST(req) {
         
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
+        const body = await req.json();
+
+        if (!body.date) {
+            return NextResponse.json({ message: 'Invalid input: date is required' }, { status: 400 });
+        }
+
         // Add streak of user to StreakRecords table
         await prisma.streaksRecords.create({
             data: {
                 userId: user.id,
-                date: req.body.date,
+                date: body.date,
             }
         }).catch((error) => {
             console.log(error);

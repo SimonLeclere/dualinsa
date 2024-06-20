@@ -33,7 +33,6 @@ const userCourses = [
 export default function CoursesList() {
 
     const { data: courses, error, isLoading } = useSwr('/api/courses/listAll', (url) => fetch(url).then((res) => res.json()));
-    const { data1: enrolledCourses, error1, isLoading1 } = useSwr('/api/courses/listEnrolled', (url) => fetch(url).then((res) => res.json()));
 
     return (
         <div>
@@ -43,13 +42,15 @@ export default function CoursesList() {
                     <div className="py-7">
                         <h2 className="mb-5 text-2xl font-bold">Matières</h2>
 
-                        { (isLoading || isLoading1) && <p>Chargement...</p> }
-                        { (error || error1) && <p>Erreur de chargement</p> }
-                        { data.message && <div>Erreur: {data.message}</div> }
+                        { isLoading && <p>Chargement...</p> }
+                        { error && <p>Erreur de chargement</p> }
+                        { !isLoading && error && courses.message ? <div>Erreur: {courses?.message || ""}</div> : ""}
+                        
                         {   
                             courses &&
-                            courses //Modifier avec enrolledCourses
-                            .sort((a, b) => userCourses.some(uc => uc.courseId === b.id) - userCourses.some(uc => uc.courseId === a.id))
+                            courses
+                            // enrolled courses first, then the rest
+                            .sort((a, b) => b.isEnrolled - a.isEnrolled)
                             .map((course) => {
                                 return (
                                     <Link
@@ -57,7 +58,7 @@ export default function CoursesList() {
                                         className={`flex border-t-2 border-gray-300 py-5 ${userCourses.find((uc) => uc.courseId === course.id) ? 'cursor-pointer' : 'cursor-default'}`}
                                         href={userCourses.find((uc) => uc.courseId === course.id) ? `/courses/${course.id}` : "#"}
                                     >
-                                        {icons[course.icon]}
+                                        {icons.lighter}
                                         <section className="flex flex-col w-full gap-3">
                                             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                                                 <h3 className="text-lg font-bold">{course.name}</h3>

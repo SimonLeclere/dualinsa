@@ -5,15 +5,39 @@ import LogoutSvg from "/app/components/icons/LogoutSvg";
 import ProfileTimeSvg from "/app/components/icons/ProfileTimeSvg";
 
 import Link from "next/link";
+import Image from "next/image";
+
+import pp1 from "@/public/pp/pp-1.png";
+import pp2 from "@/public/pp/pp-2.png";
+import pp3 from "@/public/pp/pp-3.png";
+import pp4 from "@/public/pp/pp-4.png";
+import pp5 from "@/public/pp/pp-5.png";
+import pp6 from "@/public/pp/pp-6.png";
+import pp7 from "@/public/pp/pp-7.png";
+import pp8 from "@/public/pp/pp-8.png";
+import pp9 from "@/public/pp/pp-9.png";
+import pp10 from "@/public/pp/pp-10.png";
+import pp11 from "@/public/pp/pp-11.png";
+import pp12 from "@/public/pp/pp-12.png";
+
+const avatarSources = [ pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12 ];
 
 export default function ProfileTopSection({ user }) {
 
   return (
     <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
       {/* Avatar */}
-      <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl">
-        {user.username.charAt(0).toUpperCase()}
-      </div>
+      
+      {
+        user.avatar && user.avatar >= 0 && user.avatar < avatarSources.length ? (
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-gray-400 md:h-44 md:w-44">
+            <Image src={avatarSources[user.avatar]} alt="avatar" className="w-full h-full rounded-full" />
+          </div>
+        ) :
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl">
+          {user.username.charAt(0).toUpperCase()}
+        </div>
+      }
 
       {/* User info */}
       <div className="flex grow flex-col justify-between gap-3">

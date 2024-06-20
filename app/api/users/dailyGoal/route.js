@@ -59,17 +59,18 @@ export async function POST(req) {
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
         // Update the user.dailyGoal
-        const { dailyGoal } = await req.body.json();
+        const { dailyGoalPreference } = await req.json();
+
         const updatedUser = await prisma.users.update({
             where: { id: user.id },
-            data: { dailyGoal: dailyGoal },
+            data: { dailyGoalPreference: dailyGoalPreference },
         }).catch((error) => {
             console.log(error);
             throw error;
         });
 
         // Return the updated user.dailyGoal
-        return NextResponse.json(updatedUser.dailyGoal);
+        return NextResponse.json(updatedUser.dailyGoalPreference);
 
     } catch (error) {
         console.error(error);

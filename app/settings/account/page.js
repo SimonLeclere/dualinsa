@@ -42,14 +42,11 @@ export default function Account() {
 
   const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
-  if (user.message) return <div>Erreur: {user.message}</div>;
   const [username, setUsername] = useState('');
   const [language, setLanguage] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [currentUsername, setCurrentUsername] = useState('');
-  const [currentLanguage, setCurrentLanguage] = useState('');
-  const [currentAvatar, setCurrentAvatar] = useState('')
+  const [avatar, setAvatar] = useState(0);
   
+  // TODO: remove
   useEffect(() => {
     if (user) {
       const { username, language, avatar } = user;
@@ -59,6 +56,12 @@ export default function Account() {
     }
   }, [user]);
   
+  if (user?.message) return <div>Erreur: {user.message}</div>;
+
+  const currentUsername = user?.username;
+  const currentLanguage = user?.language
+  const currentAvatar = user?.avatar;
+
   const saveChanges = async (event) => {
     event.preventDefault();
     // Request to update user
@@ -90,6 +93,7 @@ export default function Account() {
           >
             Enregistrer
           </button>
+          {/* TODO confirmation */}
         </div>
 
         <div className="flex justify-center gap-12">
@@ -112,8 +116,8 @@ export default function Account() {
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
               >
-                <option value="Français">Français</option>
-                <option value="English">English</option>
+                <option value="fr">Français</option>
+                <option value="en">English</option>
               </select>
             </div>
 
@@ -125,13 +129,13 @@ export default function Account() {
                     key={index}
                     // rounded-[15px] for beautiful rounded corners
                     className={`w-28 h-28 p-1 cursor-pointer rounded-[20px] ${
-                      avatar === avatarSource.src
+                      avatar === index
                         ? "border-2 border-blue-500"
                         : "border-2 border-gray-200"
                     } transition-colors duration-300`}
                     onClick={() =>
-                      avatar !== avatarSource.src
-                        ? setAvatar(avatarSource.src)
+                      avatar !== index
+                        ? setAvatar(index)
                         : setAvatar(null)
                     }
                   >

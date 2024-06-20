@@ -2,40 +2,15 @@
 
 import React from "react";
 import useSwr from "swr";
-import { useEffect, useRef } from "react";
 import LeaderboardProfile from "./leaderboardProfile";
-import { useLeaderboardUsers } from "/app/leaderboard/useLeaderBoard";
 import BottomBar from "../components/BottomBar";
 import NavBar from "../components/NavBar";
 
 import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
-const LeaderboardPlayer = () => {
+const LeaderboardList = ({ leaderboardUsers }) => {
 
-  const leaderboardUsers = useLeaderboardUsers();
-
-  const userRefs = useRef([]);
-
-  const { data: currentUser, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
-
-  if (isLoading) {
-    return <div>Chargement...</div>;
-  }
-  if (error) {
-    return <div>Erreur: {error.message}</div>;
-  }
-
-  useEffect(() => {
-    const currentUserIndex = leaderboardUsers.findIndex(
-      (user) => user.username === currentUser
-    );
-    if (currentUserIndex !== -1 && userRefs.current[currentUserIndex]) {
-      userRefs.current[currentUserIndex].scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [leaderboardUsers, currentUser]);
+  leaderboardUsers = leaderboardUsers.sort((a, b) => b.score - a.score);
 
   return (
     <>
@@ -43,15 +18,14 @@ const LeaderboardPlayer = () => {
         {leaderboardUsers.map((user, i) => (
           <LeaderboardProfile
             key={user.username}
-            ref={(el) => (userRefs.current[i] = el)}
             place={i + 1}
             username={user.username}
             xp={user.score}
-            condition={user.username === currentUser}
+            // condition={user.username === currentUser}
+            condition={false}
           />
         ))}
       </div>
-      <BottomBar selectedTab="leaderboard" />
     </>
   );
 };
@@ -81,8 +55,10 @@ function leaderboardLeague(leagueName) {
 
 export default function LeaderBoard() {
 
-  const { data: league, error, isLoading } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
+  const { data, error, isLoading } = useSwr('/api/leaderboard', (url) => fetch(url).then((res) => res.json()));
+  const { data: league, error: errorLeague, isLoading: isLoadingLeague } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
+  // TODO
 
   return (
     <>
@@ -98,9 +74,9 @@ export default function LeaderBoard() {
                 {
                   league  && <>
                   <div className="flex items-center gap-5">
-                  {leaderboardLeague(league)}
+                  {leaderboardLeague(league?.league)}
                 </div>
-                <h1 className="text-2xl font-bold">{league} League</h1>
+                <h1 className="text-2xl font-bold">{league?.league || "x"} League</h1>
                 <div className="flex w-full flex-col items-center gap-1">
                   <p className="text-sm sm:text-lg text-gray-500">
                     Vous êtes dans le top 20% des joueurs
@@ -113,9 +89,12 @@ export default function LeaderBoard() {
                 </>
                 }
               </div>
-              <LeaderboardPlayer />
+              {
+                data && <LeaderboardList leaderboardUsers={data} />
+              }
             </>
           }
+          <BottomBar selectedTab="leaderboard" />
         </div>
       </div>
     </>

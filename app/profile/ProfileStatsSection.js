@@ -10,12 +10,11 @@ import useSwr from "swr";
 
 export default function ProfileStatsSection({totalXp}) {
   
-  const { data: streak, error, isLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
+  const { data: streak, error, isLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
   const { data: league, error1, isLoading1 } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
   const topClassement = 3; // Remplacer par calcul de classement
-
 
   return (
     <section>
@@ -26,7 +25,7 @@ export default function ProfileStatsSection({totalXp}) {
           <div className="flex flex-col">
             {(isLoading || isLoading1) && <p>...</p>}
             {(error || error1) && <p>Erreur</p>}
-            {(streak.message || league.message) && <p>Erreur: {streak.message || league.message}</p>}
+            {(streak?.message || league?.message) && <p>Erreur: {streak.message || league.message}</p>}
             {
               streak &&
                 <span
@@ -52,14 +51,14 @@ export default function ProfileStatsSection({totalXp}) {
         </div>
         <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
           <IconLeagueSvg
-            leagueName={league}
+            leagueName={league?.league || "Unknow league"}
             plume={true}
             lock={false}
             className="w-9 h-9"
           />
           <div className="flex flex-col">
             <span className="text-xl font-bold">
-              {leagues.includes(league) ? league : "Unknow league"}
+              {leagues.includes(league?.league || "") ? league?.league || "Unknow league" : "Unknow league"}
             </span>
             <span className="text-sm text-gray-400 md:text-base">
               Ligue actuelle

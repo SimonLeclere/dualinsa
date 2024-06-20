@@ -21,7 +21,7 @@ export default function Profile() {
         <div className="flex w-full max-w-4xl flex-col gap-5 p-5">
           {isLoading && <p>Chargement...</p>}
           {error && <p>Erreur de chargement</p>}
-          {user.message && <p>Erreur: {user.message}</p>}
+          {user?.message && <p>Erreur: {user?.message}</p>}
           {
             user && <>
             <ProfileTopSection user={user} />

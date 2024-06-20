@@ -17,7 +17,8 @@ model Users {
   salt     String // Salt for password hashing
 
   score        Int @default(0)
-  dailyGoal    Int @default(0) // (0-10)
+  dailyGoal    Int @default(0)
+  dailyGoalPreference Int @default(20)
 
   creationDate DateTime @default(now())
   avatar       Int      @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index

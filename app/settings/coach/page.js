@@ -23,28 +23,26 @@ export default function Coach() {
   // TODO : get from API & save the modification of the goal
   const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
  
-  const [goalXp, setGoalXp] = useState('');
-  const [localGoalXp, setLocalGoalXp] = useState(goalXp);
+  const [dailyGoalPreference, setDailyGoalPreference] = useState(user?.dailyGoalPreference || 0);
 
-  if (user.message) return <div>Erreur: {user.message}</div>;
-  
+  // TODO: remove  
   useEffect(() => {
     if (user) {
-      const goalXp = user.dailyGoal;
-      setGoalXp(user.dailyGoal);
+      setDailyGoalPreference(user.dailyGoalPreference);
     }
   }, [user]);
   
+  if (user?.message) return <div>Erreur: {user?.message}</div>;
+  
   const saveChanges = async (event) => {
     event.preventDefault();
-    setGoalXp(localGoalXp)
     // Request to update user
-    const res = await fetch('/api/users/dailyGoal', {
+    await fetch('/api/users/dailyGoal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ dailyGoal: goalXp }),
+      body: JSON.stringify({ dailyGoalPreference: dailyGoalPreference }),
     });
   };
 
@@ -60,7 +58,7 @@ export default function Coach() {
           <button
             className="rounded-2xl border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
             onClick={saveChanges}
-            disabled={localGoalXp === goalXp}
+            disabled={dailyGoalPreference === user?.dailyGoalPreference}
           >
             Enregistrer
           </button>
@@ -86,14 +84,14 @@ export default function Coach() {
                       key={title}
                       className={[
                         "flex w-full items-center justify-between border-2 p-4 first:rounded-t-2xl last:rounded-b-2xl last:border-b-2",
-                        xp === localGoalXp
+                        xp === dailyGoalPreference
                           ? "border-b-2 border-blue-400 bg-blue-100 text-blue-500"
                           : "border-t-0 border-gray-200 first:border-t-2 hover:bg-gray-100",
-                        goalXpOptions[i + 1]?.xp === localGoalXp
+                        goalXpOptions[i + 1]?.xp === dailyGoalPreference
                           ? "border-b-0"
                           : "",
                       ].join(" ")}
-                      onClick={() => setLocalGoalXp(xp)}
+                      onClick={() => setDailyGoalPreference(xp)}
                     >
                       <div className="font-bold">{title}</div>
                       <div>{xp} XP par jour</div>
