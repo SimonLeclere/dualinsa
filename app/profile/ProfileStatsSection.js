@@ -9,10 +9,10 @@ import useSwr from "swr";
 
 
 export default function ProfileStatsSection({totalXp}) {
-
   
   const { data: streak, error, isLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
   const { data: league, error1, isLoading1 } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
+
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
   const topClassement = 3; // Remplacer par calcul de classement
 
