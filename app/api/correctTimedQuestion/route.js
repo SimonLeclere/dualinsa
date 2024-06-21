@@ -12,11 +12,13 @@ export async function POST(req) {
     return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
   }
 
-  const { question, solution, reponse } = await req.json();
+  let { question, solution, reponse } = await req.json();
 
-  if (!question || !solution || !reponse) {
+  if (!question || !solution) {
     return NextResponse.json({ message: 'Invalid input: question, solution, and reponse are required' }, { status: 400 });
   }
+
+  if (!reponse || reponse === '') reponse = 'No answer provided';
 
   let response;
 

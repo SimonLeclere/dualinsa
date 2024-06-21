@@ -27,7 +27,6 @@ export default function CoursePage({ params }) {
 
   const units = data?.units; // All units from the course with all their checkpoints
   const advancement = data?.advancement; // User advancement in the course
-  console.log(advancement);
 
   return (
     <div className="flex justify-center gap-3 pr-0 md:pr-6 md:ml-24 lg:ml-64 lg:gap-12">

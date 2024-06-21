@@ -4,40 +4,43 @@ CREATE TABLE "Users" (
     "username" TEXT NOT NULL,
     "hash" TEXT NOT NULL,
     "salt" TEXT NOT NULL,
-    "xp" INTEGER NOT NULL DEFAULT 0,
+    "score" INTEGER NOT NULL DEFAULT 0,
     "dailyGoal" INTEGER NOT NULL DEFAULT 0,
-    "streak" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "dailyGoalPreference" INTEGER NOT NULL DEFAULT 20,
+    "lastCourse" INTEGER NOT NULL DEFAULT 0,
     "creationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "avatar" INTEGER NOT NULL DEFAULT 0,
+    "language" TEXT NOT NULL DEFAULT 'fr',
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Preferences" (
+CREATE TABLE "StreaksRecords" (
     "id" SERIAL NOT NULL,
-    "language" TEXT NOT NULL DEFAULT 'fr',
     "userId" INTEGER NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Preferences_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "StreaksRecords_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "UserCourse" (
-    "id" SERIAL NOT NULL,
     "currentUnitIndex" INTEGER NOT NULL DEFAULT 0,
     "currentUnitCheckpointIndex" INTEGER NOT NULL DEFAULT 0,
+    "currentCheckpointProgress" INTEGER NOT NULL DEFAULT 0,
     "userId" INTEGER NOT NULL,
     "courseId" INTEGER NOT NULL,
 
-    CONSTRAINT "UserCourse_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "UserCourse_pkey" PRIMARY KEY ("userId","courseId")
 );
 
 -- CreateTable
 CREATE TABLE "Courses" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "celeneLink" TEXT NOT NULL,
+    "description" TEXT,
+    "celeneLink" TEXT,
     "department" TEXT NOT NULL,
     "semester" INTEGER NOT NULL,
 
@@ -57,9 +60,10 @@ CREATE TABLE "Units" (
 -- CreateTable
 CREATE TABLE "Checkpoints" (
     "id" SERIAL NOT NULL,
-    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "index" INTEGER NOT NULL,
     "questionsPerTry" INTEGER NOT NULL,
     "triesRequired" INTEGER NOT NULL,
+    "isFinalCheckpoint" BOOLEAN NOT NULL DEFAULT false,
     "unitId" INTEGER NOT NULL,
 
     CONSTRAINT "Checkpoints_pkey" PRIMARY KEY ("id")
@@ -105,7 +109,7 @@ CREATE TABLE "QCMQuestion" (
 CREATE UNIQUE INDEX "Users_username_key" ON "Users"("username");
 
 -- CreateIndex
-CREATE INDEX "Preferences_userId_idx" ON "Preferences"("userId");
+CREATE INDEX "StreaksRecords_userId_idx" ON "StreaksRecords"("userId");
 
 -- CreateIndex
 CREATE INDEX "UserCourse_courseId_idx" ON "UserCourse"("courseId");

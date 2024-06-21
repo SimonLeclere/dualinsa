@@ -32,16 +32,20 @@ export default function UnitSection({ unit, checkpoints, advancement, previousCh
     }
   }
 
-  function getType(numIcon) {
-    switch (numIcon % 6) {
+  function getType(numIcon, index, length) {
+
+    // last question is always a trophy
+    if (index === length - 1) {
+      return "trophy";
+    }
+
+    switch (numIcon % 5) {
       case 0:
         return "star";
       case 1:
         return "check";
       case 2:
         return "book";
-      case 3:
-        return "trophy";
       case 4:
         return "strong";
       default:
@@ -63,7 +67,7 @@ export default function UnitSection({ unit, checkpoints, advancement, previousCh
             
               key={`${index}${unit.index}`}
               href={`/courses/${unit.courseId}/lesson/${checkpoint.id}`}
-              type={getType(index + previousCheckPointsCount)}
+              type={getType(index + previousCheckPointsCount, index, unit.checkpoints.length)}
               offset={getOffset(index + previousCheckPointsCount)}
               progress={advancement.currentCheckpointProgress / checkpoint.triesRequired }
               state={advancement.currentUnitCheckpointIndex == index && advancement.currentUnitIndex + 1 === unit.index ? "active" : advancement.currentUnitCheckpointIndex > index ? "complete" : "complete"}

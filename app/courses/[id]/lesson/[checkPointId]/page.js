@@ -96,7 +96,6 @@ export default function LessonPage({ params }) {
                     setQuitMessageShown={setShowQuitConfirmation}
                     timerDuration={currentQuestion?.duration || 0}
                     onTimerEnd={async () => {
-                        console.log("Timer ended");
                         await BottomBarRef.current.skipQuestion()
                     }}
                     courseId={id}
@@ -153,7 +152,15 @@ export default function LessonPage({ params }) {
                     if (currentQuestionIndex === questions.length - 1) {
                         setExerciseEnded(true);
 
-                        // TODO: Save the results to the database
+                        fetch(`/api/courses/checkpoints/${checkPointId}/endQuizz`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                score: correctAnswerCount * 5,
+                            }),
+                        });
 
                         return;
                     }

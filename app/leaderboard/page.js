@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
 
 const LeaderboardList = ({ leaderboardUsers, currentUserId }) => {
- 
+
   leaderboardUsers = leaderboardUsers.sort((a, b) => b.score - a.score);
 
   const userRefs = useRef([]);
@@ -52,8 +52,8 @@ function leaderboardLeague(leagueName) {
             league === leagueName
               ? league
               : index < leagues.indexOf(leagueName)
-              ? league
-              : ""
+                ? league
+                : ""
           }
           plume={league === leagueName}
           lock={index >= leagues.indexOf(leagueName) + 1}
@@ -72,6 +72,14 @@ export default function LeaderBoard() {
   const { data: session } = useSession();
   const currentUserId = session?.user?.id;
 
+  // calculer le "vous êtes dans le top xx% des joueurs"
+  const sortedLeaderboard = data ? data.sort((a, b) => b.score - a.score) : []
+  const rank = sortedLeaderboard.findIndex(obj => obj.id === currentUserId);
+
+  let topPourcentage;
+  if (rank !== -1) topPourcentage = Math.round(((rank + 1) / data.length) * 100);
+  
+
   return (
     <>
       <NavBar />
@@ -80,25 +88,25 @@ export default function LeaderBoard() {
         <div className="flex w-full max-w-xl flex-col items-center gap-5 pb-28 md:px-5">
           {
             <>
-              <div className="sticky top-0 -mt-14 flex w-full flex-col items-center gap-2 sm:gap-5 bg-white pt-20 sm:pt-28">
-                { isLoading && <div>Chargement...</div>}
-                { error && <div>Erreur: {error.message}</div>}
+              <div className="sticky top-0 -mt-14 z-30 flex w-full flex-col items-center gap-2 sm:gap-5 bg-white pt-20 sm:pt-28">
+                {isLoading && <div>Chargement...</div>}
+                {error && <div>Erreur: {error.message}</div>}
                 {
-                  league  && <>
-                  <div className="flex items-center gap-5">
-                  {leaderboardLeague(league?.league)}
-                </div>
-                <h1 className="text-2xl font-bold">{league?.league || "x"} League</h1>
-                <div className="flex w-full flex-col items-center gap-1">
-                  <p className="text-sm sm:text-lg text-gray-500">
-                    Vous êtes dans le top 20% des joueurs
-                  </p>
-                  <time className="font-bold text-yellow-400">
-                    Continuez comme ça !
-                  </time>
-                </div>
-                <div className="w-full border-b-2 border-gray-200"></div>
-                </>
+                  league && <>
+                    <div className="flex items-center gap-5">
+                      {leaderboardLeague(league?.league)}
+                    </div>
+                    <h1 className="text-2xl font-bold">{league?.league || "x"} League</h1>
+                    <div className="flex w-full flex-col items-center gap-1">
+                      <p className="text-sm sm:text-lg text-gray-500">
+                        Vous êtes dans le top {topPourcentage}% des joueurs
+                      </p>
+                      <time className="font-bold text-yellow-400">
+                        Continuez comme ça !
+                      </time>
+                    </div>
+                    <div className="w-full border-b-2 border-gray-200"></div>
+                  </>
                 }
               </div>
               {

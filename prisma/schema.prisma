@@ -91,6 +91,7 @@ model Checkpoints {
 
   questionsPerTry Int // Nombre de questions à poser à chaque essai
   triesRequired   Int // Nombre d'essais nécessaires pour valider le checkpoint
+  isFinalCheckpoint Boolean @default(false) // Si c'est le dernier checkpoint de l'unit
 
   FillInTheBlanksQuestion FillInTheBlanksQuestion[]
   TimedQuestion           TimedQuestion[]

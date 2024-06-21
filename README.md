@@ -1,3 +1,5 @@
+# Dualinsa
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -35,7 +37,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 <https://react.dev/learn>
 
 <https://tailwindcss.com/docs/text-color>
@@ -49,4 +50,11 @@ schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
 TODO:
 
 - [ ] Relier toutes les routes à l'api
-- [ ] i18n
+- [ ] loaders !!
+- [ ] Fix logo livres
+- [ ] Scroll jusqu'au checkpoint courant
+- [ ] Relier les checkpoints avec des pointillés ?
+- [ ] Au moins traduire en francais, et pourquoi pas i18n
+- [ ] Timer optionnel
+- [ ] Saut de ligne dans les questions FillInTheBlanksQuestion
+- [ ] Afficher si un cours est terminé

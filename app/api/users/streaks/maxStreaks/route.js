@@ -14,17 +14,13 @@ function maxConsecutiveConnections(connections) {
     for (let i = 1; i < connections.length; i++) {
         let prevDate = new Date(connections[i - 1].date);
         let currentDate = new Date(connections[i].date);
-
-        // Format the dates to ISO string and extract the day part
-        let prevDay = prevDate.toISOString().split('T')[0];
-        let currentDay = currentDate.toISOString().split('T')[0];
+        
+        // Convert dates to the number of days since a fixed reference date
+        let prevDayCount = Math.floor(prevDate / (1000 * 60 * 60 * 24));
+        let currentDayCount = Math.floor(currentDate / (1000 * 60 * 60 * 24));
 
         // Check if the current day is the next day of the previous day
-        let prevDayPlusOne = new Date(prevDate);
-        prevDayPlusOne.setDate(prevDate.getDate() + 1);
-        let prevDayPlusOneStr = prevDayPlusOne.toISOString().split('T')[0];
-
-        if (currentDay === prevDayPlusOneStr) {
+        if (currentDayCount === prevDayCount + 1) {
             currentConsecutive++;
         } else {
             currentConsecutive = 1;

@@ -197,7 +197,7 @@
                             "textWithHoles": "if -> {} ; for -> {} ; try..except -> {}",
 
                             "propositions": ["Handles an exception", "Iterates over a sequence", "Conditional execution"],
-                            "correctAnswer": ["Handles an exception", "Iterates over a sequence", "Conditional execution"],
+                            "correctAnswer": ["Conditional execution", "Iterates over a sequence", "Handles an exception"],
 
                             "duration": 60
                         }
