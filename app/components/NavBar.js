@@ -141,7 +141,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                         }}
                       >
                         <Strong2Svg className="h-10 w-10" />
-                        Modifier l'objectif quotidien
+                        Modifier l&apos;objectif quotidien
                       </Link>
                     </div>
                   );
