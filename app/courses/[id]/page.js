@@ -45,7 +45,7 @@ export default function CoursePage({ params }) {
         </div>
       </div>
       <RightBar />
-      <BottomBar selectedTab="learn" />
+      <BottomBar/>
     </div>
   );
 }
