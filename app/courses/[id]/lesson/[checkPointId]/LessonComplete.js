@@ -32,7 +32,7 @@ export default function LessonComplete({ correctAnswerCount, incorrectAnswerCoun
           <div className="min-w-[110px] rounded-xl border-2 border-yellow-400 bg-yellow-400">
             <h2 className="py-1 text-center text-white">Total XP</h2>
             <div className="flex justify-center rounded-xl bg-white py-4 text-yellow-400">
-              {correctAnswerCount * 4}
+              {correctAnswerCount * 5}
             </div>
           </div>
           <div className="min-w-[110px] rounded-xl border-2 border-blue-400 bg-blue-400">
