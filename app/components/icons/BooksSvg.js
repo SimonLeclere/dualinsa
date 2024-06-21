@@ -1,4 +1,14 @@
+import BookImg from '@/public/book.png';
+import Image from 'next/image';
+
 export default function BooksSvg(props) {
+
+    return (
+        <Image src={BookImg} alt="Books" className='w-[50px] h-[50px] ' {...props} />
+    )
+
+    // FIXME
+
     return (
         <svg xmlnsXlink="http://www.w3.org/1999/xlink"
         width="50"
