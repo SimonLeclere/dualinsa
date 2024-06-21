@@ -43,7 +43,7 @@ export default function BottomBar({ selectedTab }) {
   if (error) return <div>Error: {error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
 
-  if (!isLoading && !error && lastCourse?.lastCourse != "0") {
+  if (!isLoading && !error && lastCourse?.lastCourse && lastCourse?.lastCourse != "0") {
       bottomBarItems[0].href = `/courses/${lastCourse.lastCourse}`;
   }
 
