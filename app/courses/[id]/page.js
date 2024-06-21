@@ -1,25 +1,40 @@
 "use client";
 
 import useSwr from "swr";
+import { useEffect, useState } from "react";
 
 import NavBar from "/app/components/NavBar";
 import RightBar from "/app/components/RightBar";
 import BottomBar from "/app/components/BottomBar";
 import UnitSection from "/app/components/UnitSection";
+import { UpArrowSvg } from "@/components/icons/UpArrowSvg";
 
 export default function CoursePage({ params }) {
+  
+  // Revenir au haut de la page
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const updateScrollY = () => setScrollY(globalThis.scrollY ?? scrollY);
+    updateScrollY();
+    document.addEventListener("scroll", updateScrollY);
+    return () => document.removeEventListener("scroll", updateScrollY);
+  }, [scrollY]);
 
   // Fetch Post the params.id to /api/users/lastCourse
-  useSwr(`/api/users/lastCourse`, (url) => fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ lastCourse: +params.id })
-  }).then((res) => res.json()));
+  useSwr(`/api/users/lastCourse`, (url) =>
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ lastCourse: +params.id }),
+    }).then((res) => res.json())
+  );
 
-
-  const { data, error, isLoading } = useSwr(`/api/courses/units/${params.id}/listAll`, (url) => fetch(url).then((res) => res.json()));
+  const { data, error, isLoading } = useSwr(
+    `/api/courses/units/${params.id}/listAll`,
+    (url) => fetch(url).then((res) => res.json())
+  );
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -37,11 +52,25 @@ export default function CoursePage({ params }) {
             <UnitSection
               key={unit.index}
               unit={unit}
-              previousCheckPointsCount={units.slice(0, index).reduce((acc, unit) => acc + unit.checkpoints.length, 0)}
+              previousCheckPointsCount={units
+                .slice(0, index)
+                .reduce((acc, unit) => acc + unit.checkpoints.length, 0)}
               checkpoints={units[index].checkpoints}
               advancement={advancement}
             />
           ))}
+        </div>
+        <div className="sticky bottom-28 left-0 right-0 flex items-end justify-between">
+          {/* Button pour revenir tout en haut */}
+          {scrollY > 200 && (
+            <button
+              className="absolute right-4 flex h-14 w-14 items-center justify-center self-end rounded-2xl border-2 border-b-4 border-gray-200 bg-white transition hover:bg-gray-50 hover:brightness-90 md:right-0"
+              onClick={() => scrollTo(0, 0)}
+            >
+              <span className="sr-only">Jump to top</span>
+              <UpArrowSvg />
+            </button>
+          )}
         </div>
       </div>
       <RightBar />
