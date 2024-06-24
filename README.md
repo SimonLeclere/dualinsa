@@ -58,3 +58,4 @@ TODO:
 - [ ] Timer optionnel
 - [ ] Saut de ligne dans les questions FillInTheBlanksQuestion
 - [ ] Afficher si un cours est terminé
+- [ ] worker pour reset les daily tous les jours à 00h00

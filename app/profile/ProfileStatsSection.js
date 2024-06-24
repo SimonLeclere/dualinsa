@@ -14,7 +14,7 @@ export default function ProfileStatsSection({ totalXp }) {
   const { data: league, error1, isLoading1 } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
-  const topClassement = 3; // Remplacer par calcul de classement
+  const topClassement = league?.rank || "Unknow";
 
   return (
     <section>
