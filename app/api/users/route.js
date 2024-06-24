@@ -69,7 +69,7 @@ export async function POST(req) {
             return NextResponse.json({ message: 'Invalid input: username, language and avatar are required' }, { status: 400 });
         }
 
-        if(!avatar) avatar = -1;
+        if(!avatar && avatar !== 0) avatar = -1;
 
         const updatedUser = await prisma.users.update({
             where: {

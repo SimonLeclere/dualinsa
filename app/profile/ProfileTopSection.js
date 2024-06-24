@@ -29,7 +29,7 @@ export default function ProfileTopSection({ user }) {
       {/* Avatar */}
       
       {
-        user.avatar && user.avatar >= 0 && user.avatar < avatarSources.length ? (
+        (user.avatar || user.avatar === 0) && user.avatar >= 0 && user.avatar < avatarSources.length ? (
           <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-gray-400 md:h-44 md:w-44">
             <Image src={avatarSources[user.avatar]} alt="avatar" className="w-full h-full rounded-full" />
           </div>

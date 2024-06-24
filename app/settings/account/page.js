@@ -49,7 +49,7 @@ export default function Account() {
 
   const [username, setUsername] = useState('');
   const [language, setLanguage] = useState('');
-  const [avatar, setAvatar] = useState(0);
+  const [avatar, setAvatar] = useState(null);
   
   // TODO: remove
   useEffect(() => {
@@ -85,6 +85,7 @@ export default function Account() {
     if (res.status !== 200 && updatedUser.message) {
       setErrorMessage("Erreur : Nom d'utilisateur déjà pris");
       setLoading(false);
+      setUsername(currentUsername);
       return;
     
     }
