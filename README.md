@@ -49,13 +49,10 @@ schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
 
 TODO:
 
-- [ ] Relier toutes les routes à l'api
 - [ ] loaders !!
-- [ ] Fix logo livres
 - [ ] Scroll jusqu'au checkpoint courant
 - [ ] Relier les checkpoints avec des pointillés ?
 - [ ] Au moins traduire en francais, et pourquoi pas i18n
 - [ ] Timer optionnel
-- [ ] Saut de ligne dans les questions FillInTheBlanksQuestion
 - [ ] Afficher si un cours est terminé
 - [ ] worker pour reset les daily tous les jours à 00h00

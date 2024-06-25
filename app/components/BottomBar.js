@@ -20,7 +20,7 @@ const bottomBarItems = [
     name: "Cours",
     href: "/courses",
     routeName: "courses",
-    icon: <BooksSvg />, // TODO
+    icon: <BooksSvg />,
   },
   {
     name: "Leaderboard",
