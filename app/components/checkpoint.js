@@ -21,7 +21,7 @@ const icons = {
   strong: StrongSvg,
 };
 
-export default function Checkpoint({ type, href, className, offset = 0, unlocked = false, state = "active", progress = 0 }) {
+export default function Checkpoint({ innerRef, type, href, className, offset = 0, unlocked = false, state = "active", progress = 0 }) {
   
   const router = useRouter();
   
@@ -55,6 +55,7 @@ export default function Checkpoint({ type, href, className, offset = 0, unlocked
   if (type.toLowerCase() === "trophy") {
     return (
       <button
+        ref={innerRef}
         onClick={() => unlocked && router.push(href)}
         className={unlocked ? "cursor-pointer" : "cursor-default"}
         style={{ transform: `translateX(${offset}px)` }}
@@ -72,6 +73,7 @@ export default function Checkpoint({ type, href, className, offset = 0, unlocked
   // Générique pour les autres types
   return (
     <button
+      ref={innerRef}
       onClick={() => unlocked && router.push(href)}
       className={unlocked ? "cursor-pointer" : "cursor-default"}
       style={{ transform: `translateX(${offset}px)` }}
