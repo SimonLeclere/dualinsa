@@ -26,7 +26,7 @@
                         },
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "# -> {} ; ''' or \"\"\" -> {} ; Indentation -> {}",
+                            "textWithHoles": "# -> {}\n''' or \"\"\" -> {}\nIndentation -> {}",
 
                             "propositions": ["Starts a comment", "Starts a documentation string or a multi-line string", "Defines a block of code"],
                             "correctAnswer": ["Starts a comment", "Starts a documentation string or a multi-line string", "Defines a block of code"],
@@ -138,7 +138,7 @@
                         },
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "* -> {} ; != -> {} ; and -> {}",
+                            "textWithHoles": "* -> {}\n!= -> {}\nand -> {}",
 
                             "propositions": ["Arithmetic", "Comparison", "Logical"],
                             "correctAnswer": ["Arithmetic", "Comparison", "Logical"],
@@ -194,7 +194,7 @@
                         },
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "if -> {} ; for -> {} ; try..except -> {}",
+                            "textWithHoles": "if -> {}\nfor -> {}\ntry..except -> {}",
 
                             "propositions": ["Handles an exception", "Iterates over a sequence", "Conditional execution"],
                             "correctAnswer": ["Conditional execution", "Iterates over a sequence", "Handles an exception"],
@@ -256,7 +256,7 @@
                         },
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "Parameters -> {} ; Arguments -> {} ; Return value -> {}",
+                            "textWithHoles": "Parameters -> {}\nArguments -> {}\nReturn value -> {}",
 
                             "propositions": ["Defined in the function definition", "Are given during the function call", "Output of the function"],
                             "correctAnswer": ["Defined in the function definition", "Are given during the function call", "Output of the function"],
@@ -303,7 +303,7 @@
                     "FillInTheBlanksQuestion": [
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "Lambda -> {} ; Higher-order -> {}",
+                            "textWithHoles": "Lambda -> {}\nHigher-order -> {}",
 
                             "propositions": ["No name and contains a single expression", "Accepts or returns another function"],
                             "correctAnswer": ["No name and contains a single expression", "Accepts or returns another function"],
@@ -368,7 +368,7 @@
                         },
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "import math as m -> {} ; from math import sqrt -> {}",
+                            "textWithHoles": "import math as m -> {}\nfrom math import sqrt -> {}",
 
                             "propositions": ["Renames the imported module for convenience", "Imports only a specific function from a module"],
                             "correctAnswer": ["Renames the imported module for convenience", "Imports only a specific function from a module"],
@@ -424,7 +424,7 @@
                         },
                         {
                             "question": "Match the following elements with their roles.",
-                            "textWithHoles": "random.randint(1, 10) -> {} ; math.sqrt(25) -> {}",
+                            "textWithHoles": "random.randint(1, 10) -> {}\nmath.sqrt(25) -> {}",
 
                             "propositions": ["Generates a random integer between 1 and 10", "Calculates the square root of 25"],
                             "correctAnswer": ["Generates a random integer between 1 and 10", "Calculates the square root of 25"],
