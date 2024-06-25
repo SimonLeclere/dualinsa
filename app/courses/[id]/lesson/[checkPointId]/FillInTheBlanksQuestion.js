@@ -83,7 +83,7 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
     
             <div className="w-full">
                 <div className="flex min-h-[60px] flex-wrap gap-1 border-b-2 border-t-2 border-gray-200 py-1">
-                    <div className="text-lg mb-6 leading-relaxed">
+                    <div className="text-lg leading-relaxed">
                         {renderText()}
                     </div>
                 </div>

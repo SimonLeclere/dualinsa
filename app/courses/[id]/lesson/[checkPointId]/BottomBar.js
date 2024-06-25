@@ -26,7 +26,7 @@ const Bottombar = forwardRef(function BottomBar(
   }));
 
   const validateAnswer = async (skip) => {
-    if(loading) return;
+    if (loading) return;
     setLoading(true);
     const correction = await checkAnswer(skip);
 
@@ -48,15 +48,11 @@ const Bottombar = forwardRef(function BottomBar(
           ) : (
             <button
               onClick={async () => await validateAnswer()}
-              className={`grow ${
-                loading && "inline-flex"
-              } items-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-bold uppercase text-white sm:min-w-[150px] sm:max-w-fit sm:grow-0`}
+              className={`grow ${loading && "inline-flex"} items-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-bold uppercase text-white sm:min-w-[150px] sm:max-w-fit sm:grow-0`}
               disabled={disableAllButtons}
             >
               <svg
-                className={`${
-                  !loading && "hidden"
-                } animate-spin mr-3 ml-1 h-5 w-5 text-white`}
+                className={`${!loading && "hidden"} animate-spin mr-3 ml-1 h-5 w-5 text-white`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -79,10 +75,30 @@ const Bottombar = forwardRef(function BottomBar(
             </button>
           )}
           <button
-            className="rounded-2xl border-0 sm:border-2 sm:border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:min-w-[150px] sm:max-w-fit"
+            className={`grow ${loading && "inline-flex"} rounded-2xl border-0 sm:border-2 sm:border-b-4 border-gray-200 bg-white p-3 font-bold uppercase text-gray-400 transition hover:border-gray-300 hover:bg-gray-200 sm:min-w-[150px] sm:max-w-fit`}
             onClick={async () => await validateAnswer(true)}
             disabled={disableAllButtons}
           >
+            <svg
+              className={`${!loading && "hidden"} items-center animate-spin mr-3 ml-1 h-5 w-5 text-gray-400`}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
             Sauter
           </button>
         </div>
@@ -114,7 +130,7 @@ const Bottombar = forwardRef(function BottomBar(
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-2xl">Solution correcte :</div>{" "}
-                  <div className="text-sm font-normal">{correctAnswer}</div>
+                  <div className="text-sm font-normal">{correctAnswer.split("\n").map((line, i) => <p key={i}>{line}</p>)}</div>
                 </div>
               </div>
             )}
