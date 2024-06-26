@@ -1,10 +1,10 @@
 'use client'
 
-import BottomBar from "/app/components/BottomBar";
+import BottomBar from "@/components/BottomBar";
 
-import ProfileStatsSection from "/app/profile/ProfileStatsSection.js";
-import ProfileTopBar from "/app/profile/ProfileTopBar";
-import ProfileTopSection from "/app/profile/ProfileTopSection";
+import ProfileStatsSection from "@/profile/ProfileStatsSection.js";
+import ProfileTopBar from "@/profile/ProfileTopBar";
+import ProfileTopSection from "@/profile/ProfileTopSection";
 
 
 import useSwr from "swr";

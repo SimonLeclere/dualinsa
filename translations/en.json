@@ -1,0 +1,34 @@
+{
+  "HomePage": {
+    "dualinsa": "dualinsa",
+    "catchPhrase": "Learn INSA courses the easy, fun way!",
+    "startApplication": "Launch the application",
+    "createAccount": "Create an account",
+    "signin": "Login"
+  },
+  "Auth": {
+    "Signup": {
+      "fieldsMissingError": "Please fill in all fields",
+      "passwordsNotMatchingError": "Passwords do not match",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "alreadyHaveAnAccount": "Already have an account?",
+      "createAccount": "Create an account",
+      "login": "Login",
+      "passwordPlaceholder": "Password",
+      "signin": "Login",
+      "usernamePlaceholder": "Username"
+    },
+    "Signin": {
+      "createAccount": "Create an account",
+      "dontHaveAnAccount": "No account yet?",
+      "fieldsMissingError": "Please fill in all fields",
+      "login": "Login",
+      "passwordPlaceholder": "Password",
+      "usernameOrPasswordIncorrect": "Username or password incorrect",
+      "usernamePlaceholder": "Username"
+    }
+  },
+  "CoursesList": {
+    "semester": "Semester {semester}"
+  }
+}

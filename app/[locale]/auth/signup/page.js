@@ -1,47 +1,64 @@
 'use client'
 
-import { signIn } from "next-auth/react"
+import { useState } from "react";
+import { useRouter } from '@/navigation';
 
-import { useSearchParams, useRouter } from 'next/navigation'
-import { useState, Suspense } from "react";
+import { randomBytes, pbkdf2Sync } from "crypto";
 
 import Link from "next/link";
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 
-export default function LoginScreen() {
-    return (
-        <Suspense>
-            <LoginScreenComponent/>
-        </Suspense>
-    )
-}
+import { useTranslations } from "next-intl";
 
-function LoginScreenComponent() {
+export default function Signup() {
+
+    const t = useTranslations("Auth.Signup");    
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+
     const [error, setError] = useState(null);
 
     const router = useRouter();
-    const searchParams = useSearchParams();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!username || !password) {
-            setError("Veuillez remplir tous les champs");
+            setError(t('fieldsMissingError'));
             return;
         }
 
-        await signIn("credentials", {
-            username,
-            password,
-            callbackUrl: searchParams.get("callbackUrl") || "/"
+        if (password !== passwordConfirm) {
+            setError(t('passwordsNotMatchingError'));
+            return;
+        }
+
+        const salt = randomBytes(16).toString('hex');
+        const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+    
+
+        const response = await fetch("/api/auth/signup", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                hash,
+                salt
+            })
         })
-        .catch(err => {
-            setError("Nom d'utilisateur ou mot de passe incorrect");
-        });
+
+        if (response.ok) {
+            router.push('/auth/signin');
+            return;
+        }
+
+        const data = await response.json();
+        setError(data.message);
     }
 
     const handleKeyPress = (e) => {
@@ -63,9 +80,9 @@ function LoginScreenComponent() {
                 <Button
                     color="link"
                     className="hidden sm:block"
-                    onClick={() => router.push('/auth/signup')}
+                    onClick={() => router.push('/auth/signin')}
                 >
-                    Créer un compte
+                    {t('login')}
                 </Button>
 
             </header>
@@ -73,24 +90,31 @@ function LoginScreenComponent() {
             <div className="flex grow items-center justify-center">
                 <div className="flex w-full flex-col gap-5 sm:w-96">
                     <h2 className="text-center text-2xl font-bold text-gray-800">
-                        Se connecter
+                        {t('createAccount')}
                     </h2>
 
                     <div className="flex flex-col gap-2 text-black">
                         <input
                             className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                            placeholder="Nom d'utilisateur"
+                            placeholder={t('usernamePlaceholder')}
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             onKeyDown={handleKeyPress}
-
                         />
                         <input
                             className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                            placeholder="Mot de passe"
+                            placeholder={t('passwordPlaceholder')}
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            onKeyDown={handleKeyPress}
+                        />
+                        <input
+                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
+                            placeholder={t('confirmPasswordPlaceholder')}
+                            type="password"
+                            value={passwordConfirm}
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
                             onKeyDown={handleKeyPress}
 
                         />
@@ -100,7 +124,7 @@ function LoginScreenComponent() {
                         color="sky"
                         onClick={handleSubmit}
                     >
-                        Se connecter
+                        {t('createAccount')}
                     </Button>
 
                     {
@@ -114,13 +138,13 @@ function LoginScreenComponent() {
 
                     <p className="block text-center sm:hidden">
                         <span className="text-sm font-bold text-gray-700">
-                            Pas encore de compte ?
+                            {t('alreadyHaveAnAccount')}
                         </span>{" "}
                         <button
                             className="text-sm font-bold uppercase text-blue-400"
-                            onClick={() => router.push('/auth/signup')}
+                            onClick={() => router.push('/auth/signin')}
                         >
-                            Créer un compte
+                            {t('signin')}
                         </button>
                     </p>
                 </div>

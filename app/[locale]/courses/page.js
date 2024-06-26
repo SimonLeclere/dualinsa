@@ -2,6 +2,7 @@
 
 import useSwr from "swr";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +22,8 @@ const icons = {
 }
 
 export default function CoursesList() {
+
+    const t = useTranslations("CoursesList");
 
     const { data: courses, error, isLoading, mutate } = useSwr('/api/courses/listAll', (url) => fetch(url).then((res) => res.json()));
     const [enrollLoading, setEnrollLoading] = useState(false); // false or courseId
@@ -59,7 +62,7 @@ export default function CoursesList() {
 
                 <div className="px-4 pb-20">
                     <div className="py-7">
-                        <h2 className="mb-5 text-2xl font-bold">Matières</h2>
+                        <h2 className="mb-5 text-2xl font-bold">{t('courses')}</h2>
 
                         {isLoading && <p>Chargement...</p>}
                         {error && <p>Erreur de chargement</p>}
@@ -82,7 +85,7 @@ export default function CoursesList() {
                                                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                                                     <h3 className="text-lg font-bold">{course.name}</h3>
                                                     <div className="w-fit inline-flex h-7 rounded-full bg-gray-200 px-3 py-1 text-sm font-bold uppercase text-gray-400 whitespace-nowrap">
-                                                        Semestre {course.semester}
+                                                        {t('semester', { semester: course.semester })}
                                                     </div>
                                                 </div>
 
@@ -99,7 +102,7 @@ export default function CoursesList() {
                                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                     </svg>
-                                                    {course.isEnrolled ? 'Déjà inscrit' : 'S\'inscrire'}
+                                                    {course.isEnrolled ? t('alreadyEnrolled') : t('enroll')}
                                                 </button>
                                             </section>
                                         </Link>

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import LeaderboardPlaceSvg from "../components/icons/LeaderboardPlaceSvg";
+import LeaderboardPlaceSvg from "../../components/icons/LeaderboardPlaceSvg";
 
 const LeaderboardProfile = React.forwardRef(function LeaderboardProfile({ place, username, xp, condition }, ref) {
     return (

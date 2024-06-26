@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 import useSwr from "swr";
 import LeaderboardProfile from "./leaderboardProfile";
-import BottomBar from "../components/BottomBar";
-import NavBar from "../components/NavBar";
+import BottomBar from "../../components/BottomBar";
+import NavBar from "../../components/NavBar";
 
 import { useSession } from "next-auth/react";
 
-import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
+import { IconLeagueSvg } from "../../components/icons/LeaderboardSvg";
 
 const LeaderboardList = ({ leaderboardUsers, currentUserId }) => {
 

@@ -4,12 +4,16 @@ import Link from "next/link";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 
-import GlobeSvg from "/app/components/icons/GlobeSvg";
-import bgSnow from "../../public/bg-snow.svg";
+import GlobeSvg from "@/components/icons/GlobeSvg";
+import bgSnow from "@/public/bg-snow.svg";
 
 import LoginOrStartButtonsGroup from "./loginOrStartButtonsGroup";
+import { useTranslations } from "next-intl";
 
 export default function Home({ session }) {
+
+  const t = useTranslations("HomePage");
+
   return (
     <SessionProvider session={session}>
       <main
@@ -20,7 +24,7 @@ export default function Home({ session }) {
           className="fixed left-0 top-0 px-10 py-4 text-white text-4xl font-feather"
           href="/"
         >
-          dualinsa
+          {t('dualinsa')}
         </Link>
 
         <div className="flex flex-col md:flex-row items-center gap-3 px-4 md:gap-36">
@@ -28,8 +32,7 @@ export default function Home({ session }) {
 
           <div>
             <p className="mb-6 max-w-[600px] text-center text-3xl font-bold md:mb-12">
-              Apprendre les matières de l&apos;INSA de façon simple et amusante
-              !
+              {t('catchPhrase')}
             </p>
 
             <LoginOrStartButtonsGroup />

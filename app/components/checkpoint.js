@@ -1,7 +1,6 @@
 // checkpoint.js
 import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 
 import StarSvg from "./icons/StarSvg";
 import CheckmarkSvg from "./icons/CheckMarkSvg";

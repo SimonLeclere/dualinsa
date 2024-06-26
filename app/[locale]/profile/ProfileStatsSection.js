@@ -1,9 +1,9 @@
 import FireSvg from "/app/components/icons/FireSvg";
 import LightningSvg from "/app/components/icons/LightningSvg";
 
-import { IconLeagueSvg } from "../components/icons/LeaderboardSvg";
+import { IconLeagueSvg } from "../../components/icons/LeaderboardSvg";
 import LeagueMedalSvg from "/app/components/icons/LeagueSvg";
-import LeaderboardPlaceSvg from "../components/icons/LeaderboardPlaceSvg";
+import LeaderboardPlaceSvg from "../../components/icons/LeaderboardPlaceSvg";
 
 import useSwr from "swr";
 

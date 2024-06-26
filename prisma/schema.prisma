@@ -24,7 +24,7 @@ model Users {
   creationDate DateTime @default(now())
   avatar       Int      @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
 
-  language String @default("fr") // fr | en
+  language String @default("fr") // fr | en // TODO: default to null
   courses              UserCourse[]
   streaksRecords       StreaksRecords[]
 }

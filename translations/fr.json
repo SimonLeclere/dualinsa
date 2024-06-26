@@ -1,0 +1,37 @@
+{
+  "HomePage": {
+    "dualinsa": "dualinsa",
+    "catchPhrase": "Apprendre les matières de l'INSA de façon simple et amusante !",
+    "startApplication": "Lancer l'application",
+    "createAccount": "Créer un compte",
+    "signin": "Se connecter"
+  },
+  "Auth": {
+    "Signup": {
+      "fieldsMissingError": "Veuillez remplir tous les champs",
+      "passwordsNotMatchingError": "Les mots de passe ne correspondent pas",
+      "login": "Se connecter",
+      "createAccount": "Créer un compte",
+      "usernamePlaceholder": "Nom d'utilisateur",
+      "passwordPlaceholder": "Mot de passe",
+      "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+      "signin": "Se connecter",
+      "alreadyHaveAnAccount": "Déjà un compte ?"
+    },
+    "Signin": {
+      "fieldsMissingError": "Veuillez remplir tous les champs",
+      "usernameOrPasswordIncorrect": "Nom d'utilisateur ou mot de passe incorrect",
+      "createAccount": "Créer un compte",
+      "login": "Se connecter",
+      "usernamePlaceholder": "Nom d'utilisateur",
+      "passwordPlaceholder": "Mot de passe",
+      "dontHaveAnAccount": "Pas encore de compte ?"
+    }
+  },
+  "CoursesList": {
+    "courses": "Matières",
+    "semester": "Semestre {semester}",
+    "alreadyEnrolled": "Déjà inscrit",
+    "enroll": "S'inscrire"
+  }
+}

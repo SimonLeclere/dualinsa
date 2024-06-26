@@ -1,60 +1,54 @@
 'use client'
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react"
 
-import { randomBytes, pbkdf2Sync } from "crypto";
+import { useRouter } from '@/navigation'
+import { useSearchParams } from 'next/navigation'
+
+import { useState, Suspense } from "react";
 
 import Link from "next/link";
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 
-export default function Signup() {
+import { useTranslations } from "next-intl";
+
+
+export default function LoginScreen() {
+    return (
+        <Suspense>
+            <LoginScreenComponent/>
+        </Suspense>
+    )
+}
+
+function LoginScreenComponent() {
+
+    const t = useTranslations("Auth.Signin");
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
-
     const [error, setError] = useState(null);
 
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!username || !password) {
-            setError("Veuillez remplir tous les champs");
+            setError(t('fieldsMissingError'));
             return;
         }
 
-        if (password !== passwordConfirm) {
-            setError("Les mots de passe ne correspondent pas");
-            return;
-        }
-
-        const salt = randomBytes(16).toString('hex');
-        const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
-    
-
-        const response = await fetch("/api/auth/signup", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username,
-                hash,
-                salt
-            })
+        await signIn("credentials", {
+            username,
+            password,
+            callbackUrl: searchParams.get("callbackUrl") || "/"
         })
-
-        if (response.ok) {
-            router.push('/auth/signin');
-            return;
-        }
-
-        const data = await response.json();
-        setError(data.message);
+        .catch(err => {
+            setError(t('usernameOrPasswordIncorrect'));
+        });
     }
 
     const handleKeyPress = (e) => {
@@ -76,9 +70,9 @@ export default function Signup() {
                 <Button
                     color="link"
                     className="hidden sm:block"
-                    onClick={() => router.push('/auth/signin')}
+                    onClick={() => router.push('/auth/signup')}
                 >
-                    Se connecter
+                    {t('createAccount')}
                 </Button>
 
             </header>
@@ -86,32 +80,24 @@ export default function Signup() {
             <div className="flex grow items-center justify-center">
                 <div className="flex w-full flex-col gap-5 sm:w-96">
                     <h2 className="text-center text-2xl font-bold text-gray-800">
-                        Créer un compte
+                        {t('login')}
                     </h2>
 
                     <div className="flex flex-col gap-2 text-black">
                         <input
                             className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                            placeholder="Nom d'utilisateur"
+                            placeholder={t('usernamePlaceholder')}
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            onKeyDown={handleKeyPress}
-                        />
-                        <input
-                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                            placeholder="Mot de passe"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
                             onKeyDown={handleKeyPress}
 
                         />
                         <input
                             className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                            placeholder="Confirmer le mot de passe"
+                            placeholder={t('passwordPlaceholder')}
                             type="password"
-                            value={passwordConfirm}
-                            onChange={(e) => setPasswordConfirm(e.target.value)}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             onKeyDown={handleKeyPress}
 
                         />
@@ -121,7 +107,7 @@ export default function Signup() {
                         color="sky"
                         onClick={handleSubmit}
                     >
-                        Créer un compte
+                        {t('login')}
                     </Button>
 
                     {
@@ -135,13 +121,13 @@ export default function Signup() {
 
                     <p className="block text-center sm:hidden">
                         <span className="text-sm font-bold text-gray-700">
-                            Déjà un compte ?
+                            {t('dontHaveAnAccount')}
                         </span>{" "}
                         <button
                             className="text-sm font-bold uppercase text-blue-400"
-                            onClick={() => router.push('/auth/signin')}
+                            onClick={() => router.push('/auth/signup')}
                         >
-                            Se connecter
+                            {t('createAccount')}
                         </button>
                     </p>
                 </div>

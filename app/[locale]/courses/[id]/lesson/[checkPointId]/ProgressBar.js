@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import CloseSvg from "@/components/icons/CloseSvg";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 
 const formatSeconds = (seconds) => {
   const minutes = Math.floor(seconds / 60);

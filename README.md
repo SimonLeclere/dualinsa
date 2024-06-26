@@ -51,7 +51,9 @@ TODO:
 
 - [ ] loaders !!
 - [ ] Relier les checkpoints avec des pointillés ?
-- [ ] Au moins traduire en francais, et pourquoi pas i18n
+- [ ] Traduction
+- [ ] framer-motion
 - [ ] Timer optionnel
 - [ ] Afficher si un cours est terminé
 - [ ] Calcul des streaks toujours incorrect
+- [ ] readme : comment installer et lancer le projet, comment developper, comment deployer
