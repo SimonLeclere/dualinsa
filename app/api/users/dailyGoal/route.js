@@ -24,8 +24,48 @@ export async function GET(req) {
         
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
+        // Obtient la date actuelle sans les heures, minutes, secondes, etc.
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Obtient la date de demain sans les heures, minutes, secondes, etc.
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+
+        const lastStreakToday = await prisma.streaksRecords.count({
+            where: {
+                userId: token.user.id,
+                date: {
+                    gte: today,
+                    lt: tomorrow,
+                },
+            },
+            orderBy: {
+                date: 'desc',
+            },
+        }).catch((error) => {
+            console.log(error);
+            throw error;
+        });
+
+        // if no streak for today, return 0
+        // else return dailyGoal
+
+        if (lastStreakToday === 0) {
+            // update dailyGoal asynchroniously
+            prisma.users.update({
+                where: { id: user.id },
+                data: { dailyGoal: 0 },
+            }).catch((error) => {
+                console.log(error);
+                throw error;
+            });
+
+            return NextResponse.json({ dailyGoal: 0, dailyGoalPreference: user.dailyGoalPreference });
+        }
+
         // Return user.dailyGoal
-        return NextResponse.json(user.dailyGoal);
+        return NextResponse.json({ dailyGoal: user.dailyGoal, dailyGoalPreference: user.dailyGoalPreference })
 
     } catch (error) {
         console.error(error);

@@ -5,7 +5,7 @@ import useSWR from "swr";
 
 export const ProgressSection = ( {forNavBar= false}) => {
 
-  const { data, error, isLoading } = useSWR("/api/users", (url) => fetch(url).then((res) => res.json()));
+  const { data, error, isLoading } = useSWR("/api/users/dailyGoal", (url) => fetch(url).then((res) => res.json()));
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;

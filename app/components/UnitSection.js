@@ -4,30 +4,10 @@ import { useEffect, useRef } from "react";
 import UnitHeader from "./UnitHeader";
 import Checkpoint from "./checkpoint";
 
-
-function getOffset(numIcon) {
-  switch (numIcon % 8) {
-    case 0:
-      return 0;
-    case 1:
-      return 60;
-    case 2:
-      return 120;
-    case 3:
-      return 60;
-    case 4:
-      return 0;
-    case 5:
-      return -60;
-    case 6:
-      return -120;
-    case 7:
-      return -60;
-    default:
-      return 0;
-
-  }
-}
+const getOffset = (index) => {
+  const offsets = [0, 60, 120, 60, 0, -60, -120, -60];
+  return offsets[index % offsets.length];
+};
 
 function getType(numIcon, index, length) {
 
