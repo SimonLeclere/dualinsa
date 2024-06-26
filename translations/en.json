@@ -29,6 +29,71 @@
     }
   },
   "CoursesList": {
-    "semester": "Semester {semester}"
+    "semester": "Semester {semester}",
+    "alreadyEnrolled": "Already enrolled",
+    "courses": "Courses",
+    "enroll": "Enroll"
+  },
+  "Lesson": {
+    "BottomBar": {
+      "continueButton": "Continue",
+      "correctSolutionTitle": "Correction :",
+      "greeting": "Good job!",
+      "skipQuestion": "Skip",
+      "verifyAnswer": "Verify"
+    },
+    "LessonComplete": {
+      "greeting": "Lesson complete!",
+      "time": "Time",
+      "totalXp": "Total XP"
+    },
+    "LessonCompleteBottomBar": {
+      "continueButton": "Continue",
+      "showRecapButton": "Review lesson"
+    },
+    "PerformanceDisplay": {
+      "percentage": "{value, number, percent}",
+      "message-0": "Needs revision",
+      "message-100": "Perfect!",
+      "message-25": "Could be better",
+      "message-75": "Incredible!",
+      "message-50": "Good"
+    },
+    "ReviewLesson": {
+      "correctAnswers": "Correct answers"
+    }
+  },
+  "Leaderboard": {
+    "leagueTitle": "{league} League",
+    "topPercentGreeting": "You're in the top {topPourcentage, number, percent} of players",
+    "greeting": "Keep up the good work!"
+  },
+  "Profile": {
+    "currentLeague": "Current league",
+    "dayStreak": "Série",
+    "rank": "Top {topClassement}",
+    "ranking": "Ranking",
+    "statsSectionTitle": "Statistics",
+    "totalXp": "Total XP",
+    "memberSince": "Joined {membershipDate, date, ::MMMM yyyy}",
+    "student": "Student",
+    "topBarTitle": "Profile",
+    "editProfile": "Edit profile",
+    "logout": "Logout"
+  },
+  "Settings": {
+    "accountSectionTitle": "Account",
+    "dailyGoalDescription": "Choosing a daily goal will help you stay motivated for your revisions. You can change your goal at any time.",
+    "avatar": "Avatar",
+    "language": "Language",
+    "dailyGoalSectionTitle": "Edit daily goal",
+    "locales": {
+      "fr": "French",
+      "en": "Anglais"
+    },
+    "save": "Save",
+    "username": "Username",
+    "usernameAlreadyTaken": "Error: Username already taken",
+    "xpPerDay": "{xp} XP per day"
   }
 }

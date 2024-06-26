@@ -2,7 +2,12 @@ import Link from "next/link";
 import EditPencilSvg from "/app/components/icons/EditPencilSvg";
 import LogoutSvg from "@/components/icons/LogoutSvg";
 
+import { useTranslations } from "next-intl";
+
 export default function ProfileTopBar() {
+
+  const t = useTranslations("Profile");
+
   return (
     <div className="fixed left-0 right-0 top-0 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300 md:hidden">
       <Link
@@ -12,7 +17,7 @@ export default function ProfileTopBar() {
         <EditPencilSvg />
       </Link>
 
-      <span className="text-gray-400 flex-1 text-center">Profile</span>
+      <span className="text-gray-400 flex-1 text-center">{t('topBarTitle')}</span>
 
       <Link
         href="/api/auth/signout"

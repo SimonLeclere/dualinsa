@@ -6,6 +6,7 @@ import useSwr from "swr";
 
 import Image from "next/image";
 import { useEffect } from 'react';
+import { useTranslations } from "next-intl";
 
 import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
@@ -40,6 +41,8 @@ const avatarSources = [
 ];
 
 export default function Account() {
+
+  const t = useTranslations("Settings");
 
   const { data: user, error, isLoading, mutate } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
@@ -83,7 +86,7 @@ export default function Account() {
 
     const updatedUser = await res.json();
     if (res.status !== 200 && updatedUser.message) {
-      setErrorMessage("Erreur : Nom d'utilisateur déjà pris");
+      setErrorMessage(t('usernameAlreadyTaken'));
       setLoading(false);
       setUsername(currentUsername);
       return;
@@ -100,7 +103,7 @@ export default function Account() {
       <div className="mx-auto flex flex-col gap-5 px-4 pt-20 pb-32 md:pl-28 lg:pl-72">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-4xl">
           <h1 className="text-lg font-bold text-gray-800 sm:text-2xl">
-            Compte
+            {t('accountSectionTitle')}
           </h1>
           <div className="flex flex-col items-right md:items-start w-full md:w-auto">
           <button
@@ -119,7 +122,7 @@ export default function Account() {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
               )}
-                Enregistrer
+                {t('save')}
               </div>
             </button>
             {errorMessage && (
@@ -135,7 +138,7 @@ export default function Account() {
           <div className="flex w-full max-w-xl flex-col gap-8">
             <div className="flex flex-col gap-2">
               <label className="font-bold text-gray-800">
-                Nom d&apos;utilisateur
+                {t('username')}
               </label>
               <input
                 className="rounded-2xl border-2 border-gray-200 px-5 py-3"
@@ -145,19 +148,19 @@ export default function Account() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-bold text-gray-800">Langue</label>
+              <label className="font-bold text-gray-800">{t('language')}</label>
               <select
                 className="rounded-2xl border-2 border-gray-200 px-5 py-3"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
               >
-                <option value="fr">Français</option>
-                <option value="en">English</option>
+                <option value="fr">{t('locales.fr')}</option>
+                <option value="en">{t('locales.en')}</option>
               </select>
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-bold text-gray-800">Photo de profil</label>
+              <label className="font-bold text-gray-800">{t('avatar')}</label>
               <div className="flex flex-wrap gap-2 justify-center">
                 {avatarSources.map((avatarSource, index) => (
                   <div

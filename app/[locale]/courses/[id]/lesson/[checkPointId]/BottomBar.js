@@ -4,6 +4,8 @@ import { useState, useImperativeHandle, forwardRef } from "react";
 import BigCloseSvg from "@/components/icons/BigCloseSvg";
 import DoneSvg from "@/components/icons/DoneSvg";
 
+import { useTranslations } from "next-intl";
+
 const Bottombar = forwardRef(function BottomBar(
   {
     showConfirmButton,
@@ -15,6 +17,9 @@ const Bottombar = forwardRef(function BottomBar(
   },
   ref
 ) {
+
+  const t = useTranslations("Lesson.BottomBar");
+
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -43,7 +48,7 @@ const Bottombar = forwardRef(function BottomBar(
               className="grow rounded-2xl bg-gray-200 p-3 font-bold uppercase text-gray-400 sm:min-w-[150px] sm:max-w-fit sm:grow-0"
               disabled
             >
-              Vérifier
+              {t('verifyAnswer')}
             </button>
           ) : (
             <button
@@ -71,7 +76,7 @@ const Bottombar = forwardRef(function BottomBar(
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              Vérifier
+              {t('verifyAnswer')}
             </button>
           )}
           <button
@@ -99,7 +104,7 @@ const Bottombar = forwardRef(function BottomBar(
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            Sauter
+            {t('skipQuestion')}
           </button>
         </div>
       </section>
@@ -121,7 +126,7 @@ const Bottombar = forwardRef(function BottomBar(
                 <div className="hidden rounded-full bg-white p-5 text-green-500 sm:block">
                   <DoneSvg />
                 </div>
-                <div className="text-2xl">Bon travail !</div>
+                <div className="text-2xl">{t('greeting')}</div>
               </div>
             ) : (
               <div className="mb-2 flex flex-col gap-5 sm:flex-row sm:items-center">
@@ -129,7 +134,7 @@ const Bottombar = forwardRef(function BottomBar(
                   <BigCloseSvg />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <div className="text-2xl">Solution correcte :</div>{" "}
+                  <div className="text-2xl">{t('correctSolutionTitle')}</div>{" "}
                   <div className="text-sm font-normal">{correctAnswer.split("\n").map((line, i) => <p key={i}>{line}</p>)}</div>
                 </div>
               </div>
@@ -143,7 +148,7 @@ const Bottombar = forwardRef(function BottomBar(
                 : "w-full rounded-2xl border-b-4 border-red-600 bg-red-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
             }
           >
-            Continue
+            {t('continueButton')}
           </button>
         </div>
       </div>

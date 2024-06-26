@@ -57,3 +57,5 @@ TODO:
 - [ ] Afficher si un cours est terminé
 - [ ] Calcul des streaks toujours incorrect
 - [ ] readme : comment installer et lancer le projet, comment developper, comment deployer
+- [ ] preview env
+- [ ] better landing page

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import BigCloseSvg from "@/components/icons/BigCloseSvg";
 import DoneSvg from "@/components/icons/DoneSvg";
+import { useTranslations } from "next-intl";
 
 // Fonction qui affiche les réponses correctes et incorrectes à la fin d'une leçon
 export default function ReviewLesson({
@@ -10,6 +11,9 @@ export default function ReviewLesson({
   setReviewLessonShown,
   questionResults,
 }) {
+
+  const t = useTranslations("Lesson.ReviewLesson");
+
   return (
     <div
       className={`fixed inset-0 flex items-center justify-center p-5 transition duration-300 ${
@@ -28,10 +32,9 @@ export default function ReviewLesson({
           onClick={() => setReviewLessonShown(false)}
         >
           <BigCloseSvg className="h-8 w-8" />
-          <span className="sr-only">Fermer</span>
         </button>
         <div className="overflow-y-auto">
-          <h2 className="text-center text-3xl pb-5">Solutions</h2>
+          <h2 className="text-center text-3xl pb-5">{t('correctAnswers')}</h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {questionResults.map((questionResult, i) => {
               return (

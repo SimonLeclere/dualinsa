@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import useSwr from "swr";
+import { useTranslations } from "next-intl";
 
 import haltereImg from "@/public/haltere.png";
 import { SettingsRightNav } from "@/components/SettingsRightNav";
@@ -20,6 +21,9 @@ const goalXpOptions = [
 ];
 
 export default function Coach() {
+
+  const t = useTranslations("Settings");
+
   // TODO : get from API & save the modification of the goal
   const { data: user, error, isLoading, mutate } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
  
@@ -58,7 +62,7 @@ export default function Coach() {
       <div className="mx-auto flex flex-col gap-5 px-4 pt-20 pb-32 sm:pb-10 md:pl-28 lg:pl-72">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-4xl">
           <h1 className="text-lg font-bold text-gray-800 sm:text-2xl">
-            Modifier l&apos;objectif quotidien
+            {t('dailyGoalSectionTitle')}
           </h1>
           <button
             className="rounded-2xl border-b-4 border-green-600 bg-green-500 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 disabled:border-b-0 disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:brightness-100"
@@ -72,15 +76,14 @@ export default function Coach() {
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
             )}
-            Enregistrer
+            {t('save')}
             </div>
           </button>
         </div>
         <div className="flex justify-center gap-12">
           <div className="flex w-full max-w-xl flex-col gap-8">
             <p className="text-gray-400">
-              Choisir un objectif quotidien vous aidera à rester motivé pour vos
-              révisions. Vous pouvez changer d&apos;objectif à tout moment.
+              {t('dailyGoalDescription')}
             </p>
             <div className="flex gap-5">
               <Image
@@ -107,7 +110,7 @@ export default function Coach() {
                       onClick={() => setDailyGoalPreference(xp)}
                     >
                       <div className="font-bold">{title}</div>
-                      <div>{xp} XP par jour</div>
+                      <div>{t('xpPerDay', { xp })}</div>
                     </button>
                   );
                 })}

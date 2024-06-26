@@ -67,7 +67,6 @@ export default function CoursePage({ params }) {
               className="absolute right-4 flex h-14 w-14 items-center justify-center self-end rounded-2xl border-2 border-b-4 border-gray-200 bg-white transition hover:bg-gray-50 hover:brightness-90 md:right-0"
               onClick={() => scrollTo(0, 0)}
             >
-              <span className="sr-only">Jump to top</span>
               <UpArrowSvg />
             </button>
           )}

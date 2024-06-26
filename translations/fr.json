@@ -33,5 +33,67 @@
     "semester": "Semestre {semester}",
     "alreadyEnrolled": "Déjà inscrit",
     "enroll": "S'inscrire"
+  },
+  "Lesson": {
+    "BottomBar": {
+      "verifyAnswer": "Vérifier",
+      "skipQuestion": "Sauter",
+      "greeting": "Bon travail !",
+      "correctSolutionTitle": "Solution correcte :",
+      "continueButton": "Continuer"
+    },
+    "LessonComplete": {
+      "greeting": "Leçon terminée ! Bravo !",
+      "totalXp": "XP total",
+      "time": "Temps"
+    },
+    "LessonCompleteBottomBar": {
+      "showRecapButton": "Voir le récapitulatif",
+      "continueButton": "Continuer"
+    },
+    "PerformanceDisplay": {
+      "percentage": "{value, number, percent}",
+      "message-100": "Parfait !",
+      "message-75": "Incroyable !",
+      "message-50": "Bien",
+      "message-25": "Peut mieux faire",
+      "message-0": "À retravailler"
+    },
+    "ReviewLesson": {
+      "correctAnswers": "Solutions"
+    }
+  },
+  "Leaderboard": {
+    "leagueTitle": "Ligue {league}",
+    "topPercentGreeting": "Vous êtes dans le top {topPourcentage, number, percent} des joueurs",
+    "greeting": "Continuez comme ça !"
+  },
+  "Profile": {
+    "statsSectionTitle": "Statistiques",
+    "dayStreak": "Day streak",
+    "totalXp": "XP total",
+    "currentLeague": "Ligue actuelle",
+    "rank": "Top {topClassement}",
+    "ranking": "Classement",
+    "topBarTitle": "Profil",
+    "student": "Étudiant",
+    "memberSince": "Membre depuis {membershipDate, date, ::MMMM yyyy}",
+    "editProfile": "Modifier",
+    "logout": "Déconnexion"
+  },
+  "Settings": {
+    "usernameAlreadyTaken": "Erreur : Nom d'utilisateur déjà pris",
+    "accountSectionTitle": "Compte",
+    "save": "Enregistrer",
+    "username": "Nom d'utilisateur",
+    "language": "Langue",
+    "locales": {
+      "fr": "Français",
+      "en": "English"
+    },
+    "avatar": "Photo de profil",
+    "dailyGoalSectionTitle": "Modifier l'objectif quotidien",
+    "dailyGoalDescription": "Choisir un objectif quotidien vous aidera à rester motivé pour vos révisions. Vous pouvez changer d'objectif à tout moment.",
+    "xpPerDay": "{xp} XP par jour"
   }
 }

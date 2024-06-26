@@ -7,6 +7,7 @@ import BottomBar from "../../components/BottomBar";
 import NavBar from "../../components/NavBar";
 
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 import { IconLeagueSvg } from "../../components/icons/LeaderboardSvg";
 
@@ -66,6 +67,8 @@ function leaderboardLeague(leagueName) {
 
 export default function LeaderBoard() {
 
+  const t = useTranslations("Leaderboard");
+
   const { data, error, isLoading } = useSwr('/api/leaderboard', (url) => fetch(url).then((res) => res.json()));
   const { data: league, error: errorLeague, isLoading: isLoadingLeague } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
@@ -77,7 +80,7 @@ export default function LeaderBoard() {
   const rank = sortedLeaderboard.findIndex(obj => obj.id === currentUserId);
 
   let topPourcentage;
-  if (rank !== -1) topPourcentage = Math.round(((rank + 1) / data.length) * 100);
+  if (rank !== -1) topPourcentage = (rank + 1) / data.length;
   
 
   return (
@@ -96,13 +99,13 @@ export default function LeaderBoard() {
                     <div className="flex items-center gap-5">
                       {leaderboardLeague(league?.league)}
                     </div>
-                    <h1 className="text-2xl font-bold">{league?.league || "x"} League</h1>
+                    <h1 className="text-2xl font-bold">{t('leagueTitle', { league: league?.league || "x" })}</h1>
                     <div className="flex w-full flex-col items-center gap-1">
                       <p className="text-sm sm:text-lg text-gray-500">
-                        Vous êtes dans le top {topPourcentage}% des joueurs
+                        {t('topPercentGreeting', { topPourcentage })}
                       </p>
                       <time className="font-bold text-yellow-400">
-                        Continuez comme ça !
+                        {t('greeting')}
                       </time>
                     </div>
                     <div className="w-full border-b-2 border-gray-200"></div>
