@@ -12,12 +12,12 @@ import BottomBar from "@/components/BottomBar";
 import NavBar from "@/components/NavBar";
 
 const goalXpOptions = [
-  { title: "Chill", xp: 10 },
-  { title: "Révision", xp: 20 },
-  { title: "Sérieux", xp: 30 },
-  { title: "Intense", xp: 50 },
-  { title: "Partiel en approche", xp: 500 },
-  { title: "Rattrapage", xp: 5000 },
+  { key: "1", xp: 10 },
+  { key: "2", xp: 20 },
+  { key: "3", xp: 30 },
+  { key: "4", xp: 50 },
+  { key: "5", xp: 500 },
+  { key: "6", xp: 5000 },
 ];
 
 export default function Coach() {
@@ -94,10 +94,10 @@ export default function Coach() {
                 height={208}
               />
               <div className="grow">
-                {goalXpOptions.map(({ title, xp }, i) => {
+                {goalXpOptions.map(({ key, xp }, i) => {
                   return (
                     <button
-                      key={title}
+                      key={`${key}-${xp}`}
                       className={[
                         "flex w-full items-center justify-between border-2 p-4 first:rounded-t-2xl last:rounded-b-2xl last:border-b-2",
                         xp === dailyGoalPreference
@@ -109,7 +109,7 @@ export default function Coach() {
                       ].join(" ")}
                       onClick={() => setDailyGoalPreference(xp)}
                     >
-                      <div className="font-bold">{title}</div>
+                      <div className="font-bold">{t(`DailyGoalTitles.${key}`)}</div>
                       <div>{t('xpPerDay', { xp })}</div>
                     </button>
                   );

@@ -70,7 +70,7 @@
   },
   "Profile": {
     "currentLeague": "Current league",
-    "dayStreak": "Série",
+    "dayStreak": "Streak",
     "rank": "Top {topClassement}",
     "ranking": "Ranking",
     "statsSectionTitle": "Statistics",
@@ -94,11 +94,68 @@
     "save": "Save",
     "username": "Username",
     "usernameAlreadyTaken": "Error: Username already taken",
-    "xpPerDay": "{xp} XP per day"
+    "xpPerDay": "{xp} XP per day",
+    "RightNav": {
+      "accountSectionTitle": "Account",
+      "dailyGoalSectionTitle": "Edit Daily Goal"
+    },
+    "DailyGoalTitles": {
+      "1": "Chill",
+      "2": "Revising",
+      "3": "Serious",
+      "4": "Intensive",
+      "5": "Exams comming soon",
+      "6": "Help me"
+    }
   },
   "Sidebar": {
     "Ranking": {
-      "sectionTitle": "Ranking"
+      "sectionTitle": "Ranking",
+      "greeting": "You're {rank, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} out of {totalUsers, number} participants!",
+      "leaderboardLink": "Leaderboard"
+    },
+    "Progress": {
+      "editLink": "Edit",
+      "progressNavBarTitle": "Progression",
+      "xpRatio": "{xpToday, number}/{goalXp, number} XP",
+      "objective": "Earn {goalXp, number} XP"
     }
+  },
+  "NavBar": {
+    "SettingsMenu": {
+      "accountSectionTitle": "Account",
+      "dailyGoalSectionTitle": "Edit daily goal"
+    },
+    "leaderboardLink": "Leaderboard",
+    "streakSectionTitle": "Streak",
+    "xpMessage": "You have {currentScore, number} xp",
+    "xpSectionTitle": "Experience",
+    "streakSectionMessage": "Practice every day so that your streak never resets!"
+  },
+  "ShareSection": {
+    "copyButton": "{isClicked, select, true {Link copied} other {Copy link}}",
+    "title": "Share Dualinsa"
+  },
+  "StreakCoinSection": {
+    "leaderboardButton": "See leaderboard",
+    "streakMessage": "Your series will be reset to zero tomorrow if you don't train. Be careful!",
+    "xpSectionMessage": "You have {currentScore, plural, =1 {# experience point} other {# experience points}}.",
+    "xpSectionTitle": "Experience",
+    "streakSectionTitle": "Streak"
+  },
+  "UnitHeader": {
+    "UnitNumber": "Unit {unitNumber, number}",
+    "lessonLink": "Lesson"
+  },
+  "BottomBar": {
+    "items": {
+      "courses": "Courses",
+      "leaderboard": "Leaderboard",
+      "learn": "Learn",
+      "profile": "Profile"
+    }
+  },
+  "Tooltip": {
+    "label": "Start"
   }
 }

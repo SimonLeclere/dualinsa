@@ -15,11 +15,12 @@ import {ProgressSection} from "./ProgressSection";
 import { usePathname } from "next/navigation";
 import AccountSvg from "./icons/AccountSvg";
 import Strong2Svg from "./icons/Strong2Svg";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function NavBar({ backgroundColor = "bg-purple-400", borderColor = "border-purple-500" }) {
 
     const locale = useLocale();
+    const t = useTranslations("NavBar")
 
     const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/${locale}/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
     const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/${locale}/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
@@ -80,9 +81,9 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                 case "STREAK":
                   return (
                     <div className="flex grow flex-col items-center gap-3 p-5 border-b-2 border-gray-300">
-                      <h2 className="text-xl font-bold">Streak</h2>
+                      <h2 className="text-xl font-bold">{t('streakSectionTitle')}</h2>
                       <p className="text-sm text-gray-400">
-                        {`Pratiquez chaque jour pour que votre série ne soit pas remise à zéro !`}
+                        {t('streakSectionMessage')}
                       </p>
                       <div className="self-stretch">
                         {streaksLoading && !streaksError ? (
@@ -101,16 +102,16 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                         <CoinStackSvg className="h-24 w-24" />
                         <div className="flex flex-col gap-3">
                           <h2 className="text-xl font-bold text-black">
-                            Experience
+                            {t('xpSectionTitle')}
                           </h2>
                           <p className="text-sm font-normal text-gray-400">
-                            Vous avez {currentScore} xp
+                            {t('xpMessage', { currentScore })}
                           </p>
                           <Link
                             className="font-bold uppercase text-blue-400 transition hover:brightness-110"
                             href="/leaderboard"
                           >
-                            Leaderboard
+                            {t('leaderboardLink')}
                           </Link>
                         </div>
                       </div>
@@ -133,7 +134,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                         }}
                       >
                         <AccountSvg className="h-10 w-10" />
-                        Compte
+                        {t('SettingsMenu.accountSectionTitle')}
                       </Link>
                       <Link
                         className="flex items-center gap-2 border-t-2 border-gray-300 p-2 font-bold text-gray-700"
@@ -144,7 +145,7 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
                         }}
                       >
                         <Strong2Svg className="h-10 w-10" />
-                        Modifier l&apos;objectif quotidien
+                        {t('SettingsMenu.dailyGoalSectionTitle')}
                       </Link>
                     </div>
                   );

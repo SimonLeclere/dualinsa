@@ -8,7 +8,7 @@ import LockSvg from "./icons/LockSvg";
 import BookSvg from "./icons/BookSvg";
 import TrophySvg from "./icons/TrophySvg";
 import StrongSvg from "./icons/StrongSvg";
-import ToolTip from "./icons/ToolTip";
+import ToolTip from "./ToolTip";
 import CompletionCircle from "./icons/CompletionCircle";
 
 const icons = {

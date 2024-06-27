@@ -2,11 +2,12 @@ import { Link } from "@/navigation";
 
 import { LightningProgressSvg } from "../components/icons/LightningProgressSvg";
 import useSWR from "swr";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
-export const ProgressSection = ( {forNavBar= false}) => {
+export const ProgressSection = ({ forNavBar = false }) => {
 
   const locale = useLocale();
+  const t = useTranslations("Sidebar.Progress")
 
   const { data, error, isLoading } = useSWR(`/${locale}/api/users/dailyGoal`, (url) => fetch(url).then((res) => res.json()));
 
@@ -15,19 +16,19 @@ export const ProgressSection = ( {forNavBar= false}) => {
 
   const { dailyGoal: xpToday, dailyGoalPreference: goalXp } = data;
 
-  if(forNavBar === false) { // Affichage dans RightBar
+  if (forNavBar === false) { // Affichage dans RightBar
     return (
       <article className="flex flex-col gap-5 rounded-2xl border-2 border-gray-200 p-6 font-bold text-gray-700">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl">Progression</h2>
+          <h2 className="text-xl">{t('progressNavBarTitle')}</h2>
           <Link href="/settings/coach" className="uppercase text-blue-400">
-            Modifier
+            {t('editLink')}
           </Link>
         </div>
         <div className="flex gap-5">
           <LightningProgressSvg />
           <div className="flex grow flex-col justify-around">
-            <h3 className="font-normal text-gray-500">Objectif {goalXp} XP</h3>
+            <h3 className="font-normal text-gray-500">{t('objective', { goalXp })}</h3>
             <div className="flex items-center gap-5">
               <div className="relative h-4 w-full grow rounded-full bg-gray-200">
                 {xpToday > 0 && (
@@ -40,7 +41,7 @@ export const ProgressSection = ( {forNavBar= false}) => {
                 )}
               </div>
               <div className="text-md shrink-0 font-normal text-gray-400">
-                {xpToday}/{goalXp} XP
+                {t('xpRatio', { xpToday, goalXp })}
               </div>
             </div>
           </div>
@@ -52,7 +53,7 @@ export const ProgressSection = ( {forNavBar= false}) => {
       <>
         <LightningProgressSvg size={80} />
         <div className="flex flex-col gap-3">
-          <h2 className="text-xl font-bold text-black">Progression</h2>
+          <h2 className="text-xl font-bold text-black">{t('progressNavBarTitle')}</h2>
           <p className="text-sm font-normal text-gray-400">
             <div className="flex grow flex-col justify-around">
               <div className="flex items-center gap-5 h-5 w-64">
@@ -69,7 +70,7 @@ export const ProgressSection = ( {forNavBar= false}) => {
                   )}
                 </div>
                 <div className="text-md shrink-0 font-normal text-gray-400">
-                  {xpToday}/{goalXp} XP
+                  {t('xpRatio', { xpToday, goalXp })}
                 </div>
               </div>
             </div>
@@ -78,7 +79,7 @@ export const ProgressSection = ( {forNavBar= false}) => {
             className="font-bold uppercase text-blue-400 w-auto transition hover:brightness-110"
             href="/settings/coach"
           >
-            Modifier
+            {t('editLink')}
           </Link>
         </div>
       </>

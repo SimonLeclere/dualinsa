@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ChevronSvg from "/app/components/icons/ChevronSvg";
+import { useFormatter } from "next-intl";
 
 const range = (lo, hi) => {
     const result = Array(hi - lo);
@@ -48,8 +49,12 @@ export default function Calendar({ streaks }) {
 
     const [now, setNow] = useState(new Date());
 
-    let formatter = new Intl.DateTimeFormat('en-EN', { month: "long", year: 'numeric' });
-    const formattedNowMonth = formatter.format(now);
+    const format = useFormatter();
+
+    const formattedNowMonth = format.dateTime(now, {
+        month: "long",
+        year: "numeric",
+    });
     const staticNow = new Date();
     const calendarDays = getCalendarDays(now);
 
@@ -69,7 +74,6 @@ export default function Calendar({ streaks }) {
                     onClick={handlePrevMonth}
                 >
                     <ChevronSvg direction="left" />
-                    <span className="sr-only">Go to previous month</span>
                 </button>
                 <h3 className="text-lg font-bold uppercase text-gray-500">
                     {formattedNowMonth}
@@ -79,7 +83,6 @@ export default function Calendar({ streaks }) {
                     onClick={handleNextMonth}
                 >
                     <ChevronSvg direction="right" />
-                    <span className="sr-only">Go to next month</span>
                 </button>
             </header>
             <div className="flex justify-between px-3 py-2">

@@ -8,6 +8,7 @@ import HomeSvg from "/app/components/icons/HomeSvg";
 import BooksSvg from "/app/components/icons/BooksSvg";
 import LeaderboardSvg from "/app/components/icons/LeaderboardSvg";
 import ProfileSvg from "/app/components/icons/ProfileSvg";
+import { useTranslations } from "next-intl";
 
 const bottomBarItems = [
   {
@@ -38,6 +39,8 @@ const bottomBarItems = [
 
 export default function BottomBar({ selectedTab }) {
 
+  const t = useTranslations("BottomBar");
+
   const { data: lastCourse, error, isLoading } = useSwr('/api/users/lastCourse', (url) => fetch(url).then((res) => res.json()));
   
   if (error) return <div>Error: {error.message}</div>;
@@ -62,7 +65,7 @@ export default function BottomBar({ selectedTab }) {
           {bottomBarItems.map((item) => {
             return (
               <li
-                key={`${item.name}-bottom-bar-${item.href}`}
+                key={`${item.routeName}-bottom-bar-${item.href}`}
                 className="flex flex-1 items-center md:items-stretch justify-center md:justify-normal"
               >
                 <Link
@@ -74,7 +77,7 @@ export default function BottomBar({ selectedTab }) {
                   } flex grow items-center justify-center md:justify-start gap-3 rounded-xl px-2 py-1 text-sm font-bold uppercase`}
                 >
                   {item.icon}
-                  <span className="hidden lg:flex">{item.name}</span>
+                  <span className="hidden lg:flex">{t(`items.${item.routeName}`) || ""}</span>
                 </Link>
               </li>
             );

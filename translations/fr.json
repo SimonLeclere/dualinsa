@@ -94,11 +94,68 @@
     "avatar": "Photo de profil",
     "dailyGoalSectionTitle": "Modifier l'objectif quotidien",
     "dailyGoalDescription": "Choisir un objectif quotidien vous aidera à rester motivé pour vos révisions. Vous pouvez changer d'objectif à tout moment.",
-    "xpPerDay": "{xp} XP par jour"
+    "xpPerDay": "{xp} XP par jour",
+    "RightNav": {
+      "accountSectionTitle": "Compte",
+      "dailyGoalSectionTitle": "Modifier l'objectif quotidien"
+    },
+    "DailyGoalTitles": {
+      "1": "Chill",
+      "2": "Révisions",
+      "3": "Sérieux",
+      "4": "Intense",
+      "5": "Partiels en approche",
+      "6": "Rattrapages"
+    }
   },
   "Sidebar": {
     "Ranking": {
-      "sectionTitle": "Classement"
+      "sectionTitle": "Classement",
+      "leaderboardLink": "Classement",
+      "greeting": "Vous êtes {rank, selectordinal, one {#er} other {#ème}} sur {totalUsers, number} participants !"
+    },
+    "Progress": {
+      "editLink": "Modifier",
+      "xpRatio": "{xpToday, number}/{goalXp, number} XP",
+      "progressNavBarTitle": "Progression",
+      "objective": "Objectif {goalXp, number} XP"
     }
+  },
+  "NavBar": {
+    "streakSectionTitle": "Série",
+    "xpSectionTitle": "Expérience",
+    "xpMessage": "Vous avez {currentScore, number} xp",
+    "leaderboardLink": "Classement",
+    "SettingsMenu": {
+      "accountSectionTitle": "Compte",
+      "dailyGoalSectionTitle": "Modifier l'objectif quotidien"
+    },
+    "streakSectionMessage": "Pratiquez chaque jour pour que votre série ne soit pas remise à zéro !"
+  },
+  "ShareSection": {
+    "title": "Partagez Dualinsa",
+    "copyButton": "{isClicked, select, true {Lien copié} other {Copier le lien}}"
+  },
+  "StreakCoinSection": {
+    "streakMessage": "Votre série sera remise à zéro demain si vous ne vous entraînez pas. Attention !",
+    "xpSectionTitle": "Expérience",
+    "xpSectionMessage": "Vous avez {currentScore, plural, =1 {# point} other {# points}} d'expérience.",
+    "leaderboardButton": "Voir le classement",
+    "streakSectionTitle": "Série"
+  },
+  "UnitHeader": {
+    "UnitNumber": "Chapitre {unitNumber, number}",
+    "lessonLink": "Cours"
+  },
+  "BottomBar": {
+    "items": {
+      "profile": "Profil",
+      "leaderboard": "Classement",
+      "courses": "Cours",
+      "learn": "Apprendre"
+    }
+  },
+  "Tooltip": {
+    "label": "Commencer"
   }
 }
