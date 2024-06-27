@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     // "no-console": "off",
-    "react/jsx-no-literals": "error"
+    // "react/jsx-no-literals": "error"
   },
   "plugins": [
     "react"
