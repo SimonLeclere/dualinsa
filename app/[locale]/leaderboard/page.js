@@ -65,12 +65,12 @@ function leaderboardLeague(leagueName) {
   );
 }
 
-export default function LeaderBoard() {
+export default function LeaderBoard({ params }) {
 
   const t = useTranslations("Leaderboard");
 
-  const { data, error, isLoading } = useSwr('/api/leaderboard', (url) => fetch(url).then((res) => res.json()));
-  const { data: league, error: errorLeague, isLoading: isLoadingLeague } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
+  const { data, error, isLoading } = useSwr(`/${params.locale}/api/leaderboard`, (url) => fetch(url).then((res) => res.json()));
+  const { data: league, error: errorLeague, isLoading: isLoadingLeague } = useSwr(`/${params.locale}/api/users/league`, (url) => fetch(url).then((res) => res.json()));
 
   const { data: session } = useSession();
   const currentUserId = session?.user?.id;

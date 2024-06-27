@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import CloseSvg from "../components/icons/CloseSvg";
 import TimeLeft from "../components/TimeLeft";
 

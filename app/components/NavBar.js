@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import useSwr from "swr";
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 import Calendar from "/app/components/Calendar"
 
@@ -15,12 +15,15 @@ import {ProgressSection} from "./ProgressSection";
 import { usePathname } from "next/navigation";
 import AccountSvg from "./icons/AccountSvg";
 import Strong2Svg from "./icons/Strong2Svg";
+import { useLocale } from "next-intl";
 
 export default function NavBar({ backgroundColor = "bg-purple-400", borderColor = "border-purple-500" }) {
 
-    const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
-    const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr("/api/users/xp", (url) => fetch(url).then((res) => res.json()));
-    const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
+    const locale = useLocale();
+
+    const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/${locale}/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
+    const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/${locale}/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
+    const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr(`/${locale}/api/users/streaks`, (url) => fetch(url).then((res) => res.json()));
 
     const [menu, setMenu] = useState("HIDDEN");
 

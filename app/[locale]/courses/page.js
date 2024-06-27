@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 import NavBar from "/app/components/NavBar";
 import RightBar from "/app/components/RightBar";
@@ -21,11 +21,11 @@ const icons = {
     piston: <Image src={pistonImg.src} alt="piston" width="80" height="80" className="flex-shrink-0 mx-4 w-20 h-20 sm:mx-16 sm:w-24 sm:h-24" />
 }
 
-export default function CoursesList() {
+export default function CoursesList({ params }) {
 
     const t = useTranslations("CoursesList");
 
-    const { data: courses, error, isLoading, mutate } = useSwr('/api/courses/listAll', (url) => fetch(url).then((res) => res.json()));
+    const { data: courses, error, isLoading, mutate } = useSwr(`/${params.locale}/api/courses/listAll`, (url) => fetch(url).then((res) => res.json()));
     const [enrollLoading, setEnrollLoading] = useState(false); // false or courseId
 
     const handleEnroll = async (e, courseId) => {
@@ -34,7 +34,7 @@ export default function CoursesList() {
         if (enrollLoading) return;
         setEnrollLoading(courseId);
 
-        const result = await fetch('/api/courses/enroll', {
+        const result = await fetch(`/${params.locale}/api/courses/enroll`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

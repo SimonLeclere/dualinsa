@@ -2,7 +2,7 @@
 
 import useSwr from "swr";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 import HomeSvg from "/app/components/icons/HomeSvg";
 import BooksSvg from "/app/components/icons/BooksSvg";

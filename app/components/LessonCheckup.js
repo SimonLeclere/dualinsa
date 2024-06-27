@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import PerformanceDisplay from "./PerformanceDisplay";
 
 // Fonction qui permet de formater le temps en heures, minutes et secondes (hh:mm:ss)

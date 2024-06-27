@@ -5,14 +5,14 @@ import CredentialsProvider from "next-auth/providers/credentials"
 
 import { pbkdf2Sync } from 'crypto';
 
-import prisma from "/lib/supabase";
+import prisma from "@/lib/supabase";
 
 
 // Fichier spécifique pour gérer l'authentification avec NextAuth
 
 export const authOptions = {
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/en/auth/signin',
   },
   providers: [
     CredentialsProvider({

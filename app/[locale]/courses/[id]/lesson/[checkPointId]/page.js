@@ -29,7 +29,7 @@ export default function LessonPage({ params }) {
 
     const { id, checkPointId } = params;
     
-    const { data: questions, error, isLoading } = useSWR(`/api/courses/checkpoints/${checkPointId}/selectQuestions`,
+    const { data: questions, error, isLoading } = useSWR(`/${params.locale}/api/courses/checkpoints/${checkPointId}/selectQuestions`,
         fetcher,
         {
             revalidateIfStale: false,
@@ -152,7 +152,7 @@ export default function LessonPage({ params }) {
                     if (currentQuestionIndex === questions.length - 1) {
                         setExerciseEnded(true);
 
-                        fetch(`/api/courses/checkpoints/${checkPointId}/endQuizz`, {
+                        fetch(`/${params.locale}/api/courses/checkpoints/${checkPointId}/endQuizz`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",

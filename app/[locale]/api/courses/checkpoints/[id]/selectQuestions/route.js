@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt"
 export async function GET(req, { params }) {
     
     // Verify if the request comes from an authenticated user
-    const token = await getToken({ req })
+    const token = await getToken({ req, params })
 
     if (!token) {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
@@ -14,6 +14,7 @@ export async function GET(req, { params }) {
 
     // Get checkpointId from query
     const checkpointId = +params.id
+    const locale = params.locale || 'fr'; // TODO: write question in the user's language
 
     // Select {checkpoints.questionPerTry} questions from QCMQuestions, FillInTheBlanksQuestion and TimedQuestion tables
     try {

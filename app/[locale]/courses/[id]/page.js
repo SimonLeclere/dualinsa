@@ -21,7 +21,7 @@ export default function CoursePage({ params }) {
   }, [scrollY]);
 
   // Fetch Post the params.id to /api/users/lastCourse
-  useSwr(`/api/users/lastCourse`, (url) =>
+  useSwr(`/${params.locale}/api/users/lastCourse`, (url) =>
     fetch(url, {
       method: "POST",
       headers: {
@@ -32,7 +32,7 @@ export default function CoursePage({ params }) {
   );
 
   const { data, error, isLoading } = useSwr(
-    `/api/courses/units/${params.id}/listAll`,
+    `/${params.locale}/api/courses/units/${params.id}/listAll`,
     (url) => fetch(url).then((res) => res.json())
   );
 

@@ -95,5 +95,10 @@
     "dailyGoalSectionTitle": "Modifier l'objectif quotidien",
     "dailyGoalDescription": "Choisir un objectif quotidien vous aidera à rester motivé pour vos révisions. Vous pouvez changer d'objectif à tout moment.",
     "xpPerDay": "{xp} XP par jour"
+  },
+  "Sidebar": {
+    "Ranking": {
+      "sectionTitle": "Classement"
+    }
   }
 }

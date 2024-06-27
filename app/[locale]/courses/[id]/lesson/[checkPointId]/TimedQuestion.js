@@ -1,6 +1,10 @@
 import { useState, useImperativeHandle, forwardRef } from 'react';
 
+import { useLocale } from 'next-intl';
+
 const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setShowConfirmButton }, ref) {
+
+    const locale = useLocale();
 
     const [userAnswer, setUserAnswer] = useState("");
     const [locked, setLocked] = useState(false);
@@ -11,7 +15,7 @@ const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setSh
             setLocked(true);
 
             try {
-                const data = await fetch("/api/correctTimedQuestion", {
+                const data = await fetch(`/${locale}/api/correctTimedQuestion`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -36,6 +40,9 @@ const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setSh
                     userAnswer: userAnswer
                 }
             } catch (error) {
+
+                console.log(error);
+
                 return {
                     isCorrect: false,
                     correction: currentQuestion.aiPromptSolution,

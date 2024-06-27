@@ -5,13 +5,13 @@ import { useRouter } from '@/navigation';
 
 import { randomBytes, pbkdf2Sync } from "crypto";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 
 import { useTranslations } from "next-intl";
 
-export default function Signup() {
+export default function Signup({ params }) {
 
     const t = useTranslations("Auth.Signup");    
 
@@ -40,7 +40,7 @@ export default function Signup() {
         const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
     
 
-        const response = await fetch("/api/auth/signup", {
+        const response = await fetch(`/${params.locale}/api/auth/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

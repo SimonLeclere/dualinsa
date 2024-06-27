@@ -10,9 +10,9 @@ import ProfileTopSection from "@/profile/ProfileTopSection";
 import useSwr from "swr";
 
 
-export default function Profile() {
+export default function Profile({ params }) {
 
-  const { data: user, error, isLoading } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
+  const { data: user, error, isLoading } = useSwr(`/${params.locale}/api/users/`, (url) => fetch(url).then((res) => res.json()));
 
   return (
     <div>

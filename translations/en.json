@@ -95,5 +95,10 @@
     "username": "Username",
     "usernameAlreadyTaken": "Error: Username already taken",
     "xpPerDay": "{xp} XP per day"
+  },
+  "Sidebar": {
+    "Ranking": {
+      "sectionTitle": "Ranking"
+    }
   }
 }

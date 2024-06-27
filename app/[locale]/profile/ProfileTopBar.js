@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import EditPencilSvg from "/app/components/icons/EditPencilSvg";
 import LogoutSvg from "@/components/icons/LogoutSvg";
 

@@ -4,10 +4,10 @@ import EditPencilSvg from "/app/components/icons/EditPencilSvg";
 import LogoutSvg from "/app/components/icons/LogoutSvg";
 import ProfileTimeSvg from "/app/components/icons/ProfileTimeSvg";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 import Image from "next/image";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import pp1 from "@/public/pp/pp-1.png";
 import pp2 from "@/public/pp/pp-2.png";
@@ -27,6 +27,7 @@ const avatarSources = [ pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11,
 export default function ProfileTopSection({ user }) {
 
   const t = useTranslations("Profile");
+  const locale = useLocale();
 
   return (
     <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
@@ -66,7 +67,7 @@ export default function ProfileTopSection({ user }) {
         {t('editProfile')}
       </Link>
       <Link
-        href="/api/auth/signout"
+        href={`/api/auth/signout`}
         className="hidden items-center gap-2 self-start rounded-2xl border-b-4 border-red-500 bg-red-400 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 md:flex"
       >
         <LogoutSvg />

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import LessonFastForwardStartSvg from "./icons/LessonFastForwardStartSvg";
 
 // Fonction qui permet de passer à l'unité suivante

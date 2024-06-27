@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { useState, Suspense } from "react";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 

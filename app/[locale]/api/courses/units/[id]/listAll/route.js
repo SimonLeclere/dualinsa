@@ -13,6 +13,7 @@ export async function GET(req, { params }) {
 
     // Get courseId from slug
     const courseId = +params.id
+    const locale = params.locale || 'fr'; // TODO: write question in the user's language
 
     if (!courseId) return NextResponse.json({ message: 'Invalid course id' }, { status: 400 });	
 

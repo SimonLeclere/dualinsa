@@ -46,16 +46,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
 
 <https://docs.google.com/document/d/1jww7iEQxZfz7plSWy20kQJrUcMD3mzIMfUO8stizBuI/edit?usp=sharing>
-
-TODO:
-
-- [ ] loaders !!
-- [ ] Relier les checkpoints avec des pointillés ?
-- [ ] Traduction
-- [ ] framer-motion
-- [ ] Timer optionnel
-- [ ] Afficher si un cours est terminé
-- [ ] Calcul des streaks toujours incorrect
-- [ ] readme : comment installer et lancer le projet, comment developper, comment deployer
-- [ ] preview env
-- [ ] better landing page
