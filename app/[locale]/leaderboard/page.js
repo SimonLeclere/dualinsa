@@ -91,7 +91,7 @@ export default function LeaderBoard({ params }) {
         <div className="flex w-full max-w-xl flex-col items-center gap-5 pb-28 md:px-5">
           {
             <>
-              <div className="sticky top-0 -mt-14 z-30 flex w-full flex-col items-center gap-2 sm:gap-5 bg-white pt-20 sm:pt-28">
+              <div className="sticky top-0 -mt-14 z-10 flex w-full flex-col items-center gap-2 sm:gap-5 bg-white pt-20 sm:pt-28">
                 {isLoading && <div>Chargement...</div>}
                 {error && <div>Erreur: {error.message}</div>}
                 {
