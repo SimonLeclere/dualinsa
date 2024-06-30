@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from "react";
-
-import useSwr from "swr";
 
 import Image from "next/image";
-import { useEffect } from 'react';
+
+import useSwr from "swr";
+import { useEffect, useState } from 'react';
 import { useTranslations } from "next-intl";
+import { useRouter } from '@/navigation';
 
 import { SettingsRightNav } from "@/components/SettingsRightNav";
 import BottomBar from "@/components/BottomBar";
@@ -43,6 +43,7 @@ const avatarSources = [
 export default function Account() {
 
   const t = useTranslations("Settings");
+  const router = useRouter();
 
   const { data: user, error, isLoading, mutate } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
 
@@ -93,9 +94,18 @@ export default function Account() {
     
     }
 
+    // change language
+    if (language !== currentLanguage) {
+      changeLanguage(language);
+    }
+
     mutate({ ...user, username, language, avatar }, false);
     setLoading(false);
   };
+
+  const changeLanguage = (newLanguage) => {
+    router.push('/settings/account', { locale: newLanguage });
+  }
 
   return (
     <div className="min-h-screen justify-center">
@@ -189,7 +199,7 @@ export default function Account() {
               </div>
             </div>
           </div>
-          <SettingsRightNav selectedTab="Account" />
+          <SettingsRightNav selectedTab={t('RightNav.accountSectionTitle')} />
 
           <BottomBar selectedTab="profile" />
         </div>

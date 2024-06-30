@@ -117,7 +117,7 @@ export default function Coach() {
               </div>
             </div>
           </div>
-          <SettingsRightNav selectedTab="Edit Daily Goal" />
+          <SettingsRightNav selectedTab={t('RightNav.dailyGoalSectionTitle')} />
         </div>
       </div>
     </div>
