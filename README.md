@@ -43,6 +43,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 <https://github.com/bryanjenningz/react-duolingo>
 
-schéma bdd : <https://drawsql.app/teams/simons-team-29/diagrams/dualinsa>
+schéma bdd : <[Cliquez ici](https://drawsql.app/teams/simons-team-29/diagrams/dualinsa-dev)>
 
 <https://docs.google.com/document/d/1jww7iEQxZfz7plSWy20kQJrUcMD3mzIMfUO8stizBuI/edit?usp=sharing>

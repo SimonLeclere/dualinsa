@@ -136,7 +136,7 @@ model FillInTheBlanksQuestion {
   checkpointId Int
   checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
 
-  duration                           Int // Durée en secondes
+  duration                           Int? // Durée en secondes
 
   FillInTheBlanksQuestionTranslation FillInTheBlanksQuestionTranslation[]
 
@@ -166,7 +166,7 @@ model TimedQuestion {
   checkpointId Int
   checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
 
-  duration Int // Durée en secondes
+  duration Int? // Durée en secondes
 
   TimedQuestionTranslation TimedQuestionTranslation[]
 
@@ -193,7 +193,7 @@ model QCMQuestion {
   checkpointId Int
   checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
 
-  duration Int // Durée en secondes
+  duration Int? // Durée en secondes
 
   QCMQuestionTranslation QCMQuestionTranslation[]
 

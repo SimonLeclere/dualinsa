@@ -94,7 +94,7 @@ export default function LessonPage({ params }) {
                     totalCorrectAnswersNeeded={questions?.length || 100}
                     stopTimer={showCorrectAnswer}
                     setQuitMessageShown={setShowQuitConfirmation}
-                    timerDuration={currentQuestion?.duration || 0}
+                    timerDuration={currentQuestion?.duration}
                     onTimerEnd={async () => {
                         await BottomBarRef.current.skipQuestion()
                     }}

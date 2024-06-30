@@ -18,12 +18,14 @@ export default function ProgressBar({ currentQuestionIndex, totalCorrectAnswersN
 
   useEffect(() => {
     // Reset counter and timer ended flag whenever timerDuration or currentQuestionIndex changes
-    setCounter(timerDuration);
-    timerEndedRef.current = false;
+    if (timerDuration !== null) {
+      setCounter(timerDuration);
+      timerEndedRef.current = false;
+    }
   }, [timerDuration, currentQuestionIndex]);
 
   useEffect(() => {
-    if (stopTimer) return;
+    if (stopTimer || timerDuration === null) return;
 
     if (counter > 0) {
       const timer = setInterval(() => {
@@ -42,7 +44,7 @@ export default function ProgressBar({ currentQuestionIndex, totalCorrectAnswersN
 
       return () => clearInterval(timer);
     }
-  }, [counter, stopTimer, onTimerEnd]);
+  }, [counter, stopTimer, timerDuration, onTimerEnd]);
 
   return (
     <header className="flex items-center gap-4">
@@ -75,9 +77,13 @@ export default function ProgressBar({ currentQuestionIndex, totalCorrectAnswersN
         </div>
       </div>
 
-      <span className={`flex justify-center gap-2 text-lg font-bold tabular-nums ${counter < 10 ? "text-red-500" : ""} ${counter < 10 && counter !== 0 && !stopTimer ? "animate-ping" : ""}`}>
-        {formatSeconds(counter)}
-      </span>
+      {
+        timerDuration !== null && (
+          <span className={`flex justify-center gap-2 text-lg font-bold tabular-nums ${counter < 10 ? "text-red-500" : ""} ${counter < 10 && counter !== 0 && !stopTimer ? "animate-ping" : ""}`}>
+            {formatSeconds(counter)}
+          </span>
+        )
+      }
     </header>
   );
 };
