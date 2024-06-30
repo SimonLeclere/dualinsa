@@ -16,17 +16,17 @@ model Users {
   hash     String // Hashed password
   salt     String // Salt for password hashing
 
-  score        Int @default(0)
-  dailyGoal    Int @default(0)
+  score               Int @default(0)
+  dailyGoal           Int @default(0)
   dailyGoalPreference Int @default(20)
 
-  lastCourse  Int @default(0)
+  lastCourse   Int      @default(0)
   creationDate DateTime @default(now())
   avatar       Int      @default(0) // chiant de stocker du base64, on donne une liste prédéfinie d'avatars et on stocke l'index
 
-  language String @default("fr") // fr | en // TODO: default to null
-  courses              UserCourse[]
-  streaksRecords       StreaksRecords[]
+  language       String           @default("fr") // fr | en // TODO: default to null
+  courses        UserCourse[]
+  streaksRecords StreaksRecords[]
 }
 
 model StreaksRecords {
@@ -35,7 +35,7 @@ model StreaksRecords {
   userId Int
   user   Users @relation(fields: [userId], references: [id])
 
-  date  DateTime
+  date DateTime
 
   @@index([userId])
 }
@@ -43,7 +43,7 @@ model StreaksRecords {
 model UserCourse {
   currentUnitIndex           Int @default(0)
   currentUnitCheckpointIndex Int @default(0)
-  currentCheckpointProgress Int @default(0)
+  currentCheckpointProgress  Int @default(0)
 
   userId Int
   user   Users @relation(fields: [userId], references: [id])
@@ -59,21 +59,33 @@ model UserCourse {
 model Courses {
   id Int @id @default(autoincrement())
 
-  name        String
-  description String?
-
   celeneLink String?
   department String // sti, mri, gsi, stpi
   semester   Int
 
-  units      Units[]
-  userCourse UserCourse[]
+  units             Units[]
+  userCourse        UserCourse[]
+
+  courseTranslation CourseTranslation[]
+}
+
+model CourseTranslation {
+  id Int @id @default(autoincrement())
+
+  courseId Int
+  course   Courses @relation(fields: [courseId], references: [id])
+
+  language    String
+
+  name        String
+  description String?
+
+  @@index([courseId])
 }
 
 model Units {
   id Int @id @default(autoincrement())
 
-  name  String
   index Int
 
   courseId Int
@@ -81,7 +93,22 @@ model Units {
 
   checkpoints Checkpoints[]
 
+  unitTranslation UnitTranslation[]
+
   @@index([courseId])
+}
+
+model UnitTranslation {
+  id Int @id @default(autoincrement())
+
+  unitId Int
+  unit   Units @relation(fields: [unitId], references: [id])
+
+  language    String
+
+  name        String
+
+  @@index([unitId])
 }
 
 model Checkpoints {
@@ -89,8 +116,8 @@ model Checkpoints {
 
   index Int
 
-  questionsPerTry Int // Nombre de questions à poser à chaque essai
-  triesRequired   Int // Nombre d'essais nécessaires pour valider le checkpoint
+  questionsPerTry   Int // Nombre de questions à poser à chaque essai
+  triesRequired     Int // Nombre d'essais nécessaires pour valider le checkpoint
   isFinalCheckpoint Boolean @default(false) // Si c'est le dernier checkpoint de l'unit
 
   FillInTheBlanksQuestion FillInTheBlanksQuestion[]

@@ -9,7 +9,9 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "populateDb": "node ./scripts/populateDb.js",
+    "clearCourses": "node ./scripts/clearCourses.js"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
