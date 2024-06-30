@@ -63,8 +63,8 @@ model Courses {
   department String // sti, mri, gsi, stpi
   semester   Int
 
-  units             Units[]
-  userCourse        UserCourse[]
+  units      Units[]
+  userCourse UserCourse[]
 
   courseTranslation CourseTranslation[]
 }
@@ -75,7 +75,7 @@ model CourseTranslation {
   courseId Int
   course   Courses @relation(fields: [courseId], references: [id])
 
-  language    String
+  language String
 
   name        String
   description String?
@@ -104,9 +104,9 @@ model UnitTranslation {
   unitId Int
   unit   Units @relation(fields: [unitId], references: [id])
 
-  language    String
+  language String
 
-  name        String
+  name String
 
   @@index([unitId])
 }
@@ -136,15 +136,28 @@ model FillInTheBlanksQuestion {
   checkpointId Int
   checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
 
-  question      String
-  textWithHoles String // "Le {} est un animal très {}." 
+  duration                           Int // Durée en secondes
+
+  FillInTheBlanksQuestionTranslation FillInTheBlanksQuestionTranslation[]
+
+  @@index([checkpointId])
+}
+
+model FillInTheBlanksQuestionTranslation {
+  id Int @id @default(autoincrement())
+
+  questionId Int
+  parent   FillInTheBlanksQuestion @relation(fields: [questionId], references: [id])
+
+  language String
+
+  question String
+  textWithHoles  String // "Le {} est un animal très {}." 
 
   propositions  String[] // ["chien", "mignon", "fourchette"]
   correctAnswer String[] // ["chien", "mignon"]
 
-  duration Int // Durée en secondes
-
-  @@index([checkpointId])
+  @@index([questionId])
 }
 
 model TimedQuestion {
@@ -153,12 +166,25 @@ model TimedQuestion {
   checkpointId Int
   checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
 
-  question         String
-  aiPromptSolution String // Solution pour l'évaluation automatique par IA
-
   duration Int // Durée en secondes
 
+  TimedQuestionTranslation TimedQuestionTranslation[]
+
   @@index([checkpointId])
+}
+
+model TimedQuestionTranslation {
+  id Int @id @default(autoincrement())
+
+  questionId Int
+  parent   TimedQuestion @relation(fields: [questionId], references: [id])
+
+  language String
+
+  question String
+  aiPromptSolution String
+
+  @@index([questionId])
 }
 
 model QCMQuestion {
@@ -167,12 +193,24 @@ model QCMQuestion {
   checkpointId Int
   checkpoint   Checkpoints @relation(fields: [checkpointId], references: [id])
 
-  question String
-
-  answers       String[]
-  correctAnswer String
-
   duration Int // Durée en secondes
 
+  QCMQuestionTranslation QCMQuestionTranslation[]
+
   @@index([checkpointId])
+}
+
+model QCMQuestionTranslation {
+  id Int @id @default(autoincrement())
+
+  questionId Int
+  parent   QCMQuestion @relation(fields: [questionId], references: [id])
+
+  language String
+
+  question String
+  answers  String[]
+  correctAnswer String
+
+  @@index([questionId])
 }

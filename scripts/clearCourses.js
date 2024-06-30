@@ -8,6 +8,11 @@ async function clearTables() {
     try {
         
         await prisma.$transaction([
+
+            prisma.qCMQuestionTranslation.deleteMany(),
+            prisma.fillInTheBlanksQuestionTranslation.deleteMany(),
+            prisma.unitTranslation.deleteMany(),
+
             prisma.qCMQuestion.deleteMany(),
             prisma.fillInTheBlanksQuestion.deleteMany(),
             prisma.timedQuestion.deleteMany(),
