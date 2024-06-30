@@ -36,9 +36,9 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
 
     const renderText = () => {
         const parts = currentQuestion.textWithHoles.split(/(\{\})/).map((part) => part.split('\n'));
-    
+
         let wordIndex = 0; // Keep track of the current word index for selectedAnswers
-    
+
         return parts.flat().map((part, index) => {
             if (part === '') {
                 // This represents a newline split
@@ -74,13 +74,13 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
             return <span key={index}>{part}</span>;
         });
     };
-    
+
     return (
         <section className="flex max-w-2xl grow flex-col gap-5 self-center sm:items-center sm:justify-center sm:gap-24 pb-20">
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
                 {currentQuestion.question}
             </h1>
-    
+
             <div className="w-full">
                 <div className="flex min-h-[60px] flex-wrap gap-1 border-b-2 border-t-2 border-gray-200 py-1">
                     <div className="text-lg leading-relaxed">
@@ -88,7 +88,7 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
                     </div>
                 </div>
             </div>
-    
+
             <div className="flex flex-wrap justify-center gap-1">
                 {
                     currentQuestion.propositions.map((answerTile, i) => {
@@ -103,11 +103,13 @@ const FillInTheBlanksQuestion = forwardRef(function FillInTheBlanksQuestion({ cu
                                 disabled={selectedAnswers.includes(answerTile)}
                                 onClick={() => {
                                     setSelectedAnswers((selectedAnswers) => {
-                                        // Find the first null in the selectedAnswers array
-                                        const firstNullIndex = selectedAnswers.indexOf(null);
-                                        const result = selectedAnswers.map((answer, index) => index === firstNullIndex ? answerTile : answer);
+                                        // Check if all slots are filled
+                                        const isFull = !selectedAnswers.includes(null);
+                                        const result = selectedAnswers.map((answer, index) =>
+                                            isFull && index === selectedAnswers.length - 1 ? answerTile : 
+                                            !isFull && index === selectedAnswers.indexOf(null) ? answerTile : answer
+                                        );
                                         updateConfirmButton(result);
-    
                                         return result;
                                     });
                                 }}
