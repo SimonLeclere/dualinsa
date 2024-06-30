@@ -126,6 +126,7 @@ export default function LessonPage({ params }) {
                 showConfirmButton={showConfirmButton}
                 isAnswerCorrect={isAnswerCorrect}
                 showCorrectAnswer={showCorrectAnswer}
+                displayCorrection={currentQuestion?.type === "TIMED"}
                 checkAnswer={async (skip = false) => {
                     const { isCorrect, correction, userAnswer } = await currentQuestionRef.current.checkAnswer()
                     setIsAnswerCorrect(isCorrect);

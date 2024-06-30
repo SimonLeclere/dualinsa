@@ -11,6 +11,7 @@ const Bottombar = forwardRef(function BottomBar(
     showConfirmButton,
     isAnswerCorrect,
     showCorrectAnswer,
+    displayCorrection,
     checkAnswer,
     showNextQuestion,
     disableAllButtons,
@@ -126,7 +127,14 @@ const Bottombar = forwardRef(function BottomBar(
                 <div className="hidden rounded-full bg-white p-5 text-green-500 sm:block">
                   <DoneSvg />
                 </div>
-                <div className="text-2xl">{t('greeting')}</div>
+                <div className="flex flex-col gap-2">
+                  <div className="text-2xl">{t('greeting')}</div>
+                  {
+                    displayCorrection && (
+                      <div className="text-sm font-normal">{correctAnswer.split("\n").map((line, i) => <p key={i}>{line}</p>)}</div>
+                    )
+                  }
+                </div>
               </div>
             ) : (
               <div className="mb-2 flex flex-col gap-5 sm:flex-row sm:items-center">
