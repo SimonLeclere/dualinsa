@@ -6,15 +6,29 @@ async function main() {
 
     const course = await prisma.courses.create({
         data: {
-            name: data.name,
             celeneLink: data.celeneLink,
             department: data.department,
             semester: data.semester,
-            description: data.description,
+
+            courseTranslation: {
+                create: data.translations.map(translation => ({
+                    language: translation.language,
+                    name: translation.name,
+                    description: translation.description
+                })),
+            },
+
             units: {
                 create: data.units.map(unit => ({
                     index: unit.index,
-                    name: unit.name,
+                    
+                    unitTranslation: {
+                        create: unit.translations.map(translation => ({
+                            language: translation.language,
+                            name: translation.name,
+                        }))
+                    },
+
                     checkpoints: {
                         create: unit.checkpoints.map(checkpoint => (
                             {

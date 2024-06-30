@@ -1,469 +1,500 @@
 {
-    "name": "Python Basics",
-    "celeneLink": "https://celene.insa-cvl.fr",
-    "department": "STI",
-    "semester": 3,
-    "description": "This course covers the basics of Python programming, including syntax, data types, operators, functions, and modules. It is designed for students with no prior programming experience and provides a solid foundation in Python programming.",
-    "units": [
+  "celeneLink": "https://celene.insa-cvl.fr",
+  "department": "STI",
+  "semester": 3,
+
+  "translations": [
+    {
+      "language": "en",
+      "name": "Python Basics",
+      "description": "This course covers the basics of Python programming, including syntax, data types, operators, functions, and modules. It is designed for students with no prior programming experience and provides a solid foundation in Python programming."
+    },
+    {
+      "language": "fr",
+      "name": "Bases de Python",
+      "description": "Ce cours couvre les bases de la programmation en Python, y compris la syntaxe, les types de données, les opérateurs, les fonctions et les modules. Il est conçu pour les étudiants n'ayant aucune expérience en programmation et fournit une base solide en programmation Python."
+    }
+  ],
+
+  "units": [
+    {
+      "index": 1,
+
+      "translations": [
         {
-            "index": 1,
-            "name": "Basic Syntax and Operations",
-            "checkpoints": [
-                {
-                    "index": 0,
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "In Python, {} is used to add a single line comment.",
-
-                            "propositions": ["#", ";", ",", "&&"],
-                            "correctAnswer": ["#"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "# -> {}\n''' or \"\"\" -> {}\nIndentation -> {}",
-
-                            "propositions": ["Starts a comment", "Starts a documentation string or a multi-line string", "Defines a block of code"],
-                            "correctAnswer": ["Starts a comment", "Starts a documentation string or a multi-line string", "Defines a block of code"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "What defines the end of a block of code in Python?",
-                            "answers": [
-                                "Curly braces {}",
-                                "Parentheses ()",
-                                "Indentation",
-                                "Semicolons ;"
-                            ],
-                            "answer": "Indentation",
-                            "duration": 60
-                        },
-                        {
-                            "question": "Triple quotes in Python are used for both multi-line strings and documentation strings.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "True",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Explain the role of indentation in Python's syntax and how it affects code execution.",
-                            "aiPromptSolution": "Indentation is used to define blocks of code. It is mandatory in Python and is used to determine the scope of a function, loop, or conditional statement. Incorrect indentation can lead to syntax errors or unexpected behavior in the code.",
-                            "duration": 120
-                        }
-                    ]
-                },
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 1,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "int -> {}\nstr -> {}\nbool -> {}",
-
-                            "propositions": ["Whole number", "Sequence of characters", "Boolean value"],
-                            "correctAnswer": ["Whole number", "Sequence of characters", "Boolean value"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "The special value None in Python represents {}.",
-
-                            "propositions": ["absence of a value", "a placeholder", "an empty value"],
-                            "correctAnswer": ["absence of a value"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "Which of the following is not a Python built-in data type?",
-                            "answers": [
-                                "int",
-                                "float",
-                                "str",
-                                "data"
-                            ],
-                            "answer": "data",
-                            "duration": 60
-                        },
-                        {
-                            "question": "In Python, variable names can start with a number.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "False",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Discuss the different types of data types available in Python and provide an example for each.",
-                            "aiPromptSolution": "Python has several built-in data types, including int, float, str, bool, list, tuple, set, and dict. Each data type has specific characteristics and uses. For example, int is used to represent whole numbers, float is used for decimal numbers, and str is used for sequences of characters.",
-                            "duration": 120
-                        }
-                    ]
-                },
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 2,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "The operator == is used for {} comparison between two values.",
-
-                            "propositions": ["equality", "exact", "identical"],
-                            "correctAnswer": ["equality"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "* -> {}\n!= -> {}\nand -> {}",
-
-                            "propositions": ["Arithmetic", "Comparison", "Logical"],
-                            "correctAnswer": ["Arithmetic", "Comparison", "Logical"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "What operator would you use to raise a number to the power of another in Python?",
-                            "answers": [
-                                "^",
-                                "**",
-                                "%",
-                                "//"
-                            ],
-                            "answer": "**",
-                            "duration": 60
-                        },
-                        {
-                            "question": "The != operator is used to check if two values are not equal.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "True",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Explain how logical operators are used in Python to combine conditions.",
-                            "aiPromptSolution": "Logical operators in Python, such as and, or, and not, are used to combine multiple conditions in if statements and loops. They allow you to create complex conditions that evaluate to True or False based on the individual conditions.",
-                            "duration": 120
-                        }
-                    ]
-                },
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 3,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "A {} loop executes a block of code as long as its condition remains true.",
-
-                            "propositions": ["while", "for", "do-while"],
-                            "correctAnswer": ["while"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "if -> {}\nfor -> {}\ntry..except -> {}",
-
-                            "propositions": ["Handles an exception", "Iterates over a sequence", "Conditional execution"],
-                            "correctAnswer": ["Conditional execution", "Iterates over a sequence", "Handles an exception"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "Which statement is used to handle exceptions in Python?",
-                            "answers": [
-                                "handle",
-                                "error",
-                                "try..except",
-                                "check..catch"
-                            ],
-                            "answer": "try..except",
-                            "duration": 60
-                        },
-                        {
-                            "question": "In Python, variable names can start with a number.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "False",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Describe the differences between the for and while loops in Python.",
-                            "aiPromptSolution": "The for loop is used to iterate over a sequence of elements, such as a list or a string, and executes a block of code for each element in the sequence. The while loop, on the other hand, executes a block of code as long as a condition remains true. The for loop is often used when the number of iterations is known, while the while loop is used when the number of iterations is not known in advance.",
-                            "duration": 120
-                        }
-                    ]
-                }
-            ]
+          "language": "en",
+          "name": "Basic Syntax and Operations"
         },
         {
-            "index": 2,
-            "name": "Functions and Modules",
-            "checkpoints": [
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 0,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "Functions in Python return {} by default if no return statement is specified.",
-
-                            "propositions": ["None", "null", "void"],
-                            "correctAnswer": ["None"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "Parameters -> {}\nArguments -> {}\nReturn value -> {}",
-
-                            "propositions": ["Defined in the function definition", "Are given during the function call", "Output of the function"],
-                            "correctAnswer": ["Defined in the function definition", "Are given during the function call", "Output of the function"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "What keyword is used to define a function in Python?",
-                            "answers": [
-                                "function",
-                                "def",
-                                "declare",
-                                "lambda"
-                            ],
-                            "answer": "def",
-                            "duration": 60
-                        },
-                        {
-                            "question": "A Python function can return more than one value.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "True",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Describe how to define a function in Python including its parameters and return values.",
-                            "aiPromptSolution": "In Python, a function is defined using the def keyword followed by the function name and its parameters in parentheses. The function body is indented and can contain statements and a return statement to return a value. If no return statement is specified, the function returns None by default.",
-                            "duration": 120
-                        }
-                    ]
-                },
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 1,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "Lambda -> {}\nHigher-order -> {}",
-
-                            "propositions": ["No name and contains a single expression", "Accepts or returns another function"],
-                            "correctAnswer": ["No name and contains a single expression", "Accepts or returns another function"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "In Python, functions that can accept or return other functions are called {} functions.",
-
-                            "propositions": ["higher-order", "functional", "nested"],
-                            "correctAnswer": ["higher-order"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "What type of function can be created using the lambda keyword?",
-                            "answers": [
-                                "Anonymous function",
-                                "Recursive function",
-                                "Private function",
-                                "Named function"
-                            ],
-                            "answer": "Anonymous function",
-                            "duration": 60
-                        },
-                        {
-                            "question": "Lambda functions in Python are mainly used for simple, small functions.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "False",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Explain the concept of default and optional arguments in Python functions.",
-                            "aiPromptSolution": "Default arguments in Python functions are used to provide a default value for a parameter if no argument is passed during the function call. Optional arguments, on the other hand, are used to specify parameters that can be omitted when calling the function. They are defined with a default value in the function definition.",
-                            "duration": 120
-                        }
-                    ]
-                },
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 2,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "When creating a Python package, a {} file is necessary within each directory to treat it as a package.",
-
-                            "propositions": ["__init__.py", "init.py", "package.py"],
-                            "correctAnswer": ["__init__.py"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "import math as m -> {}\nfrom math import sqrt -> {}",
-
-                            "propositions": ["Renames the imported module for convenience", "Imports only a specific function from a module"],
-                            "correctAnswer": ["Renames the imported module for convenience", "Imports only a specific function from a module"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "How do you import the entire math module in Python?",
-                            "answers": [
-                                "import math",
-                                "include math",
-                                "load math",
-                                "require math"
-                            ],
-                            "answer": "import math",
-                            "duration": 60
-                        },
-                        {
-                            "question": "You can import specific functions from a module to avoid namespace pollution.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "True",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Discuss the benefits of using modules and how they contribute to code organization in Python.",
-                            "aiPromptSolution": "Modules in Python are used to organize code into reusable units that can be imported and used in other programs. They help in keeping the code clean, modular, and maintainable by separating different functionalities into separate files. Modules also allow for code reuse and sharing across different projects.",
-                            "duration": 120
-                        }
-                    ]
-                },
-                {
-                    "questionsPerTry": 5,
-                    "triesRequired": 4,
-                    "index": 3,
-                  
-                    "FillInTheBlanksQuestion": [
-                        {
-                            "question": "Fill in the blanks",
-                            "textWithHoles": "The {} function in Python is used to return the absolute value of a number.",
-
-                            "propositions": ["abs", "absolute", "value"],
-                            "correctAnswer": ["abs"],
-
-                            "duration": 60
-                        },
-                        {
-                            "question": "Match the following elements with their roles.",
-                            "textWithHoles": "random.randint(1, 10) -> {}\nmath.sqrt(25) -> {}",
-
-                            "propositions": ["Generates a random integer between 1 and 10", "Calculates the square root of 25"],
-                            "correctAnswer": ["Generates a random integer between 1 and 10", "Calculates the square root of 25"],
-
-                            "duration": 60
-                        }
-
-                    ],
-                    "QCMQuestion": [
-                        {
-                            "question": "Which module is used to perform mathematical operations in Python?",
-                            "answers": [
-                                "math",
-                                "calc",
-                                "numbers",
-                                "operations"
-                            ],
-                            "answer": "math",
-                            "duration": 60
-                        },
-                        {
-                            "question": "The random module in Python is used to generate random numbers.",
-                            "answers": [
-                                "True",
-                                "False"
-                            ],
-                            "answer": "True",
-                            "duration": 60
-                        }
-                    ],
-                    "TimedQuestion": [
-                        {
-                            "question": "Explain how to use built-in and external modules in Python and provide examples of common modules.",
-                            "aiPromptSolution": "Python provides a wide range of built-in modules that can be used to perform various tasks, such as math, random, os, and datetime. These modules contain functions and classes that can be imported and used in your programs. External modules can be installed using package managers like pip and provide additional functionality beyond the built-in modules.",
-                            "duration": 120
-                        }
-                    ]
-                }
-            ]
+          "language": "fr",
+          "name": "Syntaxe de base et opérations"
         }
-    ]
+      ],
+
+      "checkpoints": [
+        {
+          "index": 0,
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "In Python, {} is used to add a single line comment.",
+
+              "propositions": ["#", ";", ",", "&&"],
+              "correctAnswer": ["#"],
+
+              "duration": 60
+            },
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "# -> {}\n''' or \"\"\" -> {}\nIndentation -> {}",
+
+              "propositions": [
+                "Starts a comment",
+                "Starts a documentation string or a multi-line string",
+                "Defines a block of code"
+              ],
+              "correctAnswer": [
+                "Starts a comment",
+                "Starts a documentation string or a multi-line string",
+                "Defines a block of code"
+              ],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "What defines the end of a block of code in Python?",
+              "answers": [
+                "Curly braces {}",
+                "Parentheses ()",
+                "Indentation",
+                "Semicolons ;"
+              ],
+              "answer": "Indentation",
+              "duration": 60
+            },
+            {
+              "question": "Triple quotes in Python are used for both multi-line strings and documentation strings.",
+              "answers": ["True", "False"],
+              "answer": "True",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Explain the role of indentation in Python's syntax and how it affects code execution.",
+              "aiPromptSolution": "Indentation is used to define blocks of code. It is mandatory in Python and is used to determine the scope of a function, loop, or conditional statement. Incorrect indentation can lead to syntax errors or unexpected behavior in the code.",
+              "duration": 120
+            }
+          ]
+        },
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 1,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "int -> {}\nstr -> {}\nbool -> {}",
+
+              "propositions": [
+                "Whole number",
+                "Sequence of characters",
+                "Boolean value"
+              ],
+              "correctAnswer": [
+                "Whole number",
+                "Sequence of characters",
+                "Boolean value"
+              ],
+
+              "duration": 60
+            },
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "The special value None in Python represents {}.",
+
+              "propositions": [
+                "absence of a value",
+                "a placeholder",
+                "an empty value"
+              ],
+              "correctAnswer": ["absence of a value"],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "Which of the following is not a Python built-in data type?",
+              "answers": ["int", "float", "str", "data"],
+              "answer": "data",
+              "duration": 60
+            },
+            {
+              "question": "In Python, variable names can start with a number.",
+              "answers": ["True", "False"],
+              "answer": "False",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Discuss the different types of data types available in Python and provide an example for each.",
+              "aiPromptSolution": "Python has several built-in data types, including int, float, str, bool, list, tuple, set, and dict. Each data type has specific characteristics and uses. For example, int is used to represent whole numbers, float is used for decimal numbers, and str is used for sequences of characters.",
+              "duration": 120
+            }
+          ]
+        },
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 2,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "The operator == is used for {} comparison between two values.",
+
+              "propositions": ["equality", "exact", "identical"],
+              "correctAnswer": ["equality"],
+
+              "duration": 60
+            },
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "* -> {}\n!= -> {}\nand -> {}",
+
+              "propositions": ["Arithmetic", "Comparison", "Logical"],
+              "correctAnswer": ["Arithmetic", "Comparison", "Logical"],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "What operator would you use to raise a number to the power of another in Python?",
+              "answers": ["^", "**", "%", "//"],
+              "answer": "**",
+              "duration": 60
+            },
+            {
+              "question": "The != operator is used to check if two values are not equal.",
+              "answers": ["True", "False"],
+              "answer": "True",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Explain how logical operators are used in Python to combine conditions.",
+              "aiPromptSolution": "Logical operators in Python, such as and, or, and not, are used to combine multiple conditions in if statements and loops. They allow you to create complex conditions that evaluate to True or False based on the individual conditions.",
+              "duration": 120
+            }
+          ]
+        },
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 3,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "A {} loop executes a block of code as long as its condition remains true.",
+
+              "propositions": ["while", "for", "do-while"],
+              "correctAnswer": ["while"],
+
+              "duration": 60
+            },
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "if -> {}\nfor -> {}\ntry..except -> {}",
+
+              "propositions": [
+                "Handles an exception",
+                "Iterates over a sequence",
+                "Conditional execution"
+              ],
+              "correctAnswer": [
+                "Conditional execution",
+                "Iterates over a sequence",
+                "Handles an exception"
+              ],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "Which statement is used to handle exceptions in Python?",
+              "answers": ["handle", "error", "try..except", "check..catch"],
+              "answer": "try..except",
+              "duration": 60
+            },
+            {
+              "question": "In Python, variable names can start with a number.",
+              "answers": ["True", "False"],
+              "answer": "False",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Describe the differences between the for and while loops in Python.",
+              "aiPromptSolution": "The for loop is used to iterate over a sequence of elements, such as a list or a string, and executes a block of code for each element in the sequence. The while loop, on the other hand, executes a block of code as long as a condition remains true. The for loop is often used when the number of iterations is known, while the while loop is used when the number of iterations is not known in advance.",
+              "duration": 120
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+
+      "translations": [
+        {
+          "language": "en",
+          "name": "Functions and Modules"
+        },
+        {
+          "language": "fr",
+          "name": "Fonctions et modules"
+        }
+      ],
+
+      "checkpoints": [
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 0,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "Functions in Python return {} by default if no return statement is specified.",
+
+              "propositions": ["None", "null", "void"],
+              "correctAnswer": ["None"],
+
+              "duration": 60
+            },
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "Parameters -> {}\nArguments -> {}\nReturn value -> {}",
+
+              "propositions": [
+                "Defined in the function definition",
+                "Are given during the function call",
+                "Output of the function"
+              ],
+              "correctAnswer": [
+                "Defined in the function definition",
+                "Are given during the function call",
+                "Output of the function"
+              ],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "What keyword is used to define a function in Python?",
+              "answers": ["function", "def", "declare", "lambda"],
+              "answer": "def",
+              "duration": 60
+            },
+            {
+              "question": "A Python function can return more than one value.",
+              "answers": ["True", "False"],
+              "answer": "True",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Describe how to define a function in Python including its parameters and return values.",
+              "aiPromptSolution": "In Python, a function is defined using the def keyword followed by the function name and its parameters in parentheses. The function body is indented and can contain statements and a return statement to return a value. If no return statement is specified, the function returns None by default.",
+              "duration": 120
+            }
+          ]
+        },
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 1,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "Lambda -> {}\nHigher-order -> {}",
+
+              "propositions": [
+                "No name and contains a single expression",
+                "Accepts or returns another function"
+              ],
+              "correctAnswer": [
+                "No name and contains a single expression",
+                "Accepts or returns another function"
+              ],
+
+              "duration": 60
+            },
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "In Python, functions that can accept or return other functions are called {} functions.",
+
+              "propositions": ["higher-order", "functional", "nested"],
+              "correctAnswer": ["higher-order"],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "What type of function can be created using the lambda keyword?",
+              "answers": [
+                "Anonymous function",
+                "Recursive function",
+                "Private function",
+                "Named function"
+              ],
+              "answer": "Anonymous function",
+              "duration": 60
+            },
+            {
+              "question": "Lambda functions in Python are mainly used for simple, small functions.",
+              "answers": ["True", "False"],
+              "answer": "False",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Explain the concept of default and optional arguments in Python functions.",
+              "aiPromptSolution": "Default arguments in Python functions are used to provide a default value for a parameter if no argument is passed during the function call. Optional arguments, on the other hand, are used to specify parameters that can be omitted when calling the function. They are defined with a default value in the function definition.",
+              "duration": 120
+            }
+          ]
+        },
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 2,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "When creating a Python package, a {} file is necessary within each directory to treat it as a package.",
+
+              "propositions": ["__init__.py", "init.py", "package.py"],
+              "correctAnswer": ["__init__.py"],
+
+              "duration": 60
+            },
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "import math as m -> {}\nfrom math import sqrt -> {}",
+
+              "propositions": [
+                "Renames the imported module for convenience",
+                "Imports only a specific function from a module"
+              ],
+              "correctAnswer": [
+                "Renames the imported module for convenience",
+                "Imports only a specific function from a module"
+              ],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "How do you import the entire math module in Python?",
+              "answers": [
+                "import math",
+                "include math",
+                "load math",
+                "require math"
+              ],
+              "answer": "import math",
+              "duration": 60
+            },
+            {
+              "question": "You can import specific functions from a module to avoid namespace pollution.",
+              "answers": ["True", "False"],
+              "answer": "True",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Discuss the benefits of using modules and how they contribute to code organization in Python.",
+              "aiPromptSolution": "Modules in Python are used to organize code into reusable units that can be imported and used in other programs. They help in keeping the code clean, modular, and maintainable by separating different functionalities into separate files. Modules also allow for code reuse and sharing across different projects.",
+              "duration": 120
+            }
+          ]
+        },
+        {
+          "questionsPerTry": 5,
+          "triesRequired": 4,
+          "index": 3,
+
+          "FillInTheBlanksQuestion": [
+            {
+              "question": "Fill in the blanks",
+              "textWithHoles": "The {} function in Python is used to return the absolute value of a number.",
+
+              "propositions": ["abs", "absolute", "value"],
+              "correctAnswer": ["abs"],
+
+              "duration": 60
+            },
+            {
+              "question": "Match the following elements with their roles.",
+              "textWithHoles": "random.randint(1, 10) -> {}\nmath.sqrt(25) -> {}",
+
+              "propositions": [
+                "Generates a random integer between 1 and 10",
+                "Calculates the square root of 25"
+              ],
+              "correctAnswer": [
+                "Generates a random integer between 1 and 10",
+                "Calculates the square root of 25"
+              ],
+
+              "duration": 60
+            }
+          ],
+          "QCMQuestion": [
+            {
+              "question": "Which module is used to perform mathematical operations in Python?",
+              "answers": ["math", "calc", "numbers", "operations"],
+              "answer": "math",
+              "duration": 60
+            },
+            {
+              "question": "The random module in Python is used to generate random numbers.",
+              "answers": ["True", "False"],
+              "answer": "True",
+              "duration": 60
+            }
+          ],
+          "TimedQuestion": [
+            {
+              "question": "Explain how to use built-in and external modules in Python and provide examples of common modules.",
+              "aiPromptSolution": "Python provides a wide range of built-in modules that can be used to perform various tasks, such as math, random, os, and datetime. These modules contain functions and classes that can be imported and used in your programs. External modules can be installed using package managers like pip and provide additional functionality beyond the built-in modules.",
+              "duration": 120
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
