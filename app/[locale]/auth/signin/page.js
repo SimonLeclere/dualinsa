@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import { useState, Suspense } from "react";
 
 import { Link } from "@/navigation";
+import Image from 'next/image'
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 
@@ -55,6 +56,15 @@ function LoginScreenComponent() {
         if (e.key === 'Enter') {
             handleSubmit(e);
         }
+    }
+
+    const handleINSAAuth = async () => {
+        await signIn("insa", {
+            callbackUrl: searchParams.get("callbackUrl") || "/"
+        })
+        .catch(err => {
+            setError("Une erreur est survenue lors de la connexion avec INSA.");
+        });
     }
 
     return (
@@ -108,6 +118,14 @@ function LoginScreenComponent() {
                         onClick={handleSubmit}
                     >
                         {t('login')}
+                    </Button>
+
+                    <Button
+                        color="insa"
+                        onClick={handleINSAAuth}
+                        className="flex items-center justify-center gap-2"
+                        >
+                        Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block"/>
                     </Button>
 
                     {

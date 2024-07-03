@@ -15,6 +15,20 @@ export const authOptions = {
     signIn: '/en/auth/signin',
   },
   providers: [
+
+    {
+      id: "insa",
+      name: "INSA",
+      type: "oauth",
+      wellKnown: "https://cas.insa-cvl.fr/cas/oidc/.well-known/openid-configuration",
+      authorization: { params: { scope: "openid profile" } },
+      idToken: true,
+      checks: ["pkce", "state"],
+      profile(profile) {
+        return profile;
+      },
+    },
+
     CredentialsProvider({
       name: 'Credentials',
 
