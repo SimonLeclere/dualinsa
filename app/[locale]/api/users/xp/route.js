@@ -13,7 +13,7 @@ export async function GET(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },

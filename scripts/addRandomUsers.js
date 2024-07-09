@@ -10,7 +10,7 @@ const createRandomUser = () => {
 
     return {
         username: faker.internet.userName(),
-        hash: faker.internet.password(),
+        hashedPassword: faker.internet.password(),
         salt: faker.internet.password(),
         score: faker.number.int({ min: 0, max: 500 }),
         dailyGoal: dailyGoal,
@@ -25,7 +25,7 @@ async function main() {
 
     const usersData = Array.from({ length: 114 }, createRandomUser);
 
-    const users = await prisma.users.createMany({
+    const users = await prisma.user.createMany({
         data: usersData
     });
 

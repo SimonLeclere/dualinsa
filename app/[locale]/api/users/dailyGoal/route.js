@@ -13,7 +13,7 @@ export async function GET(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },
@@ -53,7 +53,7 @@ export async function GET(req) {
 
         if (lastStreakToday === 0) {
             // update dailyGoal asynchroniously
-            prisma.users.update({
+            prisma.user.update({
                 where: { id: user.id },
                 data: { dailyGoal: 0 },
             }).catch((error) => {
@@ -87,7 +87,7 @@ export async function POST(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },
@@ -101,7 +101,7 @@ export async function POST(req) {
         // Update the user.dailyGoal
         const { dailyGoalPreference } = await req.json();
 
-        const updatedUser = await prisma.users.update({
+        const updatedUser = await prisma.user.update({
             where: { id: user.id },
             data: { dailyGoalPreference: dailyGoalPreference },
         }).catch((error) => {
