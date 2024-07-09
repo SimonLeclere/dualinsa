@@ -13,7 +13,7 @@ export async function GET(req) {
 
     // Get the authenticated user
     try {
-        const users = await prisma.users.findMany(
+        const users = await prisma.user.findMany(
             {
                 select: {
                     id: true,

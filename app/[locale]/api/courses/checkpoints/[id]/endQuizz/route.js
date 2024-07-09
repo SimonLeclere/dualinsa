@@ -31,7 +31,7 @@ export async function POST(req, { params }) {
         // Fetch checkpoint and user data in parallel
         const [checkpoint, user] = await Promise.all([
             prisma.checkpoints.findFirst({ where: { id: checkpointId } }),
-            prisma.users.findFirst({ where: { id: token.user.id } }),
+            prisma.user.findFirst({ where: { id: token.user.id } }),
         ]);
 
         if (!checkpoint) return NextResponse.json({ message: 'Checkpoint not found' }, { status: 404 });
@@ -66,14 +66,14 @@ export async function POST(req, { params }) {
         // Use a transaction to ensure atomic updates
         await prisma.$transaction(async (prisma) => {
             // Increment user score
-            await prisma.users.update({
+            await prisma.user.update({
                 where: { id: token.user.id },
                 data: { score: { increment: score } }
             });
 
             // Update dailyGoal and create a streak record if necessary
             if (lastStreakRecord && compareDates(today, lastStreakRecord.date)) {
-                await prisma.users.update({
+                await prisma.user.update({
                     where: { id: token.user.id },
                     data: { dailyGoal: { increment: score } }
                 });
@@ -81,7 +81,7 @@ export async function POST(req, { params }) {
                 await prisma.streaksRecords.create({
                     data: { userId: token.user.id, date: today }
                 });
-                await prisma.users.update({
+                await prisma.user.update({
                     where: { id: token.user.id },
                     data: { dailyGoal: score }
                 });

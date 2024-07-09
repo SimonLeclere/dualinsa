@@ -14,7 +14,7 @@ export async function GET(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },
@@ -26,7 +26,7 @@ export async function GET(req) {
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
 
-        const users = await prisma.users.findMany({
+        const users = await prisma.user.findMany({
             orderBy: {
               score: 'desc',
             },

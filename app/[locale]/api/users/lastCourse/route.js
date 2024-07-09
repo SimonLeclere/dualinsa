@@ -13,7 +13,7 @@ export async function GET(req) {
 
     // Get the authenticated user
     try {
-        const lastCourse = await prisma.users.findUnique({
+        const lastCourse = await prisma.user.findUnique({
             select : {
                 lastCourse: true,
             },
@@ -45,7 +45,7 @@ export async function POST(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },
@@ -58,7 +58,7 @@ export async function POST(req) {
 
         // Update user.lastCourse
         const { lastCourse } = await req.json();
-        const updatedUser = await prisma.users.update({
+        const updatedUser = await prisma.user.update({
             where: { id: token.user.id },
             data: { lastCourse },
         }).catch((error) => {

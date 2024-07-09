@@ -13,7 +13,7 @@ export async function GET(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },
@@ -25,7 +25,7 @@ export async function GET(req) {
         if(!user) return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
         // Return user
-        delete user.hash;
+        delete user.hashedPassword;
         delete user.salt;
         return NextResponse.json(user, { status: 200 });
 
@@ -46,7 +46,7 @@ export async function POST(req) {
 
     // Get the authenticated user
     try {
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 id: token.user.id,
             },
@@ -71,7 +71,7 @@ export async function POST(req) {
 
         if(!avatar && avatar !== 0) avatar = -1;
 
-        const updatedUser = await prisma.users.update({
+        const updatedUser = await prisma.user.update({
             where: {
                 id: user.id,
             },
@@ -86,7 +86,7 @@ export async function POST(req) {
         });
 
         // Return user
-        delete updatedUser.hash;
+        delete updatedUser.hashedPassword;
         delete updatedUser.salt;
         return NextResponse.json(updatedUser, { status: 200 });
 

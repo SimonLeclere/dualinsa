@@ -6,12 +6,12 @@ export async function POST(req) {
 
     const body = await req.json();
 
-    const { username, hash, salt } = body;
+    const { username, hashedPassword, salt } = body;
     
-    if (!username || !hash || !salt) return NextResponse.json({ message: 'Missing username, password hash or salt' }, { status: 400 });
+    if (!username || !hashedPassword || !salt) return NextResponse.json({ message: 'Missing username, password hash or salt' }, { status: 400 });
 
     // check if there is already a user with the same username
-    const existingUser = await prisma.Users.findUnique({
+    const existingUser = await prisma.user.findUnique({
         where: {
             username: username
         }
@@ -20,10 +20,10 @@ export async function POST(req) {
     if (existingUser) return NextResponse.json({ message: 'User already exists' }, { status: 400 });
 
     try {
-        const user = await prisma.Users.create({
+        const user = await prisma.user.create({
             data: {
               username: username,
-              hash: hash,
+              hashedPassword: hashedPassword,
               salt: salt,
             },
           }).catch((error) => {

@@ -47,7 +47,7 @@ export default function Signup({ params }) {
             },
             body: JSON.stringify({
                 username,
-                hash,
+                hashedPassword: hash,
                 salt
             })
         })

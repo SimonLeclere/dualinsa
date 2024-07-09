@@ -6,6 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { pbkdf2Sync } from 'crypto';
 
 import prisma from "@/lib/supabase";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 
 
 // Fichier spécifique pour gérer l'authentification avec NextAuth
@@ -14,6 +15,7 @@ export const authOptions = {
   pages: {
     signIn: '/en/auth/signin',
   },
+  adapter: PrismaAdapter(prisma),
   providers: [
 
     {
@@ -47,7 +49,7 @@ export const authOptions = {
 
         if (!credentials?.username || !credentials?.password) return null;
 
-        const user = await prisma.users.findUnique({
+        const user = await prisma.user.findUnique({
           where: {
             username: credentials.username,
           },
@@ -55,16 +57,13 @@ export const authOptions = {
 
         if (!user) return null;
 
-        if (user.hash === pbkdf2Sync(credentials.password, user.salt, 1000, 64, 'sha512').toString('hex')) {
+        if (user.hashedPassword === pbkdf2Sync(credentials.password, user.salt, 1000, 64, 'sha512').toString('hex')) {
 
-          return {
-            id: user.id,
-            username: user.username,
-            // hash: user.hash,
-            // salt: user.salt,
-            createdAt: user.createdAt,
-            language: user.language,
-          }
+          // return user without hashedPassword and salt
+          delete user.hashedPassword;
+          delete user.salt;
+
+          return user;
         }
 
         return null;
@@ -74,17 +73,13 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) token.user = user;
-
       console.log(token);
-
       return token;
     },
 
     async session({ session, token }) {
       if (token.user) session.user = token.user;
-
       console.log(session);
-
       return session;
     }
   },
