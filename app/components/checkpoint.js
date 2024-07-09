@@ -1,4 +1,3 @@
-// checkpoint.js
 import React from "react";
 import { useRouter } from "@/navigation";
 
