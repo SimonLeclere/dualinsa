@@ -25,7 +25,8 @@
       "login": "Se connecter",
       "usernamePlaceholder": "Nom d'utilisateur",
       "passwordPlaceholder": "Mot de passe",
-      "dontHaveAnAccount": "Pas encore de compte ?"
+      "dontHaveAnAccount": "Pas encore de compte ?",
+      "or": "ou"
     }
   },
   "CoursesList": {

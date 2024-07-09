@@ -14,16 +14,15 @@ import Button from "/app/components/Button";
 
 import { useTranslations } from "next-intl";
 
-
 export default function LoginScreen() {
     return (
         <Suspense>
-            <LoginScreenComponent/>
+            <LoginScreenComponent />
         </Suspense>
     )
 }
 
-function LoginScreenComponent() {
+async function LoginScreenComponent() {
 
     const t = useTranslations("Auth.Signin");
 
@@ -47,9 +46,9 @@ function LoginScreenComponent() {
             password,
             callbackUrl: searchParams.get("callbackUrl") || "/"
         })
-        .catch(err => {
-            setError(t('usernameOrPasswordIncorrect'));
-        });
+            .catch(err => {
+                setError(t('usernameOrPasswordIncorrect'));
+            });
     }
 
     const handleKeyPress = (e) => {
@@ -62,9 +61,9 @@ function LoginScreenComponent() {
         await signIn("insa", {
             callbackUrl: searchParams.get("callbackUrl") || "/"
         })
-        .catch(err => {
-            setError("Une erreur est survenue lors de la connexion avec INSA.");
-        });
+            .catch(err => {
+                setError("Une erreur est survenue lors de la connexion avec INSA.");
+            });
     }
 
     return (
@@ -120,20 +119,25 @@ function LoginScreenComponent() {
                         {t('login')}
                     </Button>
 
+                    <p className="text-center text-gray-700">
+                        {t('or')}
+                    </p>
+                    
                     <Button
                         color="insa"
                         onClick={handleINSAAuth}
                         className="flex items-center justify-center gap-2"
-                        >
-                        Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block"/>
+                    >
+                        Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block" />
                     </Button>
+
 
                     {
                         error ?
                             <p className="text-red-500 text-center">
                                 {error}
                             </p>
-                        :
+                            :
                             null
                     }
 
