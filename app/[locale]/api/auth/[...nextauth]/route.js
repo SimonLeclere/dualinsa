@@ -27,7 +27,10 @@ export const authOptions = {
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       checks: ["pkce", "state"],
       profile(profile) {
-        return profile;
+        return {
+          id: profile.sub,
+          ...profile,
+        }
       },
     },
 
