@@ -1,7 +1,7 @@
 'use client'
 
-import UnitCreatorHeader from "./UnitCreatorHeader.js";
-import Checkpoint from "@/components/Checkpoint.js";
+import UnitCreatorHeader from "./UnitCreatorHeader";
+import Checkpoint from "@/components/Checkpoint";
 import CheckpointPlaceholder from "./CheckpointPlaceholder";
 
 const getOffset = (index) => {
