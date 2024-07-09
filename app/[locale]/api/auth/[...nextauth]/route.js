@@ -23,6 +23,8 @@ export const authOptions = {
       wellKnown: "https://cas.insa-cvl.fr/cas/oidc/.well-known/openid-configuration",
       authorization: { params: { scope: "openid profile" } },
       idToken: true,
+      clientId: process.env.OAUTH_CLIENT_ID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
       checks: ["pkce", "state"],
       profile(profile) {
         return profile;
@@ -68,13 +70,13 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if(user) token.user = user;
+      if (user) token.user = user;
 
       return token;
     },
 
-    async session({ session, token }) {      
-      if(token.user) session.user = token.user;
+    async session({ session, token }) {
+      if (token.user) session.user = token.user;
       return session;
     }
   },
