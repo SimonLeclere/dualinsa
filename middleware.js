@@ -17,6 +17,6 @@ export const config = {
     // - … if they start with `/api`, `/en/api`, or `/fr/api`
     // - … if they start with `/_next`, or `/_vercel`
     // - … if they end with file extensions like `.map`, `.ico`, `.png`, etc.
-    '/((?!\\/?(?:en|fr)?\\/api|_next|_next/image|_vercel|.*\\..*).*)',
+    '/((?!\\/?api|_next|_next/image|_vercel|.*\\..*).*)',
   ]
 };

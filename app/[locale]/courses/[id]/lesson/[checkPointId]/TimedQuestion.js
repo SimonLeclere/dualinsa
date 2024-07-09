@@ -15,7 +15,7 @@ const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setSh
             setLocked(true);
 
             try {
-                const data = await fetch(`/${locale}/api/correctTimedQuestion`, {
+                const data = await fetch(`/api/correctTimedQuestion`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

@@ -5,6 +5,7 @@ import LogoutSvg from "/app/components/icons/LogoutSvg";
 import ProfileTimeSvg from "/app/components/icons/ProfileTimeSvg";
 
 import { Link } from "@/navigation";
+import NextLink from "next/link";
 import Image from "next/image";
 
 import { useLocale, useTranslations } from "next-intl";
@@ -66,13 +67,15 @@ export default function ProfileTopSection({ user }) {
         <EditPencilSvg />
         {t('editProfile')}
       </Link>
-      <Link
+
+      {/* NextLink because api routes are not internationalized */}
+      <NextLink
         href={`/api/auth/signout`}
         className="hidden items-center gap-2 self-start rounded-2xl border-b-4 border-red-500 bg-red-400 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 md:flex"
       >
         <LogoutSvg />
         {t('logout')}
-      </Link>
+      </NextLink>
     </section>
   );
 }

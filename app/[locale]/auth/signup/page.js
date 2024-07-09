@@ -40,7 +40,7 @@ export default function Signup({ params }) {
         const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
     
 
-        const response = await fetch(`/${params.locale}/api/auth/signup`, {
+        const response = await fetch(`/api/auth/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

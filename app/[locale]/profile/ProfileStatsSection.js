@@ -14,7 +14,7 @@ export default function ProfileStatsSection({ totalXp }) {
   const t = useTranslations("Profile");
   const locale = useLocale();
 
-  const { data: streak, error, isLoading } = useSwr(`/${locale}/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
+  const { data: streak, error, isLoading } = useSwr(`/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
   const { data: league, error1, isLoading1 } = useSwr('/api/users/league', (url) => fetch(url).then((res) => res.json()));
 
   const leagues = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];

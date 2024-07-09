@@ -16,9 +16,9 @@ export default function StreakCoinSection() {
   const locale = useLocale();
   const t = useTranslations("StreakCoinSection")
   
-  const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/${locale}/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
-  const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/${locale}/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
-  const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr(`/${locale}/api/users/streaks`, (url) => fetch(url).then((res) => res.json()));
+  const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
+  const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
+  const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr(`/api/users/streaks`, (url) => fetch(url).then((res) => res.json()));
   
   const [streakShown, setStreakShown] = useState(false);
   const [gemsShown, setGemsShown] = useState(false);

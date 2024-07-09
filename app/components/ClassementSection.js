@@ -16,7 +16,7 @@ export const ClassementSection = () => {
     const t = useTranslations("Sidebar.Ranking");
     const locale = useLocale();
     
-    const { data, error, isLoading } = useSWR(`/${locale}/api/users/league`, (url) => fetch(url).then((res) => res.json()));
+    const { data, error, isLoading } = useSWR(`/api/users/league`, (url) => fetch(url).then((res) => res.json()));
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error...</div>;

@@ -9,7 +9,7 @@ export const ProgressSection = ({ forNavBar = false }) => {
   const locale = useLocale();
   const t = useTranslations("Sidebar.Progress")
 
-  const { data, error, isLoading } = useSWR(`/${locale}/api/users/dailyGoal`, (url) => fetch(url).then((res) => res.json()));
+  const { data, error, isLoading } = useSWR(`/api/users/dailyGoal`, (url) => fetch(url).then((res) => res.json()));
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;

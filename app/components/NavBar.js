@@ -22,9 +22,9 @@ export default function NavBar({ backgroundColor = "bg-purple-400", borderColor 
     const locale = useLocale();
     const t = useTranslations("NavBar")
 
-    const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/${locale}/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
-    const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/${locale}/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
-    const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr(`/${locale}/api/users/streaks`, (url) => fetch(url).then((res) => res.json()));
+    const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
+    const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
+    const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr(`/api/users/streaks`, (url) => fetch(url).then((res) => res.json()));
 
     const [menu, setMenu] = useState("HIDDEN");
 
