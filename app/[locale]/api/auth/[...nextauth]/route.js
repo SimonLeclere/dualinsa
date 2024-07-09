@@ -92,15 +92,18 @@ export const authOptions = {
           updatedAt: user.updatedAt,
         };
       }
+
+      delete token.name;
+      delete token.email;
+      delete token.picture;
+
       console.log("jwt token after", token);
       return token;
     },
 
-    async session({ session, user }) {
-      console.log("session session", session);
-      console.log("session user", user);
-      if (user) {
-        session.user = user;
+    async session({ session, token }) {
+      if (token?.user) {
+        session.user = token.user;
       }
       return session;
     }
