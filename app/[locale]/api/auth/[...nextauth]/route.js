@@ -17,7 +17,6 @@ export const authOptions = {
   },
   adapter: PrismaAdapter(prisma),
   providers: [
-
     {
       id: "insa",
       name: "INSA",
@@ -30,8 +29,7 @@ export const authOptions = {
       checks: ["pkce", "state"],
       profile(profile) {
         return {
-          id: profile.sub,
-          ...profile,
+          username: profile.sub,
         }
       },
     },
