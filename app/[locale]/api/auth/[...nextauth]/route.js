@@ -29,7 +29,8 @@ export const authOptions = {
       checks: ["pkce", "state"],
       profile(profile) {
         return {
-          username: profile.sub,
+          id: profile.sub,
+          username: profile.preferred_username,
         }
       },
     },
