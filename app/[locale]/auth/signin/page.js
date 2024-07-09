@@ -14,9 +14,6 @@ import Button from "/app/components/Button";
 
 import { useTranslations } from "next-intl";
 
-import { showINSALoginButton } from "@/lib/flags";
-
-
 export default function LoginScreen() {
     return (
         <Suspense>
@@ -28,8 +25,6 @@ export default function LoginScreen() {
 async function LoginScreenComponent() {
 
     const t = useTranslations("Auth.Signin");
-
-    const showINSALogin = await showINSALoginButton();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -124,23 +119,18 @@ async function LoginScreenComponent() {
                         {t('login')}
                     </Button>
 
-                    {
-                        showINSALogin ?
-                            <>
-                                <p className="text-center text-gray-700">
-                                    {t('or')}
-                                </p>
-                                <Button
-                                    color="insa"
-                                    onClick={handleINSAAuth}
-                                    className="flex items-center justify-center gap-2"
-                                >
-                                    Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block" />
-                                </Button>
-                            </>
-                            :
-                            null
-                    }
+                    <p className="text-center text-gray-700">
+                        {t('or')}
+                    </p>
+                    
+                    <Button
+                        color="insa"
+                        onClick={handleINSAAuth}
+                        className="flex items-center justify-center gap-2"
+                    >
+                        Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block" />
+                    </Button>
+
 
                     {
                         error ?
