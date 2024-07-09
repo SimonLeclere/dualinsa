@@ -2,7 +2,6 @@ import NextAuth from "next-auth"
 import { getServerSession as getSession } from "next-auth/next"
 
 import CredentialsProvider from "next-auth/providers/credentials"
-
 import { pbkdf2Sync } from 'crypto';
 
 import prisma from "@/lib/supabase";
@@ -19,9 +18,6 @@ prismaAdapter.createUser = (data) => {
     },
   });
 };
-
-
-// Fichier spécifique pour gérer l'authentification avec NextAuth
 
 export const authOptions = {
   pages: {
@@ -49,15 +45,11 @@ export const authOptions = {
 
     CredentialsProvider({
       name: 'Credentials',
-
       credentials: {
         username: { label: "Nom d'utilisateur", type: "text" },
         password: { label: "Mot de passe", type: "password" }
       },
-
-      // Fait une requête à la base de données pour vérifier si les identifiants sont corrects
       async authorize(credentials, req) {
-
         if (!credentials?.username || !credentials?.password) return null;
 
         const user = await prisma.user.findUnique({
@@ -69,11 +61,8 @@ export const authOptions = {
         if (!user) return null;
 
         if (user.hashedPassword === pbkdf2Sync(credentials.password, user.salt, 1000, 64, 'sha512').toString('hex')) {
-
-          // return user without hashedPassword and salt
           delete user.hashedPassword;
           delete user.salt;
-
           return user;
         }
 
@@ -83,16 +72,28 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.user = user;
+      if (user) {
+        token.user = {
+          id: user.id,
+          username: user.username,
+          score: user.score,
+          dailyGoal: user.dailyGoal,
+          dailyGoalPreference: user.dailyGoalPreference,
+          lastCourse: user.lastCourse,
+          avatar: user.avatar,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        };
+      }
       console.log(token);
       return token;
     },
 
     async session({ session, token }) {
+      if (token.user) {
+        session.user = token.user;
+      }
       console.log(session);
-      console.log(token);
-
-      if (token.user) session.user = token.user;
       return session;
     }
   },
