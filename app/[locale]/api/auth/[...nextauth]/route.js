@@ -6,6 +6,7 @@ import { pbkdf2Sync } from 'crypto';
 
 import prisma from "@/lib/supabase";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { strategy } from "sharp";
 
 const prismaAdapter = PrismaAdapter(prisma);
 
