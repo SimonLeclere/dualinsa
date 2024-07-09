@@ -23,6 +23,7 @@ export const authOptions = {
   pages: {
     signIn: '/en/auth/signin',
   },
+  debug: true,
   adapter: prismaAdapter,
   providers: [
     {
@@ -91,11 +92,11 @@ export const authOptions = {
       return token;
     },
 
-    async session({ session, token }) {
+    async session({ session, user }) {
       console.log("session session", session);
-      console.log("session token", token);
-      if (token.user) {
-        session.user = token.user;
+      console.log("session user", user);
+      if (user) {
+        session.user = user;
       }
       return session;
     }
