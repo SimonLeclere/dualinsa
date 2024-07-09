@@ -25,7 +25,8 @@
       "login": "Login",
       "passwordPlaceholder": "Password",
       "usernameOrPasswordIncorrect": "Username or password incorrect",
-      "usernamePlaceholder": "Username"
+      "usernamePlaceholder": "Username",
+      "or": "or"
     }
   },
   "CoursesList": {
