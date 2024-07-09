@@ -8,6 +8,18 @@ import { pbkdf2Sync } from 'crypto';
 import prisma from "@/lib/supabase";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
+const prismaAdapter = PrismaAdapter(prisma);
+
+prismaAdapter.createUser = (data) => {
+  return prisma.user.create({
+    data: {
+      username: data.username,
+      hashedPassword: data.hashedPassword,
+      salt: data.salt,
+    },
+  });
+};
+
 
 // Fichier spécifique pour gérer l'authentification avec NextAuth
 
@@ -15,7 +27,7 @@ export const authOptions = {
   pages: {
     signIn: '/en/auth/signin',
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: prismaAdapter,
   providers: [
     {
       id: "insa",
