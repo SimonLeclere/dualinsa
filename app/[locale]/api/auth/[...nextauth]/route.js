@@ -26,6 +26,9 @@ export const authOptions = {
   },
   debug: true,
   adapter: prismaAdapter,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     {
       id: "insa",
