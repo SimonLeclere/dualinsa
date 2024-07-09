@@ -22,7 +22,7 @@ export default function LoginScreen() {
     )
 }
 
-async function LoginScreenComponent() {
+function LoginScreenComponent() {
 
     const t = useTranslations("Auth.Signin");
 
