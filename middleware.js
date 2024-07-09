@@ -8,6 +8,8 @@ export default createMiddleware({
   // Used when no locale matches
   defaultLocale: 'en'
 });
+
+// TODO: dynamically generate the list of locales
  
 export const config = { 
   matcher: [
