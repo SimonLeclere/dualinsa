@@ -1,0 +1,161 @@
+{
+  "HomePage": {
+    "dualinsa": "dualinsa",
+    "catchPhrase": "Learn INSA courses the easy, fun way!",
+    "startApplication": "Launch the application",
+    "createAccount": "Create an account",
+    "signin": "Login"
+  },
+  "Auth": {
+    "Signup": {
+      "fieldsMissingError": "Please fill in all fields",
+      "passwordsNotMatchingError": "Passwords do not match",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "alreadyHaveAnAccount": "Already have an account?",
+      "createAccount": "Create an account",
+      "login": "Login",
+      "passwordPlaceholder": "Password",
+      "signin": "Login",
+      "usernamePlaceholder": "Username"
+    },
+    "Signin": {
+      "createAccount": "Create an account",
+      "dontHaveAnAccount": "No account yet?",
+      "fieldsMissingError": "Please fill in all fields",
+      "login": "Login",
+      "passwordPlaceholder": "Password",
+      "usernameOrPasswordIncorrect": "Username or password incorrect",
+      "usernamePlaceholder": "Username"
+    }
+  },
+  "CoursesList": {
+    "semester": "Semester {semester}",
+    "alreadyEnrolled": "Already enrolled",
+    "courses": "Courses",
+    "enroll": "Enroll"
+  },
+  "Lesson": {
+    "BottomBar": {
+      "continueButton": "Continue",
+      "correctSolutionTitle": "Correction :",
+      "greeting": "Good job!",
+      "skipQuestion": "Skip",
+      "verifyAnswer": "Verify"
+    },
+    "LessonComplete": {
+      "greeting": "Lesson complete!",
+      "time": "Time",
+      "totalXp": "Total XP"
+    },
+    "LessonCompleteBottomBar": {
+      "continueButton": "Continue",
+      "showRecapButton": "Review lesson"
+    },
+    "PerformanceDisplay": {
+      "percentage": "{value, number, percent}",
+      "message-0": "Needs revision",
+      "message-100": "Perfect!",
+      "message-25": "Could be better",
+      "message-75": "Incredible!",
+      "message-50": "Good"
+    },
+    "ReviewLesson": {
+      "correctAnswers": "Correct answers"
+    }
+  },
+  "Leaderboard": {
+    "leagueTitle": "{league} League",
+    "topPercentGreeting": "You're in the top {topPourcentage, number, percent} of players",
+    "greeting": "Keep up the good work!"
+  },
+  "Profile": {
+    "currentLeague": "Current league",
+    "dayStreak": "Streak",
+    "rank": "Top {topClassement}",
+    "ranking": "Ranking",
+    "statsSectionTitle": "Statistics",
+    "totalXp": "Total XP",
+    "memberSince": "Joined {membershipDate, date, ::MMMM yyyy}",
+    "student": "Student",
+    "topBarTitle": "Profile",
+    "editProfile": "Edit profile",
+    "logout": "Logout"
+  },
+  "Settings": {
+    "accountSectionTitle": "Account",
+    "dailyGoalDescription": "Choosing a daily goal will help you stay motivated for your revisions. You can change your goal at any time.",
+    "avatar": "Avatar",
+    "language": "Language",
+    "dailyGoalSectionTitle": "Edit daily goal",
+    "locales": {
+      "fr": "French",
+      "en": "English"
+    },
+    "save": "Save",
+    "username": "Username",
+    "usernameAlreadyTaken": "Error: Username already taken",
+    "xpPerDay": "{xp} XP per day",
+    "RightNav": {
+      "accountSectionTitle": "Account",
+      "dailyGoalSectionTitle": "Edit Daily Goal"
+    },
+    "DailyGoalTitles": {
+      "1": "Chill",
+      "2": "Revising",
+      "3": "Serious",
+      "4": "Intensive",
+      "5": "Exams comming soon",
+      "6": "Help me"
+    }
+  },
+  "Sidebar": {
+    "Ranking": {
+      "sectionTitle": "Ranking",
+      "greeting": "You're {rank, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} out of {totalUsers, number} participants!",
+      "leaderboardLink": "Leaderboard"
+    },
+    "Progress": {
+      "editLink": "Edit",
+      "progressNavBarTitle": "Progression",
+      "xpRatio": "{xpToday, number}/{goalXp, number} XP",
+      "objective": "Earn {goalXp, number} XP"
+    }
+  },
+  "NavBar": {
+    "SettingsMenu": {
+      "accountSectionTitle": "Account",
+      "dailyGoalSectionTitle": "Edit daily goal"
+    },
+    "leaderboardLink": "Leaderboard",
+    "streakSectionTitle": "Streak",
+    "xpMessage": "You have {currentScore, number} xp",
+    "xpSectionTitle": "Experience",
+    "streakSectionMessage": "Practice every day so that your streak never resets!"
+  },
+  "ShareSection": {
+    "copyButton": "{isClicked, select, true {Link copied} other {Copy link}}",
+    "title": "Share Dualinsa"
+  },
+  "StreakCoinSection": {
+    "leaderboardButton": "See leaderboard",
+    "streakMessage": "Your series will be reset to zero tomorrow if you don't train. Be careful!",
+    "xpSectionMessage": "You have {currentScore, plural, =1 {# experience point} other {# experience points}}.",
+    "xpSectionTitle": "Experience",
+    "streakSectionTitle": "Streak"
+  },
+  "UnitHeader": {
+    "UnitNumber": "Unit {unitNumber, number}",
+    "lessonLink": "Lesson"
+  },
+  "BottomBar": {
+    "items": {
+      "courses": "Courses",
+      "leaderboard": "Leaderboard",
+      "learn": "Learn",
+      "profile": "Profile"
+    }
+  },
+  "Tooltip": {
+    "label": "Start"
+  }
+}

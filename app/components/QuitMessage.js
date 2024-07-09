@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 // Fonction qui affiche un message de confirmation pour quitter la leçon
 export default function QuitMessage ({quitMessageShown, setQuitMessageShown}) {

@@ -6,15 +6,29 @@ async function main() {
 
     const course = await prisma.courses.create({
         data: {
-            name: data.name,
             celeneLink: data.celeneLink,
             department: data.department,
             semester: data.semester,
-            description: data.description,
+
+            courseTranslation: {
+                create: data.translations.map(translation => ({
+                    language: translation.language,
+                    name: translation.name,
+                    description: translation.description
+                })),
+            },
+
             units: {
                 create: data.units.map(unit => ({
                     index: unit.index,
-                    name: unit.name,
+                    
+                    unitTranslation: {
+                        create: unit.translations.map(translation => ({
+                            language: translation.language,
+                            name: translation.name,
+                        }))
+                    },
+
                     checkpoints: {
                         create: unit.checkpoints.map(checkpoint => (
                             {
@@ -23,26 +37,42 @@ async function main() {
                                 triesRequired: checkpoint.triesRequired,
                                 FillInTheBlanksQuestion: {
                                     create: checkpoint.FillInTheBlanksQuestion.map(question => ({
-                                        question: question.question,
-                                        textWithHoles: question.textWithHoles,
-                                        propositions: question.propositions,
-                                        correctAnswer: question.correctAnswer,
-                                        duration: question.duration
+                                        duration: question.duration,
+                                        FillInTheBlanksQuestionTranslation: {
+                                            create: question.translations.map(translation => ({
+                                                language: translation.language,
+                                                question: translation.question,
+                                                textWithHoles: translation.textWithHoles,
+                                                propositions: translation.propositions,
+                                                correctAnswer: translation.correctAnswer
+                                            }))
+                                        }
                                     }))
                                 },
                                 QCMQuestion: {
                                     create: checkpoint.QCMQuestion.map(question => ({
-                                        question: question.question,
-                                        answers: question.answers,
-                                        correctAnswer: question.answer,
-                                        duration: question.duration
+                                        duration: question.duration,
+                                        QCMQuestionTranslation: {
+                                            create: question.translations.map(translation => ({
+                                                language: translation.language,
+                                                question: translation.question,
+                                                answers: translation.answers,
+                                                correctAnswer: translation.answer
+                                            }))
+                                        }
                                     }))
                                 },
                                 TimedQuestion: {
                                     create: checkpoint.TimedQuestion.map(question => ({
-                                        question: question.question,
-                                        aiPromptSolution: question.aiPromptSolution,
-                                        duration: question.duration
+                                        duration: question.duration,
+
+                                        TimedQuestionTranslation: {
+                                            create: question.translations.map(translation => ({
+                                                language: translation.language,
+                                                question: translation.question,
+                                                aiPromptSolution: translation.aiPromptSolution,
+                                            }))
+                                        }
                                     }))
                                 }
                             }))

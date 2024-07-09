@@ -6,15 +6,19 @@ import CoinStackSvg from "./icons/CoinStackSvg";
 
 import Calendar from "./Calendar";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useState } from "react";
 import useSwr from "swr";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function StreakCoinSection() {
+
+  const locale = useLocale();
+  const t = useTranslations("StreakCoinSection")
   
-  const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr("/api/users/streaks/maxStreaks", (url) => fetch(url).then((res) => res.json()));
-  const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr("/api/users/xp", (url) => fetch(url).then((res) => res.json()));
-  const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr("/api/users/streaks", (url) => fetch(url).then((res) => res.json()));
+  const { data: currentStreak, error: streakError, isLoading: streakLoading } = useSwr(`/${locale}/api/users/streaks/maxStreaks`, (url) => fetch(url).then((res) => res.json()));
+  const { data: currentScore, error: lingotsError, isLoading: lingotsLoading } = useSwr(`/${locale}/api/users/xp`, (url) => fetch(url).then((res) => res.json()));
+  const { data: streaks, error: streaksError, isLoading: streaksLoading } = useSwr(`/${locale}/api/users/streaks`, (url) => fetch(url).then((res) => res.json()));
   
   const [streakShown, setStreakShown] = useState(false);
   const [gemsShown, setGemsShown] = useState(false);
@@ -48,10 +52,9 @@ export default function StreakCoinSection() {
             display: streakShown ? "flex" : "none",
           }}
         >
-          <h2 className="text-center text-lg font-bold">Streak</h2>
+          <h2 className="text-center text-lg font-bold">{t('streakSectionTitle')}</h2>
           <p className="text-center text-sm font-normal text-gray-400">
-            Votre série sera remise à zéro demain si vous ne vous entraînez
-            pas. Attention !
+            {t('streakMessage')}
           </p>
           {
             streaksLoading && !streaksError ? <div>Loading...</div> : <Calendar streaks={streaks} />
@@ -80,15 +83,15 @@ export default function StreakCoinSection() {
         >
           <CoinStackSvg className="h-24 w-24" />
           <div className="flex flex-col gap-3">
-            <h2 className="text-xl font-bold text-black">Expérience</h2>
+            <h2 className="text-xl font-bold text-black">{t('xpSectionTitle')}</h2>
             <p className="text-sm font-normal text-gray-400">
-              Vous avez {currentScore} {currentScore === 1 ? "point" : "points"} d&apos;expérience.
+              {t('xpSectionMessage', { currentScore })}
             </p>
             <Link
               className="uppercase text-blue-400 transition hover:brightness-110"
               href="/leaderboard"
             >
-              Voir le classement
+              {t('leaderboardButton')}
             </Link>
           </div>
         </div>

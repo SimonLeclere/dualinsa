@@ -33,6 +33,18 @@ export default function Button({ children, className, onClick, color }) {
     );
   }
 
+  if (color === 'insa') {
+    return (
+      <button
+        onClick={onClick}
+        // white button with an elegant shadow (not a border!) and gray text
+        className={`${className} w-full rounded-2xl shadow-md text-gray-700 bg-white px-10 py-3 text-center font-bold uppercase transition hover:shadow-lg md:min-w-[320px]`}
+      >
+        {children}
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={onClick}

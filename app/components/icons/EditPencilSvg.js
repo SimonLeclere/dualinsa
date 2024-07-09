@@ -1,6 +1,6 @@
-export default function EditPencilSvg({ color = "white" }) {
+export default function EditPencilSvg({ color = "white", ...props }) {
   return (
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

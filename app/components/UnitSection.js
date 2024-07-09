@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import UnitHeader from "./UnitHeader";
-import Checkpoint from "./checkpoint";
+import Checkpoint from "@/components/Checkpoint";
 
 const getOffset = (index) => {
   const offsets = [0, 60, 120, 60, 0, -60, -120, -60];
