@@ -25,7 +25,7 @@ export default function CoursesList({ params }) {
 
     const t = useTranslations("CoursesList");
 
-    const { data: courses, error, isLoading, mutate } = useSwr(`/api/courses/listAll`, (url) => fetch(url).then((res) => res.json()));
+    const { data: courses, error, isLoading, mutate } = useSwr([`/api/courses/listAll`, params?.locale], ([url, locale]) => fetch(`${url}?locale=${locale || "fr"}`).then((res) => res.json()));
     const [enrollLoading, setEnrollLoading] = useState(false); // false or courseId
 
     const handleEnroll = async (e, courseId) => {

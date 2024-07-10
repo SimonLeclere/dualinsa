@@ -18,7 +18,10 @@ const questionsTypes = {
     FILL_IN_THE_BLANKS: FillInTheBlanksQuestion,
 }
 
-const fetcher = async url => {
+const fetcher = async ([url, locale]) => {
+
+    url = `${url}?locale=${locale || "fr"}`
+
     const res = await fetch(url)
     if (!res.ok) throw new Error('Failed to fetch', res)
     const data = await res.json()
@@ -29,7 +32,7 @@ export default function LessonPage({ params }) {
 
     const { id, checkPointId } = params;
     
-    const { data: questions, error, isLoading } = useSWR(`/api/courses/checkpoints/${checkPointId}/selectQuestions`,
+    const { data: questions, error, isLoading } = useSWR([`/api/courses/checkpoints/${checkPointId}/selectQuestions`, params?.locale],
         fetcher,
         {
             revalidateIfStale: false,

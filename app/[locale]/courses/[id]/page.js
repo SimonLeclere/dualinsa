@@ -31,9 +31,8 @@ export default function CoursePage({ params }) {
     }).then((res) => res.json())
   );
 
-  const { data, error, isLoading } = useSwr(
-    `/api/courses/units/${params.id}/listAll`,
-    (url) => fetch(url).then((res) => res.json())
+  const { data, error, isLoading } = useSwr([`/api/courses/units/${params.id}/listAll`, params?.locale],
+    ([url, locale]) => fetch(`${url}?locale=${locale || "fr"}`).then((res) => res.json())
   );
 
   if (isLoading) return <div>Loading...</div>;

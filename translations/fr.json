@@ -71,7 +71,7 @@
   },
   "Profile": {
     "statsSectionTitle": "Statistiques",
-    "dayStreak": "Day streak",
+    "dayStreak": "Série",
     "totalXp": "XP total",
     "currentLeague": "Ligue actuelle",
     "rank": "Top {topClassement}",

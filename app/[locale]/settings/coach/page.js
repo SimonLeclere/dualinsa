@@ -24,7 +24,6 @@ export default function Coach() {
 
   const t = useTranslations("Settings");
 
-  // TODO : get from API & save the modification of the goal
   const { data: user, error, isLoading, mutate } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
  
   const [dailyGoalPreference, setDailyGoalPreference] = useState(user?.dailyGoalPreference || 0);

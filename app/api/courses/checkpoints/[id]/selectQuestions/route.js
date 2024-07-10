@@ -11,7 +11,7 @@ export const GET = auth(async (req, { params }) => {
 
     // Get checkpointId from query
     const checkpointId = +params.id
-    const locale = params?.locale || 'fr'; // TODO
+    const locale = req?.nextUrl?.searchParams?.get('locale') || 'fr';
 
     try {
         const checkpoint = await prisma.checkpoints.findUnique({

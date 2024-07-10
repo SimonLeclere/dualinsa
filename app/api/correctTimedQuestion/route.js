@@ -11,8 +11,8 @@ export const POST = auth(async (req, { params }) => {
     return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
   }
 
-  let { question, solution, reponse } = await req.json();
-  let locale = params?.locale || 'fr'; // TODO
+  let { question, solution, reponse, locale } = await req.json();
+  let language = locale || 'fr';
 
   if (!question || !solution) {
     return NextResponse.json({ message: 'Invalid input: question, solution, and reponse are required' }, { status: 400 });
@@ -23,8 +23,9 @@ export const POST = auth(async (req, { params }) => {
   let response;
 
   try {
-    response = await getAnswer(question, solution, reponse, locale);
+    response = await getAnswer(question, solution, reponse, language);
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ message: 'Error while processing the request' }, { status: 500 });
   }
   return NextResponse.json(response, { status: 200 });

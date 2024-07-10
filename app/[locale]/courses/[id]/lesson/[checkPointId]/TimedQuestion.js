@@ -23,7 +23,8 @@ const TimedQuestion = forwardRef(function TimedQuestion({ currentQuestion, setSh
                     body: JSON.stringify({
                         question: currentQuestion.question,
                         solution: currentQuestion.aiPromptSolution,
-                        reponse: userAnswer
+                        reponse: userAnswer,
+                        locale: locale
                     })
                 });
 

@@ -8,7 +8,7 @@ export const GET = auth(async (req, { params}) => {
         return NextResponse.json({ message: 'User not connected' }, { status: 401 }); // Return error 401 if user unauthenticated
     }
 
-    const locale = params?.locale || 'fr'; // TODO
+    const locale = req?.nextUrl?.searchParams?.get('locale') || 'fr';
 
     // Get a list of all courses
     try {

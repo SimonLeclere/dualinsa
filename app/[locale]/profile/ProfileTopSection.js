@@ -55,7 +55,7 @@ export default function ProfileTopSection({ user }) {
           <div className="flex items-center gap-3">
             <ProfileTimeSvg />
             <span className="text-gray-500">
-              {t('memberSince', { membershipDate: new Date(user.creationDate) })}
+              {t('memberSince', { membershipDate: new Date(user.createdAt) })}
             </span>
           </div>
         </div>

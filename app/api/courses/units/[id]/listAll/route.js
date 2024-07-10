@@ -10,7 +10,7 @@ export const GET = auth(async (req, { params }) => {
 
     // Get courseId from slug
     const courseId = +params.id
-    const locale = params?.locale || 'fr'; // TODO
+    const locale = req?.nextUrl?.searchParams?.get('locale') || 'fr';
 
     if (!courseId) return NextResponse.json({ message: 'Invalid course id' }, { status: 400 });	
 
