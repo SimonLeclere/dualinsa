@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import localFont from 'next/font/local'
 
 import { AuthProvider } from "@/providers/sessionProvider";
+
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 

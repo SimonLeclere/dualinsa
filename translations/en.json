@@ -27,6 +27,10 @@
       "usernameOrPasswordIncorrect": "Username or password incorrect",
       "usernamePlaceholder": "Username",
       "or": "or"
+    },
+    "Signout": {
+      "signout": "Sign Out",
+      "confirmSignout": "Confirm Sign Out"
     }
   },
   "CoursesList": {

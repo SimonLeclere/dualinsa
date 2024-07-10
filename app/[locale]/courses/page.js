@@ -7,6 +7,9 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/navigation";
 
+import { useSession } from "next-auth/react";
+import { redirect } from "@/navigation";
+
 import NavBar from "/app/components/NavBar";
 import RightBar from "/app/components/RightBar";
 import BottomBar from "/app/components/BottomBar";
@@ -27,6 +30,10 @@ export default function CoursesList({ params }) {
 
     const { data: courses, error, isLoading, mutate } = useSwr([`/api/courses/listAll`, params?.locale], ([url, locale]) => fetch(`${url}?locale=${locale || "fr"}`).then((res) => res.json()));
     const [enrollLoading, setEnrollLoading] = useState(false); // false or courseId
+
+    const session = useSession();
+    if (session.status === "loading") return <div>Loading...</div>;
+    if (session.status !== "authenticated") return redirect("/auth/signin");
 
     const handleEnroll = async (e, courseId) => {
         e.preventDefault();

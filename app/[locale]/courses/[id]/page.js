@@ -9,7 +9,11 @@ import BottomBar from "/app/components/BottomBar";
 import UnitSection from "/app/components/UnitSection";
 import { UpArrowSvg } from "@/components/icons/UpArrowSvg";
 
+import { useSession } from "next-auth/react";
+import { redirect } from "@/navigation";
+
 export default function CoursePage({ params }) {
+
   
   // Revenir au haut de la page
   const [scrollY, setScrollY] = useState(0);
@@ -34,6 +38,10 @@ export default function CoursePage({ params }) {
   const { data, error, isLoading } = useSwr([`/api/courses/units/${params.id}/listAll`, params?.locale],
     ([url, locale]) => fetch(`${url}?locale=${locale || "fr"}`).then((res) => res.json())
   );
+
+  const session = useSession();
+  if (session.status === "loading") return <div>Loading...</div>;
+  if (session.status !== "authenticated") return redirect("/auth/signin");
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

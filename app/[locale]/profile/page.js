@@ -9,10 +9,16 @@ import ProfileTopSection from "@/profile/ProfileTopSection";
 
 import useSwr from "swr";
 
+import { redirect } from "@/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Profile({ params }) {
 
   const { data: user, error, isLoading } = useSwr(`/api/users/`, (url) => fetch(url).then((res) => res.json()));
+
+  const session = useSession();
+  if (session.status === "loading") return <div>Loading...</div>;
+  if (session.status !== "authenticated") return redirect("/auth/signin");
 
   return (
     <div>

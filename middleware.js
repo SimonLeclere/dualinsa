@@ -10,13 +10,7 @@ export default createMiddleware({
 });
 
 // TODO: dynamically generate the list of locales
- 
-export const config = { 
-  matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/en/api`, or `/fr/api`
-    // - … if they start with `/_next`, or `/_vercel`
-    // - … if they end with file extensions like `.map`, `.ico`, `.png`, etc.
-    '/((?!\\/?api|_next|_next/image|_vercel|.*\\..*).*)',
-  ]
+
+export const config = {
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

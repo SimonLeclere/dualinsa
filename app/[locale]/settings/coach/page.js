@@ -20,21 +20,28 @@ const goalXpOptions = [
   { key: "6", xp: 5000 },
 ];
 
+import { redirect } from "@/navigation";
+import { useSession } from "next-auth/react";
+
 export default function Coach() {
-
+  
   const t = useTranslations("Settings");
-
+  
   const { data: user, error, isLoading, mutate } = useSwr('/api/users/', (url) => fetch(url).then((res) => res.json()));
- 
+  
   const [dailyGoalPreference, setDailyGoalPreference] = useState(user?.dailyGoalPreference || 0);
   const [loading, setLoading] = useState(false);
-
+  
   // TODO: remove  
   useEffect(() => {
     if (user) {
       setDailyGoalPreference(user.dailyGoalPreference);
     }
   }, [user]);
+  
+  const session = useSession();
+  if (session.status === "loading") return <div>Loading...</div>;
+  if (session.status !== "authenticated") return redirect("/auth/signin");
   
   if (user?.message) return <div>Erreur: {user?.message}</div>;
   

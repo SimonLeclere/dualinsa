@@ -40,8 +40,11 @@ const avatarSources = [
   pp12,
 ];
 
-export default function Account() {
+import { redirect } from "@/navigation";
+import { useSession } from "next-auth/react";
 
+export default function Account() {
+  
   const t = useTranslations("Settings");
   const router = useRouter();
 
@@ -64,6 +67,10 @@ export default function Account() {
       setAvatar(avatar);
     }
   }, [user]);
+  
+  const session = useSession();
+  if (session.status === "loading") return <div>Loading...</div>;
+  if (session.status !== "authenticated") return redirect("/auth/signin");
   
   if (user?.message) return <div>Erreur: {user.message}</div>;
 

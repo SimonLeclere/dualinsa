@@ -1,17 +1,16 @@
 'use client'
 
 import { useState } from "react";
-import { useRouter } from '@/navigation';
+import { useRouter, Link } from '@/navigation';
 
 import { randomBytes, pbkdf2Sync } from "crypto";
 
-import { Link } from "@/navigation";
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
 
 import { useTranslations } from "next-intl";
 
-export default function Signup({ params }) {
+export default function Signup() {
 
     const t = useTranslations("Auth.Signup");    
 

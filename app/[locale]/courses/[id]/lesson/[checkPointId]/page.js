@@ -12,6 +12,9 @@ import QCMQuestion from "./QCMQuestion";
 import FillInTheBlanksQuestion from "./FillInTheBlanksQuestion";
 import TimedQuestion from "./TimedQuestion";
 
+import { useSession } from "next-auth/react";
+import { redirect } from "@/navigation";
+
 const questionsTypes = {
     QCM: QCMQuestion,
     TIMED: TimedQuestion,
@@ -41,6 +44,7 @@ export default function LessonPage({ params }) {
         }
     );
 
+
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0); // Nombre de réponses correctes
     const [incorrectAnswerCount, setIncorrectAnswerCount] = useState(0); // Nombre de réponses incorrectes
     const [showCorrectAnswer, setShowCorrectAnswer] = useState(false); // Afficher la réponse correcte
@@ -66,6 +70,10 @@ export default function LessonPage({ params }) {
 
     const currentQuestion = questions ? questions[currentQuestionIndex] : null;
     const CurrentQuestionComponent = currentQuestion ? questionsTypes[currentQuestion.type] : null
+
+    const session = useSession();
+    if (session.status === "loading") return <div>Loading...</div>;
+    if (session.status !== "authenticated") return redirect("/auth/signin");
 
     if (exerciseEnded) {
         return (

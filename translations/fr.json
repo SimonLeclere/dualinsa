@@ -27,6 +27,10 @@
       "passwordPlaceholder": "Mot de passe",
       "dontHaveAnAccount": "Pas encore de compte ?",
       "or": "ou"
+    },
+    "Signout": {
+      "signout": "Déconnexion",
+      "confirmSignout": "Confirmer la déconnexion"
     }
   },
   "CoursesList": {

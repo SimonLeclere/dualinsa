@@ -7,6 +7,7 @@ import BottomBar from "../../components/BottomBar";
 import NavBar from "../../components/NavBar";
 
 import { useSession } from "next-auth/react";
+import { redirect } from "@/navigation";
 import { useTranslations } from "next-intl";
 
 import { IconLeagueSvg } from "../../components/icons/LeaderboardSvg";
@@ -23,6 +24,10 @@ const LeaderboardList = ({ leaderboardUsers, currentUserId }) => {
       userRefs.current[currentUserIndex].scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [leaderboardUsers, currentUserId]);
+
+  const session = useSession();
+  if (session.status === "loading") return <div>Loading...</div>;
+  if (session.status !== "authenticated") return redirect("/auth/signin");
 
   return (
     <>

@@ -5,15 +5,15 @@ import { useRouter } from '@/navigation';
 import { useTranslations } from "next-intl";
 
 export default function LoginOrStartButtonsGroup() {
-  const { data: session } = useSession();
   const router = useRouter();
+  
+  const session = useSession();
 
   const t = useTranslations("HomePage");
 
-
   return (
     <div className="mx-auto mt-4 flex w-fit flex-col items-center gap-3">
-      {session ? (
+      {session.data ? (
         <Button color="green" onClick={() => router.push("/courses")}>
           {t('startApplication')}
         </Button>

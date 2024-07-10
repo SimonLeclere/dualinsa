@@ -8,9 +8,18 @@ import BottomBar from "/app/components/BottomBar";
 import UnitCreatorSection from "./UnitCreatorSection";
 import UnitCreatorHeaderPlaceholder from "./UnitHeaderPlaceHolder";
 
+import { useSession } from "next-auth/react";
+import { redirect } from "@/navigation";
+
 export default function CoursePage() {
 
+  
   const [units, setUnits] = useState([]);
+  
+  const session = useSession();
+
+  if (session.status === "loading") return <div>Loading...</div>;
+  if (session.status !== "authenticated") return redirect("/auth/signin");
 
   const addUnit = () => {
     setUnits([
