@@ -17,13 +17,14 @@ import { useTranslations } from "next-intl";
 export default function LoginScreenComponent({ showInsaAuth }) {
 
     const t = useTranslations("Auth.Signin");
+    
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(searchParams.get("error") ? t('usernameOrPasswordIncorrect') : "");
 
-    const router = useRouter();
-    const searchParams = useSearchParams();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,14 +34,17 @@ export default function LoginScreenComponent({ showInsaAuth }) {
             return;
         }
 
-        await signIn("credentials", {
-            username,
-            password,
-            callbackUrl: searchParams.get("callbackUrl") || "/"
-        })
-            .catch(err => {
-                setError(t('usernameOrPasswordIncorrect'));
+        try {
+            await signIn("credentials", {
+                username,
+                password,
+                callbackUrl: searchParams.get("callbackUrl") || "/"
             });
+        }
+        catch (err) {
+            console.error("Login error", err);
+            setError(t('usernameOrPasswordIncorrect'));
+        };
     }
 
     const handleKeyPress = (e) => {
@@ -50,12 +54,15 @@ export default function LoginScreenComponent({ showInsaAuth }) {
     }
 
     const handleINSAAuth = async () => {
-        await signIn("insa", {
-            callbackUrl: searchParams.get("callbackUrl") || "/"
-        })
-            .catch(err => {
-                setError("Une erreur est survenue lors de la connexion avec INSA.");
-            });
+
+        try {
+            await signIn("insa", {
+                callbackUrl: searchParams.get("callbackUrl") || "/"
+            })
+        } catch (err) {
+            console.log("INSA auth error", err);
+            setError("Une erreur est survenue lors de la connexion avec INSA.");
+        };
     }
 
     return (
