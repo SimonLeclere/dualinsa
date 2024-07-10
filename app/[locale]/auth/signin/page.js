@@ -119,17 +119,21 @@ function LoginScreenComponent() {
                         {t('login')}
                     </Button>
 
-                    <p className="text-center text-gray-700">
-                        {t('or')}
-                    </p>
-                    
-                    <Button
-                        color="insa"
-                        onClick={handleINSAAuth}
-                        className="flex items-center justify-center gap-2"
-                    >
-                        Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block" />
-                    </Button>
+                    {
+                        process.env.NODE_ENV === 'production' &&
+                        <>
+                            <p className="text-center text-gray-700">
+                                {t('or')}
+                            </p>
+                            <Button
+                                color="insa"
+                                onClick={handleINSAAuth}
+                                className="flex items-center justify-center gap-2"
+                            >
+                                Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block" />
+                            </Button>
+                        </>
+                    }
 
 
                     {

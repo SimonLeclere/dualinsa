@@ -43,7 +43,6 @@ export const GET = auth(async (req, { params }) => {
 
         if (!checkpoint) return NextResponse.json({ message: 'no questions found' }, { status: 404 });
 
-        console.log("checkpoint qcmQuestion");
         // Add all fields of the QCMQuestionTranslation object corresponding to the user's locale to the QCMQuestion object, except the id, QCMQuestionId and locale fields
         checkpoint.QCMQuestion.forEach(question => {
             question.QCMQuestionTranslation.forEach(translation => {
@@ -66,7 +65,6 @@ export const GET = auth(async (req, { params }) => {
             question.answers = question.answers.sort(() => Math.random() - 0.5);
         });
 
-        console.log("checkpoint FillInTheBlanksQuestion");
         // Add all fields of the FillInTheBlanksQuestionTranslation object corresponding to the user's locale to the FillInTheBlanksQuestion object, except the id, FillInTheBlanksQuestionId and locale fields
         checkpoint.FillInTheBlanksQuestion.forEach(question => {
             question.FillInTheBlanksQuestionTranslation.forEach(translation => {
@@ -89,7 +87,6 @@ export const GET = auth(async (req, { params }) => {
             question.propositions = question.propositions.sort(() => Math.random() - 0.5);
         });
 
-        console.log("checkpoint TimedQuestion");
         // Add all fields of the TimedQuestionTranslation object corresponding to the user's locale to the TimedQuestion object, except the id, TimedQuestionId and locale fields
         checkpoint.TimedQuestion.forEach(question => {
             question.TimedQuestionTranslation.forEach(translation => {
