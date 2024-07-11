@@ -66,7 +66,7 @@ export default function LoginScreenComponent({ showInsaAuth }) {
     }
 
     return (
-        <main className="fixed inset-0 z-30 flex flex-col bg-white p-7 transition duration-300">
+        <main className="fixed inset-0 z-30 flex flex-col bg-white dark:bg-gray-800 p-7 transition duration-300">
             <header className="flex flex-row-reverse justify-between sm:flex-row">
                 <Link
                     className="flex text-gray-400"

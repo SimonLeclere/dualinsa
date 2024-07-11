@@ -23,10 +23,8 @@ export default async function RootLayout({ children, params: { locale } }) {
   const messages = await getMessages();
   const darkMode = await darkModeFlag();
 
-  console.log(darkMode);
-
   return (
-    <html lang={locale}>
+    <html lang={locale} className={darkMode ? "dark" : ""}>
       <AuthProvider>
         <NextIntlClientProvider messages={messages}>
           <body className={`${inter.className} ${feather.variable}`}>{children}</body>
