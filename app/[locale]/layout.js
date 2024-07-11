@@ -8,6 +8,8 @@ import { getMessages } from 'next-intl/server';
 
 import "./globals.css";
 
+import { darkModeFlag } from "@/lib/flags";
+
 const inter = Inter({ subsets: ["latin"] });
 const feather = localFont({ src: '../../public/Feather Bold.ttf', variable: '--font-feather' });
 
@@ -19,6 +21,9 @@ export const metadata = {
 export default async function RootLayout({ children, params: { locale } }) {
 
   const messages = await getMessages();
+  const darkMode = await darkModeFlag();
+
+  console.log(darkMode);
 
   return (
     <html lang={locale}>
