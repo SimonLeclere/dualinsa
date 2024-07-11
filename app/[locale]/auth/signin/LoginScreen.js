@@ -1,39 +1,29 @@
 'use client'
 
 import { signIn } from "next-auth/react"
-
 import { useRouter } from '@/navigation'
 import { useSearchParams } from 'next/navigation'
-
 import { useState } from "react";
-
 import { Link } from "@/navigation";
 import Image from 'next/image'
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
-
 import { useTranslations } from "next-intl";
 
 export default function LoginScreenComponent({ showInsaAuth }) {
-
     const t = useTranslations("Auth.Signin");
-    
     const router = useRouter();
     const searchParams = useSearchParams();
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(searchParams.get("error") ? t('usernameOrPasswordIncorrect') : "");
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!username || !password) {
             setError(t('fieldsMissingError'));
             return;
         }
-
         try {
             await signIn("credentials", {
                 username,
@@ -54,7 +44,6 @@ export default function LoginScreenComponent({ showInsaAuth }) {
     }
 
     const handleINSAAuth = async () => {
-
         try {
             await signIn("insa", {
                 callbackUrl: searchParams.get("callbackUrl") || "/"
@@ -69,7 +58,7 @@ export default function LoginScreenComponent({ showInsaAuth }) {
         <main className="fixed inset-0 z-30 flex flex-col bg-white dark:bg-gray-800 p-7 transition duration-300">
             <header className="flex flex-row-reverse justify-between sm:flex-row">
                 <Link
-                    className="flex text-gray-400"
+                    className="flex text-gray-400 dark:text-gray-200"
                     href="/"
                 >
                     <CloseSvg />
@@ -82,32 +71,29 @@ export default function LoginScreenComponent({ showInsaAuth }) {
                 >
                     {t('createAccount')}
                 </Button>
-
             </header>
 
             <div className="flex grow items-center justify-center">
                 <div className="flex w-full flex-col gap-5 sm:w-96">
-                    <h2 className="text-center text-2xl font-bold text-gray-800">
+                    <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-gray-100">
                         {t('login')}
                     </h2>
 
-                    <div className="flex flex-col gap-2 text-black">
+                    <div className="flex flex-col gap-2">
                         <input
-                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
+                            className="grow rounded-2xl border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-4 py-3 text-black dark:text-white"
                             placeholder={t('usernamePlaceholder')}
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             onKeyDown={handleKeyPress}
-
                         />
                         <input
-                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
+                            className="grow rounded-2xl border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-4 py-3 text-black dark:text-white"
                             placeholder={t('passwordPlaceholder')}
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             onKeyDown={handleKeyPress}
-
                         />
                     </div>
 
@@ -118,10 +104,9 @@ export default function LoginScreenComponent({ showInsaAuth }) {
                         {t('login')}
                     </Button>
 
-                    {
-                        showInsaAuth &&
+                    {showInsaAuth && (
                         <>
-                            <p className="text-center text-gray-700">
+                            <p className="text-center text-gray-700 dark:text-gray-300">
                                 {t('or')}
                             </p>
                             <Button
@@ -132,20 +117,16 @@ export default function LoginScreenComponent({ showInsaAuth }) {
                                 Se connecter avec <Image src="/insa.png" width={60} height={24} alt="INSA" className="inline-block" />
                             </Button>
                         </>
-                    }
+                    )}
 
-
-                    {
-                        error ?
-                            <p className="text-red-500 text-center">
-                                {error}
-                            </p>
-                            :
-                            null
-                    }
+                    {error && (
+                        <p className="text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <p className="block text-center sm:hidden">
-                        <span className="text-sm font-bold text-gray-700">
+                        <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
                             {t('dontHaveAnAccount')}
                         </span>{" "}
                         <button
@@ -159,4 +140,4 @@ export default function LoginScreenComponent({ showInsaAuth }) {
             </div>
         </main>
     );
-};
+}
