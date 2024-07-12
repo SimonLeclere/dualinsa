@@ -1,5 +1,4 @@
 export default function Button({ children, className, onClick, color }) {
-  
   if (color === 'green') {
     return (
       <button
@@ -37,7 +36,7 @@ export default function Button({ children, className, onClick, color }) {
     return (
       <button
         onClick={onClick}
-        className={`${className} w-full rounded-2xl shadow-md text-gray-700 bg-white px-10 py-3 text-center font-bold uppercase transition hover:shadow-lg dark:bg-gray-800 dark:text-gray-300 dark:shadow-lg dark:hover:bg-gray-700 md:min-w-[320px]`}
+        className={`${className} w-full rounded-2xl shadow-md text-gray-700 bg-white px-10 py-3 text-center font-bold uppercase transition hover:shadow-lg dark:bg-gray-700 dark:text-gray-300 dark:shadow-lg dark:hover:bg-gray-600 dark:border-gray-600 md:min-w-[320px]`}
       >
         {children}
       </button>

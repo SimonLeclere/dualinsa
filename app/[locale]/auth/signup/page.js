@@ -2,24 +2,17 @@
 
 import { useState } from "react";
 import { useRouter, Link } from '@/navigation';
-
 import { randomBytes, pbkdf2Sync } from "crypto";
-
 import CloseSvg from "/app/components/icons/CloseSvg";
 import Button from "/app/components/Button";
-
 import { useTranslations } from "next-intl";
 
 export default function Signup() {
-
-    const t = useTranslations("Auth.Signup");    
-
+    const t = useTranslations("Auth.Signup");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-
     const [error, setError] = useState(null);
-
     const router = useRouter();
 
     const handleSubmit = async (e) => {
@@ -37,7 +30,6 @@ export default function Signup() {
 
         const salt = randomBytes(16).toString('hex');
         const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
-    
 
         const response = await fetch(`/api/auth/signup`, {
             method: 'POST',
@@ -67,10 +59,10 @@ export default function Signup() {
     }
 
     return (
-        <main className="fixed inset-0 z-30 flex flex-col bg-white p-7 transition duration-300">
+        <main className="fixed inset-0 z-30 flex flex-col bg-white dark:bg-gray-800 p-7 transition duration-300">
             <header className="flex flex-row-reverse justify-between sm:flex-row">
                 <Link
-                    className="flex text-gray-400"
+                    className="flex text-gray-400 dark:text-gray-200"
                     href="/"
                 >
                     <CloseSvg />
@@ -83,25 +75,24 @@ export default function Signup() {
                 >
                     {t('login')}
                 </Button>
-
             </header>
 
             <div className="flex grow items-center justify-center">
                 <div className="flex w-full flex-col gap-5 sm:w-96">
-                    <h2 className="text-center text-2xl font-bold text-gray-800">
+                    <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-gray-100">
                         {t('createAccount')}
                     </h2>
 
-                    <div className="flex flex-col gap-2 text-black">
+                    <div className="flex flex-col gap-2 text-black dark:text-white">
                         <input
-                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
+                            className="grow rounded-2xl border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-4 py-3"
                             placeholder={t('usernamePlaceholder')}
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             onKeyDown={handleKeyPress}
                         />
                         <input
-                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
+                            className="grow rounded-2xl border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-4 py-3"
                             placeholder={t('passwordPlaceholder')}
                             type="password"
                             value={password}
@@ -109,13 +100,12 @@ export default function Signup() {
                             onKeyDown={handleKeyPress}
                         />
                         <input
-                            className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
+                            className="grow rounded-2xl border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-4 py-3"
                             placeholder={t('confirmPasswordPlaceholder')}
                             type="password"
                             value={passwordConfirm}
                             onChange={(e) => setPasswordConfirm(e.target.value)}
                             onKeyDown={handleKeyPress}
-
                         />
                     </div>
 
@@ -126,17 +116,14 @@ export default function Signup() {
                         {t('createAccount')}
                     </Button>
 
-                    {
-                        error ?
-                            <p className="text-red-500 text-center">
-                                {error}
-                            </p>
-                        :
-                            null
-                    }
+                    {error && (
+                        <p className="text-red-500 text-center">
+                            {error}
+                        </p>
+                    )}
 
                     <p className="block text-center sm:hidden">
-                        <span className="text-sm font-bold text-gray-700">
+                        <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
                             {t('alreadyHaveAnAccount')}
                         </span>{" "}
                         <button

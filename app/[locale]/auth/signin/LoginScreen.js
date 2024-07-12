@@ -104,7 +104,7 @@ export default function LoginScreenComponent({ showInsaAuth }) {
                         {t('login')}
                     </Button>
 
-                    {showInsaAuth && (
+                    {true && (
                         <>
                             <p className="text-center text-gray-700 dark:text-gray-300">
                                 {t('or')}

@@ -21,7 +21,7 @@ export const metadata = {
 export default async function RootLayout({ children, params: { locale } }) {
 
   const messages = await getMessages();
-  const darkMode = await darkModeFlag();
+  const darkMode = true // await darkModeFlag();
 
   return (
     <html lang={locale} className={darkMode ? "dark" : ""}>
